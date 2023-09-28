@@ -18,8 +18,7 @@ Authors@R:
 URL: https://github.com/js2264/BiocBookDemo
 BugReports: https://github.com/js2264/BiocBookDemo
 Depends:
-    R (>= 4.3), 
-    BiocBook
+    R (>= 4.3)
 Imports:
     utils, 
     gert
@@ -33,8 +32,6 @@ Suggests:
     sessioninfo, 
     knitr, 
     quarto
-Remotes:
-    github::js2264/BiocBook
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
