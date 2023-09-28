@@ -315,11 +315,11 @@ Saving your Github token for later use
 <span class="header-section-number">2.2.1.1</span> R</h4>
 <p>Creating a <code>BiocBook</code> in <code>R</code> is straightforward with the {<code>BiocBook</code>} package.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/js2264/BiocBook">BiocBook</a></span><span class="op">)</span><span class="op">)</span> <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">'js2264/BiocBook'</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/js2264/BiocBook">BiocBook</a></span><span class="op">)</span></span>
-<span><span class="va">biocbook</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook.html">init</a></span><span class="op">(</span><span class="st">"myBook"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va">BiocBook</span><span class="op">)</span><span class="op">)</span> <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">'js2264/BiocBook'</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">BiocBook</span><span class="op">)</span></span>
+<span><span class="va">biocbook</span> <span class="op">&lt;-</span> <span class="fu">init</span><span class="op">(</span><span class="st">"myBook"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The steps performed under the hood by <code><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook.html">init()</a></code> are detailed in the console. Briefly, the following steps are followed:</p>
+<p>The steps performed under the hood by <code>init()</code> are detailed in the console. Briefly, the following steps are followed:</p>
 <ol type="1">
 <li>Creating a Github repository in your account, using the <code>js2264/BiocBook.template</code> repository as a template</li>
 <li>Clone the Github package locally</li>
@@ -333,7 +333,7 @@ Saving your Github token for later use
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-This approach is significantly more hazardous. It is highly recommended to stick to the <code><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook.html">init()</a></code> helper function from the {<code>BiocBook</code>} package.
+This approach is significantly more hazardous. It is highly recommended to stick to the <code>init()</code> helper function from the {<code>BiocBook</code>} package.
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -420,9 +420,9 @@ Don’t forget to add any package used in the book pages to <code>Imports:</code
 </ul>
 <p>To quickly edit these assets, use the corresponding <code>edit_*</code> functions:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook-editing.html">edit_yml</a></span><span class="op">(</span><span class="va">biocbook</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook-editing.html">edit_bib</a></span><span class="op">(</span><span class="va">biocbook</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook-editing.html">edit_css</a></span><span class="op">(</span><span class="va">biocbook</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">edit_yml</span><span class="op">(</span><span class="va">biocbook</span><span class="op">)</span></span>
+<span><span class="fu">edit_bib</span><span class="op">(</span><span class="va">biocbook</span><span class="op">)</span></span>
+<span><span class="fu">edit_css</span><span class="op">(</span><span class="va">biocbook</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="previewing-and-publishing-changes" class="level3" data-number="2.2.4"><h3 data-number="2.2.4" class="anchored" data-anchor-id="previewing-and-publishing-changes">
 <span class="header-section-number">2.2.4</span> Previewing and publishing changes</h3>
@@ -430,20 +430,20 @@ Don’t forget to add any package used in the book pages to <code>Imports:</code
 <span class="header-section-number">2.2.4.1</span> Previewing</h4>
 <p>While writing, you can monitor the rendering of your book live as follows:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook-editing.html">preview</a></span><span class="op">(</span><span class="va">biocbook</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">preview</span><span class="op">(</span><span class="va">biocbook</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This will serve a local live rendering of your book.</p>
 </section><section id="publishing" class="level4" data-number="2.2.4.2"><h4 data-number="2.2.4.2" class="anchored" data-anchor-id="publishing">
 <span class="header-section-number">2.2.4.2</span> Publishing</h4>
 <p>Once you are done writing pages of your new book, you should always commit your changes and push them to Github. This can be done as follows:</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook-editing.html">publish</a></span><span class="op">(</span><span class="va">biocbook</span>, message <span class="op">=</span> <span class="st">"🚀 Publish"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">publish</span><span class="op">(</span><span class="va">biocbook</span>, message <span class="op">=</span> <span class="st">"🚀 Publish"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="check-your-published-book-and-dockerfiles" class="level4" data-number="2.2.4.3"><h4 data-number="2.2.4.3" class="anchored" data-anchor-id="check-your-published-book-and-dockerfiles">
 <span class="header-section-number">2.2.4.3</span> Check your published book and Dockerfiles</h4>
 <p>This connects to the Github repository associated with a local book and checks the existing branches and Dockerfiles.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook-editing.html">status</a></span><span class="op">(</span><span class="va">biocbook</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">status</span><span class="op">(</span><span class="va">biocbook</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section></section><section id="writing-features" class="level2 page-columns page-full" data-number="2.3"><h2 data-number="2.3" class="anchored" data-anchor-id="writing-features">
 <span class="header-section-number">2.3</span> Writing features</h2>
