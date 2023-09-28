@@ -9,3 +9,6 @@ website:
   repo-branch: devel
   repo-actions: [edit, issue]
   open-graph: true
+  repo-url: https://github.com/js2264/BiocBookDemo/
+  site-url: https://github.com/js2264/BiocBookDemo/
+  issue-url: https://github.com/js2264/BiocBookDemo/

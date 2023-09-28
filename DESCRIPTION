@@ -1,16 +1,19 @@
 Package: BiocBookDemo
-Title: What the Package Does (One Line, Title Case)
+Title: Write, containerize, publish and versionize Quarto books with Bioconductor
 Description: 
-    This sentence is a placeholder. It should be changed by the author of 
-    the package to describe the purpose of this BiocBook. 
-    It should be at least 3 sentences otherwise `BiocCheck` will complain.
+    A BiocBook can be created by authors (e.g. R developers, but also 
+    scientists, teachers, communicators, …) who wish to 1) write (compile a 
+    body of biological and/or bioinformatics knowledge), 2) containerize
+    (provide Docker images to reproduce the examples illustrated in the compendium), 
+    3) publish (deploy an online book to disseminate the compendium), and 4) 
+    versionize (automatically generate specific online book versions 
+    and Docker images for specific Bioconductor releases). 
 Version: 0.99.0
-Date: `r date()`
+Date: 2023-08-03
 Authors@R: 
     person(
-        "First", "Last", , "first.last@example.com", 
-        role = c("aut", "cre"),
-        comment = c(ORCID = "YOUR-ORCID-ID")
+        "Jacques", "Serizay", , "jacquesserizay@gmail.com", 
+        role = c("aut", "cre")
     )
 URL: https://github.com/js2264/BiocBookDemo
 BugReports: https://github.com/js2264/BiocBookDemo
@@ -18,6 +21,8 @@ Depends:
     R (>= 4.3), 
     BiocBook
 Imports:
+    utils, 
+    gert
 Suggests:
     BiocManager, 
     BiocVersion, 
