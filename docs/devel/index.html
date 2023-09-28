@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.353">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>BiocBookDemo</title>
+<title>Write Quarto books with Bioconductor</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -51,7 +51,26 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -60,6 +79,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./pages/preamble.html" rel="next">
 <link href="./assets/favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -96,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Welcome</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">What are <code>BiocBook</code>s?</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -107,7 +127,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">BiocBookDemo</a> 
+      <a href="./">Write Quarto books with Bioconductor</a> 
         <div class="sidebar-tools-main">
     <div class="dropdown">
       <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label=""><i class="bi bi-git"></i></a>
@@ -137,7 +157,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Welcome</span></a>
+ <span class="menu-text">What are <code>BiocBook</code>s?</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pages/preamble.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preamble</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pages/Chapter-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><code>BiocBook</code> versioning system</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pages/Chapter-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Writing a {<code>BiocBook</code>} package</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pages/Chapter-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Containerizing and Publishing against specific Bioconductor release versions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pages/biocbook-vs-rebook.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">{<code>BiocBook</code>}-based books vs.&nbsp;{<code>rebook</code>}-based books</span></span></a>
   </div>
 </li>
     </ul>
@@ -148,15 +198,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome</a></li>
-  <li><a href="#docker-image" id="toc-docker-image" class="nav-link" data-scroll-target="#docker-image">Docker image</a></li>
+<li><a href="#what-are-biocbooks" id="toc-what-are-biocbooks" class="nav-link active" data-scroll-target="#what-are-biocbooks">What are <code>BiocBook</code>s?</a></li>
+  <li><a href="#what-is-this-biocbook-package" id="toc-what-is-this-biocbook-package" class="nav-link" data-scroll-target="#what-is-this-biocbook-package">What is this {<code>BiocBook</code>} package?</a></li>
+  <li>
+<a href="#main-features-of-biocbooks" id="toc-main-features-of-biocbooks" class="nav-link" data-scroll-target="#main-features-of-biocbooks">Main features of <code>BiocBook</code>s</a>
+  <ul class="collapse">
+<li><a href="#fully-compatible-with-the-bioconductor-build-system" id="toc-fully-compatible-with-the-bioconductor-build-system" class="nav-link" data-scroll-target="#fully-compatible-with-the-bioconductor-build-system">Fully compatible with the <em>Bioconductor Build System</em></a></li>
+  <li><a href="#automated-versioning-of-docker-images" id="toc-automated-versioning-of-docker-images" class="nav-link" data-scroll-target="#automated-versioning-of-docker-images">Automated versioning of Docker images</a></li>
+  <li><a href="#automated-versioning-of-the-online-book" id="toc-automated-versioning-of-the-online-book" class="nav-link" data-scroll-target="#automated-versioning-of-the-online-book">Automated versioning of the online book</a></li>
+  </ul>
+</li>
   <li><a href="#rstudio-server" id="toc-rstudio-server" class="nav-link" data-scroll-target="#rstudio-server">RStudio Server</a></li>
+  <li><a href="#acknowledgments" id="toc-acknowledgments" class="nav-link" data-scroll-target="#acknowledgments">Acknowledgments</a></li>
   <li><a href="#session-info" id="toc-session-info" class="nav-link" data-scroll-target="#session-info">Session info</a></li>
-  </ul></nav>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul><div class="toc-actions"><div class="action-links"><p><a href="https://github.com/js2264/BiocBookDemo/" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title">BiocBookDemo</h1>
+<h1 class="title">Write Quarto books with Bioconductor</h1>
 </div>
 
 
@@ -169,13 +229,66 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
-</header><p><img src="assets/cover.png" title="BiocBookDemo" class="quarto-cover-image img-fluid"></p>
-<p><strong>Package:</strong> BiocBookDemo<br><strong>Authors:</strong> First Last [aut, cre]<br><strong>Compiled:</strong> 2023-09-27<br><strong>Package version:</strong> 0.99.0<br><strong>R version:</strong> <b style="color:red;">R version 4.3.1 (2023-06-16)</b><br><strong>BioC version:</strong> <b style="color:red;">3.18</b><br><strong>License:</strong> MIT + file LICENSE<br></p>
-<section id="welcome" class="level1 unnumbered"><h1 class="unnumbered">Welcome</h1>
-<p>This is the landing page of the <code>BiocBook</code> entitled <em>…</em>.</p>
-<p>This book introduces the reader to <em>…</em>.</p>
-</section><section id="docker-image" class="level1 unnumbered"><h1 class="unnumbered">Docker image</h1>
-<p>A <code>Docker</code> image built from this repository is available here:</p>
+</header><p><img src="assets/cover.png" title="Write Quarto books with Bioconductor" class="quarto-cover-image img-fluid"></p>
+<p><strong>Package:</strong> BiocBookDemo<br><strong>Authors:</strong> Jacques Serizay [aut, cre]<br><strong>Compiled:</strong> 2023-09-28<br><strong>Package version:</strong> 0.99.0<br><strong>R version:</strong> <b style="color:red;">R version 4.3.1 (2023-06-16)</b><br><strong>BioC version:</strong> <b style="color:red;">3.18</b><br><strong>License:</strong> MIT + file LICENSE<br></p>
+<section id="what-are-biocbooks" class="level1 unnumbered"><h1 class="unnumbered">What are <code>BiocBook</code>s?</h1>
+<p><code>BiocBook</code>s are <strong>package-based, versioned online books</strong> with a <strong>supporting <code>Docker</code> image</strong> for each book version.</p>
+<p>A <code>BiocBook</code> can be created by authors (e.g.&nbsp;<code>R</code> developers, but also scientists, teachers, communicators, …) who wish to:</p>
+<ol type="1">
+<li>
+<em>Write</em>: compile a <strong>body of biological and/or bioinformatics knowledge</strong>;</li>
+<li>
+<em>Containerize</em>: provide <strong>Docker images</strong> to reproduce the examples illustrated in the compendium;</li>
+<li>
+<em>Publish</em>: deploy an <strong>online book</strong> to disseminate the compendium;</li>
+<li>
+<em>Versionize</em>: <strong>automatically</strong> generate specific online book versions and Docker images for specific <a href="https://contributions.bioconductor.org/use-devel.html">Bioconductor releases</a>.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A {<code>BiocBook</code>}-based package in Bioconductor <code>devel</code> or release <code>X.Y</code> (i.e.&nbsp;with a branch named <code>RELEASE_X_Y</code>) provides:</p>
+<ul>
+<li>A <strong>Docker image</strong>: hosted on <a href="https://github.com/features/packages">ghcr.io</a>;</li>
+<li>A <strong><code>BiocBook</code> online book (a.k.a website)</strong>: hosted on the repository <code>gh-pages</code> branch;</li>
+</ul>
+<p>Both are built against the specific Bioconductor release <code>X.Y</code>.</p>
+</div>
+</div>
+<p><img src="pages/images/workflow.jpg" class="img-fluid"></p>
+</section><section id="what-is-this-biocbook-package" class="level1 unnumbered"><h1 class="unnumbered">What is this {<code>BiocBook</code>} package?</h1>
+<p>The <a href="https://github.com/js2264/BiocBook">{BiocBook} <strong>package</strong></a> offers a streamlined approach to creating <code>BiocBook</code>s, with several important benefits:</p>
+<ul>
+<li>The author creates a {<code>BiocBook</code>}-based package without leaving R;</li>
+<li>The author writes book chapters in <code>pages/*.qmd</code> files using enhanced markdown;</li>
+<li>The author can submit its {<code>BiocBook</code>}-based package to Bioconductor.</li>
+</ul>
+<p>The containerization and publishing of the new {<code>BiocBook</code>}-based package is automated:</p>
+<ul>
+<li>Github Action workflow generates different Docker images for different Bioconductor releases, with the packages used in the book pre-installed;</li>
+<li>A Github Action workflow publishes different book versions for different Bioconductor releases.</li>
+</ul></section><section id="main-features-of-biocbooks" class="level1 unnumbered"><h1 class="unnumbered">Main features of <code>BiocBook</code>s</h1>
+<section id="fully-compatible-with-the-bioconductor-build-system" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="fully-compatible-with-the-bioconductor-build-system">Fully compatible with the <em>Bioconductor Build System</em>
+</h2>
+<p>When a {<code>BiocBook</code>}-based package is accepted into Bioconductor, it is automatically integrated into the <em>Bionconductor Build System</em> (BBS).</p>
+<p>This means that it is getting built using <code>R CMD build --keep-empty-dirs --no-resave-data .</code>. This triggers the rendering of the book contained in <code>/inst/</code>. Book packages built by the BBS are then automatically deployed and are eventually available at <code>https://bioconductor.org/books/&lt;bioc_version&gt;/&lt;pkg&gt;/</code>.</p>
+</section><section id="automated-versioning-of-docker-images" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="automated-versioning-of-docker-images">Automated versioning of Docker images</h2>
+<p>A separate Docker image is built for each branch (named <code>devel</code> or <code>RELEASE_X_Y</code>) of a <code>BiocBook</code>-based <strong>Github repository</strong>.</p>
+<p>Each Docker image provides pre-installed <code>R</code> packages:</p>
+<ul>
+<li>Bioconductor release <code>X.Y</code>;</li>
+<li>Specific book dependencies from Bioconductor release <code>X.Y</code> (listed in <code>DESCRIPTION</code>);</li>
+<li>The book package itself</li>
+</ul>
+<p>The Docker images also include a <code>micromamba</code>-based environment, named <code>BiocBook</code>, in which all the softwares listed in <code>requirements.yml</code> are installed.</p>
+<p>For example, <code>Docker</code> images built from the {<code>BiocBook</code>} package repository are available here:</p>
 <p>👉 <a href="https://ghcr.io/js2264/biocbookdemo">ghcr.io/js2264/biocbookdemo</a> 🐳</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -198,8 +311,12 @@ Get started now 🎉
 </div>
 </div>
 </div>
-</section><section id="rstudio-server" class="level1 unnumbered"><h1 class="unnumbered">RStudio Server</h1>
-<p>An RStudio Server instance can be initiated from the <code>Docker</code> image as follows:</p>
+</section><section id="automated-versioning-of-the-online-book" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="automated-versioning-of-the-online-book">Automated versioning of the online book</h2>
+<p>Regardless of whether the book package is submitted to Bioconductor, a Github Actions workflow publishes individual online books for each branch (named <code>devel</code> or <code>RELEASE_X_Y</code>) of a <code>BiocBook</code>-based <strong>Github repository</strong>.</p>
+<p>For example, the online book version matching the <code>devel</code> version of the {<code>BiocBook</code>} package is available from:</p>
+<p>👉 <a href="http://js2264.github.io/BiocBookDemo/devel/">http://js2264.github.io/BiocBookDemo/devel/</a> 📘</p>
+</section></section><section id="rstudio-server" class="level1 unnumbered"><h1 class="unnumbered">RStudio Server</h1>
+<p>An RStudio Server instance based on a specific Bioconductor <code>&lt;version&gt;</code> (<code>devel</code> or <code>RELEASE_X_Y</code>) can be initiated from the corresponding <code>Docker</code> image as follows:</p>
 <div class="cell" data-layout-align="center">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -209,30 +326,26 @@ Get started now 🎉
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">--volume</span> <span class="op">&lt;</span>local_folder<span class="op">&gt;</span>:<span class="op">&lt;</span>destination_folder<span class="op">&gt;</span> <span class="dt">\</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">-e</span> PASSWORD=OHCA <span class="dt">\</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">-p</span> 8787:8787 <span class="dt">\</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    ghcr.io/js2264/biocbookdemo:devel</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    ghcr.io/<span class="op">&lt;</span>github_user<span class="op">&gt;</span>/<span class="op">&lt;</span>biocbook_repo<span class="op">&gt;</span>:<span class="op">&lt;</span>version<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 <p>The initiated RStudio Server instance will be available at <a href="https://localhost:8787">https://localhost:8787</a>.</p>
-<!-- 
-# System dependencies and conda 
-
-A pre-configured `micromamba` environment called `BiocBook` is available 
-once the Docker image is loaded. It provides all the softwares listed in 
-`requirements.yml`. 
-
-
-::: {.cell layout-align="center" filename='bash'}
-
-```{.sh .cell-code}
-docker run -it ghcr.io/js2264/biocbookdemo:devel bash
-micromamba activate BiocBook
-```
-:::
-
--->
-</section><section id="session-info" class="level1 unnumbered"><h1 class="unnumbered">Session info</h1>
+<p>Further instructions regarding Bioconductor-based Docker images are available <a href="https://bioconductor.org/help/docker/">here</a>.</p>
+</section><section id="acknowledgments" class="level1 unnumbered"><h1 class="unnumbered">Acknowledgments</h1>
+<p>This works was inspired by and closely follows the strategy used in coordination by the Bioconductor core team and Aaron Lun to submit book-containing packages (from the <code>OSCA</code> series as well as <code>SingleR</code> and <code>csaw</code> books).</p>
+<ul>
+<li><span class="citation" data-cites="OSCA"><em><span class="nocase">Orchestrating Single-Cell Analysis with Bioconductor</span></em> (<a href="#ref-OSCA" role="doc-biblioref">n.d.</a>)</span></li>
+<li><span class="citation" data-cites="SingleR"><em><span class="nocase">Assigning cell types with SingleR</span></em> (<a href="#ref-SingleR" role="doc-biblioref">2023</a>)</span></li>
+<li><span class="citation" data-cites="csaw"><em><span class="nocase">The csaw Book</span></em> (<a href="#ref-csaw" role="doc-biblioref">2023</a>)</span></li>
+</ul>
+<p>This package was also inspired by the <code>*down</code> package series, including:</p>
+<ul>
+<li><span class="citation" data-cites="knitr">Xie (<a href="#ref-knitr" role="doc-biblioref">2014</a>)</span></li>
+<li><span class="citation" data-cites="bookdown">Xie (<a href="#ref-bookdown" role="doc-biblioref">2016</a>)</span></li>
+<li><span class="citation" data-cites="pkgdown">Wickham, Hesselberth, and Salmon (<a href="#ref-pkgdown" role="doc-biblioref">2022</a>)</span></li>
+</ul></section><section id="session-info" class="level1 unnumbered"><h1 class="unnumbered">Session info</h1>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -241,7 +354,7 @@ Click to expand 👇
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="https://r-lib.github.io/sessioninfo/reference/session_info.html">session_info</a></span><span class="op">(</span></span>
@@ -258,7 +371,7 @@ Click to expand 👇
 <span><span class="co">##   collate  C</span></span>
 <span><span class="co">##   ctype    en_US.UTF-8</span></span>
 <span><span class="co">##   tz       Etc/UTC</span></span>
-<span><span class="co">##   date     2023-09-27</span></span>
+<span><span class="co">##   date     2023-09-28</span></span>
 <span><span class="co">##   pandoc   3.1.1 @ /usr/local/bin/ (via rmarkdown)</span></span>
 <span><span class="co">##  </span></span>
 <span><span class="co">##  ─ Packages ────────────────────────────────────────────────────────────────</span></span>
@@ -270,8 +383,8 @@ Click to expand 👇
 <span><span class="co">##   BH              1.81.0-1  2023-01-22 [2] CRAN (R 4.3.1)</span></span>
 <span><span class="co">##   Biobase         2.61.0    2023-04-25 [2] Bioconductor</span></span>
 <span><span class="co">##   BiocBaseUtils   1.3.2     2023-07-18 [2] Bioconductor</span></span>
-<span><span class="co">##   BiocBook        0.99.6    2023-09-27 [2] Github (js2264/BiocBook@9a19bdd)</span></span>
-<span><span class="co">##   BiocBookDemo    0.99.0    2023-09-27 [1] Bioconductor</span></span>
+<span><span class="co">##   BiocBook        0.99.6    2023-09-28 [2] Github (js2264/BiocBook@9a19bdd)</span></span>
+<span><span class="co">##   BiocBookDemo    0.99.0    2023-09-28 [1] Bioconductor</span></span>
 <span><span class="co">##   BiocCheck       1.37.16   2023-09-15 [2] Bioconductor</span></span>
 <span><span class="co">##   BiocFileCache   2.9.1     2023-07-12 [2] Bioconductor</span></span>
 <span><span class="co">##   BiocGenerics    0.47.0    2023-04-25 [2] Bioconductor</span></span>
@@ -434,7 +547,7 @@ Click to expand 👇
 <span><span class="co">##   yesno           0.1.2     2020-07-10 [2] CRAN (R 4.3.1)</span></span>
 <span><span class="co">##   zip             2.3.0     2023-04-17 [2] CRAN (R 4.3.1)</span></span>
 <span><span class="co">##  </span></span>
-<span><span class="co">##   [1] /tmp/Rtmpj9XXw5/Rinsta16f9c526</span></span>
+<span><span class="co">##   [1] /tmp/Rtmpf2FL0g/Rinstb1b3948b</span></span>
 <span><span class="co">##   [2] /usr/local/lib/R/site-library</span></span>
 <span><span class="co">##   [3] /usr/local/lib/R/library</span></span>
 <span><span class="co">##  </span></span>
@@ -443,8 +556,29 @@ Click to expand 👇
 </div>
 </div>
 </div>
+</section><section id="references" class="level1 unnumbered"><h1 class="unnumbered">References</h1>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-SingleR" class="csl-entry" role="listitem">
+<em><span class="nocase">Assigning cell types with SingleR</span></em>. 2023. <a href="https://bioconductor.org/books/3.17/SingleRBook">https://bioconductor.org/books/3.17/SingleRBook</a>.
+</div>
+<div id="ref-OSCA" class="csl-entry" role="listitem">
+<em><span class="nocase">Orchestrating Single-Cell Analysis with Bioconductor</span></em>. n.d. <a href="https://bioconductor.org/books/devel/OSCA">https://bioconductor.org/books/devel/OSCA</a>.
+</div>
+<div id="ref-csaw" class="csl-entry" role="listitem">
+<em><span class="nocase">The csaw Book</span></em>. 2023. <a href="https://bioconductor.org/books/devel/csawBook">https://bioconductor.org/books/devel/csawBook</a>.
+</div>
+<div id="ref-pkgdown" class="csl-entry" role="listitem">
+Wickham, Hadley, Jay Hesselberth, and Maëlle Salmon. 2022. <em>Pkgdown: Make Static HTML Documentation for a Package</em>. <a href="https://CRAN.R-project.org/package=pkgdown">https://CRAN.R-project.org/package=pkgdown</a>.
+</div>
+<div id="ref-knitr" class="csl-entry" role="listitem">
+Xie, Yihui. 2014. <span>“Knitr: A Comprehensive Tool for Reproducible Research in <span>R</span>.”</span> In <em>Implementing Reproducible Computational Research</em>, edited by Victoria Stodden, Friedrich Leisch, and Roger D. Peng. Chapman; Hall/CRC.
+</div>
+<div id="ref-bookdown" class="csl-entry" role="listitem">
+———. 2016. <em>Bookdown: Authoring Books and Technical Documents with <span>R</span> Markdown</em>. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://bookdown.org/yihui/bookdown">https://bookdown.org/yihui/bookdown</a>.
+</div>
+</div>
 </section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -677,7 +811,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./pages/preamble.html" class="pagination-link">
+        <span class="nav-page-text">Preamble</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">This book was built with <a href="https://github.com/js2264/BiocBook/">BiocBook</a> with <span class="emoji" data-emoji="heart">❤️</span></div>   
