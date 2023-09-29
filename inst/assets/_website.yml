@@ -1,5 +1,4 @@
 website:
-  back-to-top-navigation: true
   search: 
     location: sidebar
   page-footer:
@@ -11,4 +10,3 @@ website:
   open-graph: true
   repo-url: https://github.com/js2264/BiocBookDemo/
   site-url: https://github.com/js2264/BiocBookDemo/
-  issue-url: https://github.com/js2264/BiocBookDemo/
