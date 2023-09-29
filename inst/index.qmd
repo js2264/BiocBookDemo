@@ -85,7 +85,7 @@ at `https://bioconductor.org/books/<bioc_version>/<pkg>/`.
 ## Automated versioning of Docker images {-}
 
 A separate Docker image is built for each branch (named `devel` or `RELEASE_X_Y`) 
-of a `BiocBook`-based **Github repository**.  
+of a {`BiocBook`}-based **Github repository**.  
 
 Each Docker image provides pre-installed `R` packages: 
 
@@ -96,7 +96,7 @@ Each Docker image provides pre-installed `R` packages:
 The Docker images also include a `micromamba`-based environment, named `BiocBook`, 
 in which all the softwares listed in `requirements.yml` are installed. 
 
-For example, `Docker` images built from the {`BiocBook`} package repository are available here: 
+For example, `Docker` images built from the {`BiocBookDemo`} package repository are available here: 
 
 👉 [ghcr.io/js2264/biocbookdemo](https://ghcr.io/js2264/biocbookdemo) 🐳
 
