@@ -67,7 +67,7 @@
     "href": "pages/Chapter-1.html#so-what-packages-can-i-use",
     "title": "\n2  BiocBook versioning system\n",
     "section": "\n2.4 So what packages can I use?",
-    "text": "2.4 So what packages can I use?\nAny package that has been released in the Bioconductor version you are using (in this book version, this is 3.15.2).\nThe BiocBaseUtils package is available in Bioconductor since 3.16, while the BiocHail package was only made available in 3.17. CuratedAtlasQueryR has recently been accepted in 3.18 (current devel, on Fri Sep 29 09:17:31 2023). Let’s check this!\n\npackageVersion(\"BiocVersion\")\n##  [1] '3.15.2'\nBiocManager::available(\"BiocBaseUtils\")\n##  character(0)\nBiocManager::available(\"BiocHail\")\n##  character(0)\nBiocManager::available(\"CuratedAtlasQueryR\")\n##  character(0)"
+    "text": "2.4 So what packages can I use?\nAny package that has been released in the Bioconductor version you are using (in this book version, this is 3.15.2).\nThe BiocBaseUtils package is available in Bioconductor since 3.16, while the BiocHail package was only made available in 3.17. CuratedAtlasQueryR has recently been accepted in 3.18 (current devel, on Fri Sep 29 09:26:18 2023). Let’s check this!\n\npackageVersion(\"BiocVersion\")\n##  [1] '3.15.2'\nBiocManager::available(\"BiocBaseUtils\")\n##  character(0)\nBiocManager::available(\"BiocHail\")\n##  character(0)\nBiocManager::available(\"CuratedAtlasQueryR\")\n##  character(0)"
   },
   {
     "objectID": "pages/Chapter-2.html",
