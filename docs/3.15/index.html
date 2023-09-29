@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Write Quarto books with Bioconductor</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./pages/preamble.html" rel="next">
+<link href="./assets/favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+</head>
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Write Quarto books with Bioconductor</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Write Quarto books with Bioconductor</a> 
+        <div class="sidebar-tools-main">
+    <a href="" title="" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-git"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+<li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://github.com/js2264/BiocBookDemo/">
+          Source Code
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://js2264.github.io/BiocBookDemo/devel/">
+          Browse version `devel`
+          </a>
+        </li>
+    </ul>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">| echo: false</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pages/preamble.html" class="sidebar-item-text sidebar-link">Preamble</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pages/Chapter-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"><code>BiocBook</code> versioning system</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pages/Chapter-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Writing a {<code>BiocBook</code>} package</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pages/Chapter-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Containerizing and Publishing against specific Bioconductor release versions</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pages/biocbook-vs-rebook.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">{<code>BiocBook</code>}-based books vs.&nbsp;{<code>rebook</code>}-based books</span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#what-are-biocbooks" id="toc-what-are-biocbooks" class="nav-link active" data-scroll-target="#what-are-biocbooks">What are <code>BiocBook</code>s?</a></li>
+  <li><a href="#what-is-this-biocbook-package" id="toc-what-is-this-biocbook-package" class="nav-link" data-scroll-target="#what-is-this-biocbook-package">What is this {<code>BiocBook</code>} package?</a></li>
+  <li>
+<a href="#main-features-of-biocbooks" id="toc-main-features-of-biocbooks" class="nav-link" data-scroll-target="#main-features-of-biocbooks">Main features of <code>BiocBook</code>s</a>
+  <ul class="collapse">
+<li><a href="#fully-compatible-with-the-bioconductor-build-system" id="toc-fully-compatible-with-the-bioconductor-build-system" class="nav-link" data-scroll-target="#fully-compatible-with-the-bioconductor-build-system">Fully compatible with the <em>Bioconductor Build System</em></a></li>
+  <li><a href="#automated-versioning-of-docker-images" id="toc-automated-versioning-of-docker-images" class="nav-link" data-scroll-target="#automated-versioning-of-docker-images">Automated versioning of Docker images</a></li>
+  <li><a href="#automated-versioning-of-the-online-book" id="toc-automated-versioning-of-the-online-book" class="nav-link" data-scroll-target="#automated-versioning-of-the-online-book">Automated versioning of the online book</a></li>
+  </ul>
+</li>
+  <li><a href="#rstudio-server" id="toc-rstudio-server" class="nav-link" data-scroll-target="#rstudio-server">RStudio Server</a></li>
+  <li><a href="#acknowledgments" id="toc-acknowledgments" class="nav-link" data-scroll-target="#acknowledgments">Acknowledgments</a></li>
+  <li><a href="#session-info" id="toc-session-info" class="nav-link" data-scroll-target="#session-info">Session info</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block">Write Quarto books with Bioconductor</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header><p><img src="assets/cover.png" title="Write Quarto books with Bioconductor" class="quarto-cover-image img-fluid"></p>
+<div class="cell" data-layout-align="center">
+
+</div>
+<p><strong>Package:</strong> BiocBookDemo<br><strong>Authors:</strong> Jacques Serizay [aut, cre]<br><strong>Compiled:</strong> 2023-09-29<br><strong>Package version:</strong> 0.99.0<br><strong>R version:</strong> <b style="color:red;">R version 4.2.1 (2022-06-23)</b><br><strong>BioC version:</strong> <b style="color:red;">3.15</b><br><strong>License:</strong> MIT + file LICENSE<br></p>
+<section id="what-are-biocbooks" class="level1 unnumbered"><h1 class="unnumbered">What are <code>BiocBook</code>s?</h1>
+<p><code>BiocBook</code>s are <strong>package-based, versioned online books</strong> with a <strong>supporting <code>Docker</code> image</strong> for each book version.</p>
+<p>A <code>BiocBook</code> can be created by authors (e.g.&nbsp;<code>R</code> developers, but also scientists, teachers, communicators, …) who wish to:</p>
+<ol type="1">
+<li>
+<em>Write</em>: compile a <strong>body of biological and/or bioinformatics knowledge</strong>;</li>
+<li>
+<em>Containerize</em>: provide <strong>Docker images</strong> to reproduce the examples illustrated in the compendium;</li>
+<li>
+<em>Publish</em>: deploy an <strong>online book</strong> to disseminate the compendium;</li>
+<li>
+<em>Versionize</em>: <strong>automatically</strong> generate specific online book versions and Docker images for specific <a href="https://contributions.bioconductor.org/use-devel.html">Bioconductor releases</a>.</li>
+</ol>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A {<code>BiocBook</code>}-based package in Bioconductor <code>devel</code> or release <code>X.Y</code> (i.e.&nbsp;with a branch named <code>RELEASE_X_Y</code>) provides:</p>
+<ul>
+<li>A <strong>Docker image</strong>: hosted on <a href="https://github.com/features/packages">ghcr.io</a>;</li>
+<li>A <strong><code>BiocBook</code> online book (a.k.a website)</strong>: hosted on the repository <code>gh-pages</code> branch;</li>
+</ul>
+<p>Both are built against the specific Bioconductor release <code>X.Y</code>.</p>
+</div>
+</div>
+<p><img src="pages/images/workflow.jpg" class="img-fluid"></p>
+</section><section id="what-is-this-biocbook-package" class="level1 unnumbered"><h1 class="unnumbered">What is this {<code>BiocBook</code>} package?</h1>
+<p>The <a href="https://github.com/js2264/BiocBook">{BiocBook} <strong>package</strong></a> offers a streamlined approach to creating <code>BiocBook</code>s, with several important benefits:</p>
+<ul>
+<li>The author creates a {<code>BiocBook</code>}-based package without leaving R;</li>
+<li>The author writes book chapters in <code>pages/*.qmd</code> files using enhanced markdown;</li>
+<li>The author can submit its {<code>BiocBook</code>}-based package to Bioconductor.</li>
+</ul>
+<p>The containerization and publishing of the new {<code>BiocBook</code>}-based package is automated:</p>
+<ul>
+<li>Github Action workflow generates different Docker images for different Bioconductor releases, with the packages used in the book pre-installed;</li>
+<li>A Github Action workflow publishes different book versions for different Bioconductor releases.</li>
+</ul></section><section id="main-features-of-biocbooks" class="level1 unnumbered"><h1 class="unnumbered">Main features of <code>BiocBook</code>s</h1>
+<section id="fully-compatible-with-the-bioconductor-build-system" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="fully-compatible-with-the-bioconductor-build-system">Fully compatible with the <em>Bioconductor Build System</em>
+</h2>
+<p>When a {<code>BiocBook</code>}-based package is accepted into Bioconductor, it is automatically integrated into the <em>Bionconductor Build System</em> (BBS).</p>
+<p>This means that it is getting built using <code>R CMD build --keep-empty-dirs --no-resave-data .</code>. This triggers the rendering of the book contained in <code>/inst/</code>. Book packages built by the BBS are then automatically deployed and are eventually available at <code>https://bioconductor.org/books/&lt;bioc_version&gt;/&lt;pkg&gt;/</code>.</p>
+</section><section id="automated-versioning-of-docker-images" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="automated-versioning-of-docker-images">Automated versioning of Docker images</h2>
+<p>A separate Docker image is built for each branch (named <code>devel</code> or <code>RELEASE_X_Y</code>) of a {<code>BiocBook</code>}-based <strong>Github repository</strong>.</p>
+<p>Each Docker image provides pre-installed <code>R</code> packages:</p>
+<ul>
+<li>Bioconductor release <code>X.Y</code>;</li>
+<li>Specific book dependencies from Bioconductor release <code>X.Y</code> (listed in <code>DESCRIPTION</code>);</li>
+<li>The book package itself</li>
+</ul>
+<p>The Docker images also include a <code>micromamba</code>-based environment, named <code>BiocBook</code>, in which all the softwares listed in <code>requirements.yml</code> are installed.</p>
+<p>For example, <code>Docker</code> images built from the {<code>BiocBookDemo</code>} package repository are available here:</p>
+<p>👉 <a href="https://ghcr.io/js2264/biocbookdemo">ghcr.io/js2264/biocbookdemo</a> 🐳</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Get started now 🎉
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can get access to all the packages used in this book in &lt; 1 minute, using this command in a terminal:</p>
+<div class="cell" data-layout-align="center" data-filename="bash">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-it</span> ghcr.io/js2264/biocbookdemo:devel R</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</section><section id="automated-versioning-of-the-online-book" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="automated-versioning-of-the-online-book">Automated versioning of the online book</h2>
+<p>Regardless of whether the book package is submitted to Bioconductor, a Github Actions workflow publishes individual online books for each branch (named <code>devel</code> or <code>RELEASE_X_Y</code>) of a <code>BiocBook</code>-based <strong>Github repository</strong>.</p>
+<p>For example, the online book version matching the <code>devel</code> version of the {<code>BiocBook</code>} package is available from:</p>
+<p>👉 <a href="http://js2264.github.io/BiocBookDemo/devel/">http://js2264.github.io/BiocBookDemo/devel/</a> 📘</p>
+</section></section><section id="rstudio-server" class="level1 unnumbered"><h1 class="unnumbered">RStudio Server</h1>
+<p>An RStudio Server instance based on a specific Bioconductor <code>&lt;version&gt;</code> (<code>devel</code> or <code>RELEASE_X_Y</code>) can be initiated from the corresponding <code>Docker</code> image as follows:</p>
+<div class="cell" data-layout-align="center" data-filename="bash">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="dt">\</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">--volume</span> <span class="op">&lt;</span>local_folder<span class="op">&gt;</span>:<span class="op">&lt;</span>destination_folder<span class="op">&gt;</span> <span class="dt">\</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">-e</span> PASSWORD=OHCA <span class="dt">\</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">-p</span> 8787:8787 <span class="dt">\</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    ghcr.io/<span class="op">&lt;</span>github_user<span class="op">&gt;</span>/<span class="op">&lt;</span>biocbook_repo<span class="op">&gt;</span>:<span class="op">&lt;</span>version<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The initiated RStudio Server instance will be available at <a href="https://localhost:8787">https://localhost:8787</a>.</p>
+<p>Further instructions regarding Bioconductor-based Docker images are available <a href="https://bioconductor.org/help/docker/">here</a>.</p>
+</section><section id="acknowledgments" class="level1 unnumbered"><h1 class="unnumbered">Acknowledgments</h1>
+<p>This works was inspired by and closely follows the strategy used in coordination by the Bioconductor core team and Aaron Lun to submit book-containing packages (from the <code>OSCA</code> series as well as <code>SingleR</code> and <code>csaw</code> books).</p>
+<ul>
+<li><span class="citation" data-cites="OSCA"><em><span class="nocase">Orchestrating Single-Cell Analysis with Bioconductor</span></em> (<a href="#ref-OSCA" role="doc-biblioref">n.d.</a>)</span></li>
+<li><span class="citation" data-cites="SingleR"><em><span class="nocase">Assigning cell types with SingleR</span></em> (<a href="#ref-SingleR" role="doc-biblioref">2023</a>)</span></li>
+<li><span class="citation" data-cites="csaw"><em><span class="nocase">The csaw Book</span></em> (<a href="#ref-csaw" role="doc-biblioref">2023</a>)</span></li>
+</ul>
+<p>This package was also inspired by the <code>*down</code> package series, including:</p>
+<ul>
+<li><span class="citation" data-cites="knitr">Xie (<a href="#ref-knitr" role="doc-biblioref">2014</a>)</span></li>
+<li><span class="citation" data-cites="bookdown">Xie (<a href="#ref-bookdown" role="doc-biblioref">2016</a>)</span></li>
+<li><span class="citation" data-cites="pkgdown">Wickham, Hesselberth, and Salmon (<a href="#ref-pkgdown" role="doc-biblioref">2022</a>)</span></li>
+</ul></section><section id="session-info" class="level1 unnumbered"><h1 class="unnumbered">Session info</h1>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Click to expand 👇
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="https://r-lib.github.io/sessioninfo/reference/session_info.html">session_info</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/utils/installed.packages.html">installed.packages</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span>,<span class="st">"Package"</span><span class="op">]</span>, </span>
+<span>    include_base <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">##  ─ Session info ────────────────────────────────────────────────────────────</span></span>
+<span><span class="co">##   setting  value</span></span>
+<span><span class="co">##   version  R version 4.2.1 (2022-06-23)</span></span>
+<span><span class="co">##   os       Ubuntu 20.04.4 LTS</span></span>
+<span><span class="co">##   system   x86_64, linux-gnu</span></span>
+<span><span class="co">##   ui       X11</span></span>
+<span><span class="co">##   language (EN)</span></span>
+<span><span class="co">##   collate  C</span></span>
+<span><span class="co">##   ctype    en_US.UTF-8</span></span>
+<span><span class="co">##   tz       Etc/UTC</span></span>
+<span><span class="co">##   date     2023-09-29</span></span>
+<span><span class="co">##   pandoc   2.18 @ /usr/local/bin/ (via rmarkdown)</span></span>
+<span><span class="co">##  </span></span>
+<span><span class="co">##  ─ Packages ────────────────────────────────────────────────────────────────</span></span>
+<span><span class="co">##   package      * version   date (UTC) lib source</span></span>
+<span><span class="co">##   askpass        1.2.0     2023-09-03 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   base         * 4.2.1     2022-06-23 [3] local</span></span>
+<span><span class="co">##   base64enc      0.1-3     2015-07-28 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   BH             1.81.0-1  2023-01-22 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   Biobase        2.56.0    2022-04-26 [2] Bioconductor</span></span>
+<span><span class="co">##   BiocBookDemo   0.99.0    2023-09-29 [1] Bioconductor</span></span>
+<span><span class="co">##   BiocCheck      1.32.1    2022-08-30 [2] Bioconductor</span></span>
+<span><span class="co">##   BiocGenerics   0.42.0    2022-04-26 [2] Bioconductor</span></span>
+<span><span class="co">##   BiocManager    1.30.22   2023-08-08 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   BiocStyle      2.24.0    2022-04-26 [2] Bioconductor</span></span>
+<span><span class="co">##   BiocVersion    3.15.2    2022-03-29 [2] Bioconductor</span></span>
+<span><span class="co">##   biocViews      1.64.1    2022-07-19 [2] Bioconductor</span></span>
+<span><span class="co">##   bitops         1.0-7     2021-04-24 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   bookdown       0.35      2023-08-09 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   boot           1.3-28    2021-05-03 [3] CRAN (R 4.2.1)</span></span>
+<span><span class="co">##   brew           1.0-7     2022-02-04 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   brio           1.1.3     2021-11-30 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   bslib          0.5.1     2023-08-11 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   cachem         1.0.8     2023-05-01 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   callr          3.7.3     2022-11-02 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   class          7.3-20    2022-01-16 [3] CRAN (R 4.2.1)</span></span>
+<span><span class="co">##   cli            3.6.1     2023-03-23 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   clipr          0.8.0     2022-02-22 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   cluster        2.1.3     2022-03-28 [3] CRAN (R 4.2.1)</span></span>
+<span><span class="co">##   codetools      0.2-18    2020-11-04 [3] CRAN (R 4.2.1)</span></span>
+<span><span class="co">##   commonmark     1.8.0     2022-03-09 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   compiler       4.2.1     2022-06-23 [3] local</span></span>
+<span><span class="co">##   cpp11          0.4.2     2021-11-30 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   crayon         1.5.2     2022-09-29 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   credentials    2.0.1     2023-09-06 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   curl           5.0.2     2023-08-14 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   datasets     * 4.2.1     2022-06-23 [3] local</span></span>
+<span><span class="co">##   desc           1.4.2     2022-09-08 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   devtools       2.4.4     2022-07-20 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   diffobj        0.3.5     2021-10-05 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   digest         0.6.33    2023-07-07 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   docopt         0.7.1     2020-06-24 [2] RSPM (R 4.2.1)</span></span>
+<span><span class="co">##   downlit        0.4.2     2022-07-05 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   ellipsis       0.3.2     2021-04-29 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   evaluate       0.21      2023-05-05 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   fansi          1.0.3     2022-03-24 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   fastmap        1.1.1     2023-02-24 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   fontawesome    0.5.2     2023-08-19 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   foreign        0.8-82    2022-01-16 [3] CRAN (R 4.2.1)</span></span>
+<span><span class="co">##   fs             1.6.3     2023-07-20 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   gert           2.0.0     2023-09-26 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   gh             1.3.0     2021-04-30 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   gitcreds       0.1.1     2020-12-04 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   glue           1.6.2     2022-02-24 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   graph          1.74.0    2022-04-26 [2] Bioconductor</span></span>
+<span><span class="co">##   graphics     * 4.2.1     2022-06-23 [3] local</span></span>
+<span><span class="co">##   grDevices    * 4.2.1     2022-06-23 [3] local</span></span>
+<span><span class="co">##   grid           4.2.1     2022-06-23 [3] local</span></span>
+<span><span class="co">##   highr          0.10      2022-12-22 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   htmltools      0.5.6     2023-08-10 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   htmlwidgets    1.5.4     2021-09-08 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   httpuv         1.6.5     2022-01-05 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   httr           1.4.7     2023-08-15 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   ini            0.3.1     2018-05-20 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   jquerylib      0.1.4     2021-04-26 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   jsonlite       1.8.7     2023-06-29 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   KernSmooth     2.23-20   2021-05-03 [3] CRAN (R 4.2.1)</span></span>
+<span><span class="co">##   knitr          1.44      2023-09-11 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   later          1.3.1     2023-05-02 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   lattice        0.20-45   2021-09-22 [3] CRAN (R 4.2.1)</span></span>
+<span><span class="co">##   lifecycle      1.0.3     2022-10-07 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   littler        0.3.15    2021-12-03 [2] RSPM (R 4.2.1)</span></span>
+<span><span class="co">##   magrittr       2.0.3     2022-03-30 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   MASS           7.3-58.1  2022-08-03 [3] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   Matrix         1.4-1     2022-03-23 [3] CRAN (R 4.2.1)</span></span>
+<span><span class="co">##   memoise        2.0.1     2021-11-26 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   methods      * 4.2.1     2022-06-23 [3] local</span></span>
+<span><span class="co">##   mgcv           1.8-40    2022-03-29 [3] CRAN (R 4.2.1)</span></span>
+<span><span class="co">##   mime           0.12      2021-09-28 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   miniUI         0.1.1.1   2018-05-18 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   nlme           3.1-158   2022-06-15 [3] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   nnet           7.3-17    2022-01-16 [3] CRAN (R 4.2.1)</span></span>
+<span><span class="co">##   openssl        2.1.1     2023-09-25 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   packrat        0.9.2     2023-09-05 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   parallel       4.2.1     2022-06-23 [3] local</span></span>
+<span><span class="co">##   pillar         1.8.0     2022-07-18 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   pkgbuild       1.4.2     2023-06-26 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   pkgconfig      2.0.3     2019-09-22 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   pkgdown        2.0.6     2022-07-16 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   pkgload        1.3.0     2022-06-27 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   praise         1.0.0     2015-08-11 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   prettyunits    1.2.0     2023-09-24 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   processx       3.8.2     2023-06-30 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   profvis        0.3.7     2020-11-02 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   promises       1.2.0.1   2021-02-11 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   ps             1.7.5     2023-04-18 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   purrr          0.3.4     2020-04-17 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   quarto         1.3       2023-09-19 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   R6             2.5.1     2021-08-19 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   ragg           1.2.2     2022-02-21 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   rappdirs       0.3.3     2021-01-31 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   RBGL           1.72.0    2022-04-26 [2] Bioconductor</span></span>
+<span><span class="co">##   rcmdcheck      1.4.0     2021-09-27 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   Rcpp           1.0.11    2023-07-06 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   RCurl          1.98-1.12 2023-03-27 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   rematch2       2.1.2     2020-05-01 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   remotes        2.4.2     2021-11-30 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   renv           1.0.3     2023-09-19 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   rlang          1.1.1     2023-04-28 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   rmarkdown      2.25      2023-09-18 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   roxygen2       7.2.1     2022-07-18 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   rpart          4.1.16    2022-01-24 [3] CRAN (R 4.2.1)</span></span>
+<span><span class="co">##   rprojroot      2.0.3     2022-04-02 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   rsconnect      1.1.0     2023-09-05 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   rstudioapi     0.15.0    2023-07-07 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   RUnit          0.4.32    2018-05-18 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   rversions      2.1.1     2021-05-31 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   sass           0.4.7     2023-07-15 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   sessioninfo    1.2.2     2021-12-06 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   shiny          1.7.2     2022-07-19 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   sourcetools    0.1.7     2018-04-25 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   spatial        7.3-15    2022-01-16 [3] CRAN (R 4.2.1)</span></span>
+<span><span class="co">##   splines        4.2.1     2022-06-23 [3] local</span></span>
+<span><span class="co">##   stats        * 4.2.1     2022-06-23 [3] local</span></span>
+<span><span class="co">##   stats4         4.2.1     2022-06-23 [3] local</span></span>
+<span><span class="co">##   stringdist     0.9.10    2022-11-07 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   stringi        1.7.12    2023-01-11 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   stringr        1.5.0     2022-12-02 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   survival       3.3-1     2022-03-03 [3] CRAN (R 4.2.1)</span></span>
+<span><span class="co">##   sys            3.4.2     2023-05-23 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   systemfonts    1.0.4     2022-02-11 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   tcltk          4.2.1     2022-06-23 [3] local</span></span>
+<span><span class="co">##   testthat       3.1.4     2022-04-26 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   textshaping    0.3.6     2021-10-13 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   tibble         3.1.8     2022-07-22 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   tinytex        0.46      2023-08-09 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   tools          4.2.1     2022-06-23 [3] local</span></span>
+<span><span class="co">##   urlchecker     1.0.1     2021-11-30 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   usethis        2.1.6     2022-05-25 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   utf8           1.2.2     2021-07-24 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   utils        * 4.2.1     2022-06-23 [3] local</span></span>
+<span><span class="co">##   vctrs          0.6.3     2023-06-14 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   waldo          0.4.0     2022-03-16 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   whisker        0.4       2019-08-28 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   withr          2.5.1     2023-09-26 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   xfun           0.40      2023-08-09 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   XML            3.99-0.14 2023-03-19 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   xml2           1.3.3     2021-11-30 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   xopen          1.0.0     2018-09-17 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   xtable         1.8-4     2019-04-21 [2] CRAN (R 4.2.0)</span></span>
+<span><span class="co">##   yaml           2.3.7     2023-01-23 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##   zip            2.3.0     2023-04-17 [2] RSPM (R 4.2.0)</span></span>
+<span><span class="co">##  </span></span>
+<span><span class="co">##   [1] /tmp/Rtmp3PnYAW/Rinsta67c12d9a</span></span>
+<span><span class="co">##   [2] /usr/local/lib/R/site-library</span></span>
+<span><span class="co">##   [3] /usr/local/lib/R/library</span></span>
+<span><span class="co">##  </span></span>
+<span><span class="co">##  ───────────────────────────────────────────────────────────────────────────</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="references" class="level1 unnumbered"><h1 class="unnumbered">References</h1>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-SingleR" class="csl-entry" role="doc-biblioentry">
+<em><span class="nocase">Assigning cell types with SingleR</span></em>. 2023. <a href="https://bioconductor.org/books/3.17/SingleRBook">https://bioconductor.org/books/3.17/SingleRBook</a>.
+</div>
+<div id="ref-OSCA" class="csl-entry" role="doc-biblioentry">
+<em><span class="nocase">Orchestrating Single-Cell Analysis with Bioconductor</span></em>. n.d. <a href="https://bioconductor.org/books/devel/OSCA">https://bioconductor.org/books/devel/OSCA</a>.
+</div>
+<div id="ref-csaw" class="csl-entry" role="doc-biblioentry">
+<em><span class="nocase">The csaw Book</span></em>. 2023. <a href="https://bioconductor.org/books/devel/csawBook">https://bioconductor.org/books/devel/csawBook</a>.
+</div>
+<div id="ref-pkgdown" class="csl-entry" role="doc-biblioentry">
+Wickham, Hadley, Jay Hesselberth, and Maëlle Salmon. 2022. <em>Pkgdown: Make Static HTML Documentation for a Package</em>. <a href="https://CRAN.R-project.org/package=pkgdown">https://CRAN.R-project.org/package=pkgdown</a>.
+</div>
+<div id="ref-knitr" class="csl-entry" role="doc-biblioentry">
+Xie, Yihui. 2014. <span>“Knitr: A Comprehensive Tool for Reproducible Research in <span>R</span>.”</span> In <em>Implementing Reproducible Computational Research</em>, edited by Victoria Stodden, Friedrich Leisch, and Roger D. Peng. Chapman; Hall/CRC.
+</div>
+<div id="ref-bookdown" class="csl-entry" role="doc-biblioentry">
+———. 2016. <em>Bookdown: Authoring Books and Technical Documents with <span>R</span> Markdown</em>. Boca Raton, Florida: Chapman; Hall/CRC. <a href="https://bookdown.org/yihui/bookdown">https://bookdown.org/yihui/bookdown</a>.
+</div>
+</div>
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./pages/preamble.html" class="pagination-link">
+        <span class="nav-page-text">Preamble</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">This book was built with <a href="https://github.com/js2264/BiocBook/">BiocBook</a> with <span class="emoji" data-emoji="heart">❤️</span></div>   
+  </div>
+</footer>
+
+
+</body></html>
