@@ -15,9 +15,6 @@ URL: https://github.com/js2264/BiocBookDemo
 BugReports: https://github.com/js2264/BiocBookDemo
 Depends:
     R (>= 4.3)
-Imports:
-    utils, 
-    gert
 Suggests:
     BiocManager, 
     BiocVersion, 
