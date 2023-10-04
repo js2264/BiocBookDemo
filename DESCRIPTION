@@ -1,5 +1,5 @@
 Package: BiocBookDemo
-Title: Write, containerize, publish and versionize Quarto books with Bioconductor
+Title: Write, containerize, publish and version Quarto books with Bioconductor
 Description: 
     This package has been created using the BiocBook package. 
     It serves as a demo of a `BiocBook` online book. Read `BiocBook` package 
@@ -28,9 +28,6 @@ Suggests:
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-biocViews: 
-	Infrastructure, 
-    ReportWriting, 
-    Software
+BiocType: Book
 License: MIT + file LICENSE
 VignetteBuilder: knitr
