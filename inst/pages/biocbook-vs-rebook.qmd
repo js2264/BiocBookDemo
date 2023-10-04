@@ -51,13 +51,6 @@ The resulting book, fully compiled by native `quarto`, is also located in `/inst
 - It distributes versioned Dockerfiles **through the author Github account**;
 - `BiocBook`-based packages can actually provide fully-fledged functions in `R/`, manual pages and vignettes. They can be installed exactly the same way than other software packages. 
 
-::: {.callout-tip icon='true'}
-
-In fact, this very **online book** is shipped in the {`BiocBook`} **package**,
-which also provides functions to create/edit books. 
-
-:::
-
 ## `rebook` features missing from `BiocBook`
 
 - Smart reuse of objects generated in one book in another book;

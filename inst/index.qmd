@@ -39,16 +39,21 @@ A `BiocBook` can be created by authors (e.g. `R` developers, but also scientists
 1. *Write*: compile a **body of biological and/or bioinformatics knowledge**;
 2. *Containerize*: provide **Docker images** to reproduce the examples illustrated in the compendium;
 3. *Publish*: deploy an **online book** to disseminate the compendium; 
-4. *Versionize*: **automatically** generate specific online book versions and Docker images for specific [Bioconductor releases](https://contributions.bioconductor.org/use-devel.html). 
+4. *Version*: **automatically** generate specific online book versions and Docker images for specific [Bioconductor releases](https://contributions.bioconductor.org/use-devel.html). 
 
 ::: {.callout-tip icon='true'}
 
-A {`BiocBook`}-based package in Bioconductor `devel` or release `X.Y` (i.e. with a branch named `RELEASE_X_Y`) provides: 
+A {`BiocBook`}-based package hosted on **GitHub** with a branch named `RELEASE_X_Y` provides: 
 
 - A **Docker image**: hosted on [ghcr.io](https://github.com/features/packages);
-- A **`BiocBook` online book (a.k.a website)**: hosted on the repository `gh-pages` branch;
+- An **online book** (a.k.a website): hosted on the GitHub repository `gh-pages` branch;
 
 Both are built against the specific Bioconductor release `X.Y`.
+
+A {`BiocBook`}-based package submitted to **Bioconductor** also lead to 
+the online book being independently built by the 
+**Bioconductor Build System (BBS)** and deployed to 
+`https://bioconductor.org/books/<bioc_version>/<pkg>/`
 
 :::
 
@@ -66,8 +71,8 @@ with several important benefits:
 
 The containerization and publishing of the new {`BiocBook`}-based package is automated:
 
-- Github Action workflow generates different Docker images for different Bioconductor releases, with the packages used in the book pre-installed;
-- A Github Action workflow publishes different book versions for different Bioconductor releases.
+- A Github Action workflow **generates different Docker images** for different Bioconductor releases, with the packages used in the book pre-installed;
+- A Github Action workflow **publishes different book versions** for different Bioconductor releases.
 
 # Main features of `BiocBook`s {-}
 
@@ -124,7 +129,7 @@ For example, the online book version matching the `devel` version of the {`BiocB
 
 👉 [http://js2264.github.io/BiocBookDemo/devel/](http://js2264.github.io/BiocBookDemo/devel/) 📘
 
-# RStudio Server {-}
+## RStudio Server {-}
 
 An RStudio Server instance based on a specific Bioconductor `<version>` (`devel` or `RELEASE_X_Y`) 
 can be initiated from the corresponding `Docker` image as follows: 
