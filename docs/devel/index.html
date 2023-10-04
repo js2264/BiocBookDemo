@@ -207,9 +207,9 @@ div.csl-indent {
 <li><a href="#fully-compatible-with-the-bioconductor-build-system" id="toc-fully-compatible-with-the-bioconductor-build-system" class="nav-link" data-scroll-target="#fully-compatible-with-the-bioconductor-build-system">Fully compatible with the <em>Bioconductor Build System</em></a></li>
   <li><a href="#automated-versioning-of-docker-images" id="toc-automated-versioning-of-docker-images" class="nav-link" data-scroll-target="#automated-versioning-of-docker-images">Automated versioning of Docker images</a></li>
   <li><a href="#automated-versioning-of-the-online-book" id="toc-automated-versioning-of-the-online-book" class="nav-link" data-scroll-target="#automated-versioning-of-the-online-book">Automated versioning of the online book</a></li>
+  <li><a href="#rstudio-server" id="toc-rstudio-server" class="nav-link" data-scroll-target="#rstudio-server">RStudio Server</a></li>
   </ul>
 </li>
-  <li><a href="#rstudio-server" id="toc-rstudio-server" class="nav-link" data-scroll-target="#rstudio-server">RStudio Server</a></li>
   <li><a href="#acknowledgments" id="toc-acknowledgments" class="nav-link" data-scroll-target="#acknowledgments">Acknowledgments</a></li>
   <li><a href="#session-info" id="toc-session-info" class="nav-link" data-scroll-target="#session-info">Session info</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
@@ -231,7 +231,7 @@ div.csl-indent {
   
 
 </header><p><img src="assets/cover.png" title="Write Quarto books with Bioconductor" class="quarto-cover-image img-fluid"></p>
-<p><strong>Package:</strong> BiocBookDemo<br><strong>Authors:</strong> Jacques Serizay [aut, cre]<br><strong>Compiled:</strong> 2023-10-02<br><strong>Package version:</strong> 0.99.1<br><strong>R version:</strong> <b style="color:red;">R version 4.3.1 (2023-06-16)</b><br><strong>BioC version:</strong> <b style="color:red;">3.18</b><br><strong>License:</strong> MIT + file LICENSE<br></p>
+<p><strong>Package:</strong> BiocBookDemo<br><strong>Authors:</strong> Jacques Serizay [aut, cre]<br><strong>Compiled:</strong> 2023-10-04<br><strong>Package version:</strong> 0.99.1<br><strong>R version:</strong> <b style="color:red;">R version 4.3.1 (2023-06-16)</b><br><strong>BioC version:</strong> <b style="color:red;">3.18</b><br><strong>License:</strong> MIT + file LICENSE<br></p>
 <section id="what-are-biocbooks" class="level1 unnumbered"><h1 class="unnumbered">What are <code>BiocBook</code>s?</h1>
 <p><code>BiocBook</code>s are <strong>package-based, versioned online books</strong> with a <strong>supporting <code>Docker</code> image</strong> for each book version.</p>
 <p>A <code>BiocBook</code> can be created by authors (e.g.&nbsp;<code>R</code> developers, but also scientists, teachers, communicators, …) who wish to:</p>
@@ -243,7 +243,7 @@ div.csl-indent {
 <li>
 <em>Publish</em>: deploy an <strong>online book</strong> to disseminate the compendium;</li>
 <li>
-<em>Versionize</em>: <strong>automatically</strong> generate specific online book versions and Docker images for specific <a href="https://contributions.bioconductor.org/use-devel.html">Bioconductor releases</a>.</li>
+<em>Version</em>: <strong>automatically</strong> generate specific online book versions and Docker images for specific <a href="https://contributions.bioconductor.org/use-devel.html">Bioconductor releases</a>.</li>
 </ol>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -255,12 +255,13 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>A {<code>BiocBook</code>}-based package in Bioconductor <code>devel</code> or release <code>X.Y</code> (i.e.&nbsp;with a branch named <code>RELEASE_X_Y</code>) provides:</p>
+<p>A {<code>BiocBook</code>}-based package hosted on <strong>GitHub</strong> with a branch named <code>RELEASE_X_Y</code> provides:</p>
 <ul>
 <li>A <strong>Docker image</strong>: hosted on <a href="https://github.com/features/packages">ghcr.io</a>;</li>
-<li>A <strong><code>BiocBook</code> online book (a.k.a website)</strong>: hosted on the repository <code>gh-pages</code> branch;</li>
+<li>An <strong>online book</strong> (a.k.a website): hosted on the GitHub repository <code>gh-pages</code> branch;</li>
 </ul>
 <p>Both are built against the specific Bioconductor release <code>X.Y</code>.</p>
+<p>A {<code>BiocBook</code>}-based package submitted to <strong>Bioconductor</strong> also lead to the online book being independently built by the <strong>Bioconductor Build System (BBS)</strong> and deployed to <code>https://bioconductor.org/books/&lt;bioc_version&gt;/&lt;pkg&gt;/</code></p>
 </div>
 </div>
 <p><img src="pages/images/workflow.jpg" class="img-fluid"></p>
@@ -273,8 +274,8 @@ Tip
 </ul>
 <p>The containerization and publishing of the new {<code>BiocBook</code>}-based package is automated:</p>
 <ul>
-<li>Github Action workflow generates different Docker images for different Bioconductor releases, with the packages used in the book pre-installed;</li>
-<li>A Github Action workflow publishes different book versions for different Bioconductor releases.</li>
+<li>A Github Action workflow <strong>generates different Docker images</strong> for different Bioconductor releases, with the packages used in the book pre-installed;</li>
+<li>A Github Action workflow <strong>publishes different book versions</strong> for different Bioconductor releases.</li>
 </ul></section><section id="main-features-of-biocbooks" class="level1 unnumbered"><h1 class="unnumbered">Main features of <code>BiocBook</code>s</h1>
 <section id="fully-compatible-with-the-bioconductor-build-system" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="fully-compatible-with-the-bioconductor-build-system">Fully compatible with the <em>Bioconductor Build System</em>
 </h2>
@@ -316,7 +317,7 @@ Get started now 🎉
 <p>Regardless of whether the book package is submitted to Bioconductor, a Github Actions workflow publishes individual online books for each branch (named <code>devel</code> or <code>RELEASE_X_Y</code>) of a <code>BiocBook</code>-based <strong>Github repository</strong>.</p>
 <p>For example, the online book version matching the <code>devel</code> version of the {<code>BiocBook</code>} package is available from:</p>
 <p>👉 <a href="http://js2264.github.io/BiocBookDemo/devel/">http://js2264.github.io/BiocBookDemo/devel/</a> 📘</p>
-</section></section><section id="rstudio-server" class="level1 unnumbered"><h1 class="unnumbered">RStudio Server</h1>
+</section><section id="rstudio-server" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="rstudio-server">RStudio Server</h2>
 <p>An RStudio Server instance based on a specific Bioconductor <code>&lt;version&gt;</code> (<code>devel</code> or <code>RELEASE_X_Y</code>) can be initiated from the corresponding <code>Docker</code> image as follows:</p>
 <div class="cell" data-layout-align="center">
 <div class="code-with-filename">
@@ -332,7 +333,7 @@ Get started now 🎉
 </div>
 <p>The initiated RStudio Server instance will be available at <a href="https://localhost:8787">https://localhost:8787</a>.</p>
 <p>Further instructions regarding Bioconductor-based Docker images are available <a href="https://bioconductor.org/help/docker/">here</a>.</p>
-</section><section id="acknowledgments" class="level1 unnumbered"><h1 class="unnumbered">Acknowledgments</h1>
+</section></section><section id="acknowledgments" class="level1 unnumbered"><h1 class="unnumbered">Acknowledgments</h1>
 <p>This works was inspired by and closely follows the strategy used in coordination by the Bioconductor core team and Aaron Lun to submit book-containing packages (from the <code>OSCA</code> series as well as <code>SingleR</code> and <code>csaw</code> books).</p>
 <ul>
 <li><span class="citation" data-cites="OSCA"><em><span class="nocase">Orchestrating Single-Cell Analysis with Bioconductor</span></em> (<a href="#ref-OSCA" role="doc-biblioref">n.d.</a>)</span></li>
@@ -372,7 +373,7 @@ Click to expand 👇
 <span><span class="co">##   collate  C</span></span>
 <span><span class="co">##   ctype    en_US.UTF-8</span></span>
 <span><span class="co">##   tz       Etc/UTC</span></span>
-<span><span class="co">##   date     2023-10-02</span></span>
+<span><span class="co">##   date     2023-10-04</span></span>
 <span><span class="co">##   pandoc   3.1.1 @ /usr/local/bin/ (via rmarkdown)</span></span>
 <span><span class="co">##  </span></span>
 <span><span class="co">##  ─ Packages ────────────────────────────────────────────────────────────────</span></span>
@@ -383,7 +384,7 @@ Click to expand 👇
 <span><span class="co">##   BH              1.81.0-1  2023-01-22 [2] CRAN (R 4.3.1)</span></span>
 <span><span class="co">##   Biobase         2.61.0    2023-04-25 [2] Bioconductor</span></span>
 <span><span class="co">##   BiocBaseUtils   1.3.2     2023-07-18 [2] Bioconductor</span></span>
-<span><span class="co">##   BiocBookDemo    0.99.1    2023-10-02 [1] Bioconductor</span></span>
+<span><span class="co">##   BiocBookDemo    0.99.1    2023-10-04 [1] local</span></span>
 <span><span class="co">##   BiocCheck       1.37.16   2023-09-15 [2] Bioconductor</span></span>
 <span><span class="co">##   BiocFileCache   2.9.1     2023-07-12 [2] Bioconductor</span></span>
 <span><span class="co">##   BiocGenerics    0.47.0    2023-04-25 [2] Bioconductor</span></span>
@@ -412,7 +413,7 @@ Click to expand 👇
 <span><span class="co">##   cpp11           0.4.6     2023-08-10 [2] CRAN (R 4.3.1)</span></span>
 <span><span class="co">##   crayon          1.5.2     2022-09-29 [2] CRAN (R 4.3.1)</span></span>
 <span><span class="co">##   credentials     2.0.1     2023-09-06 [2] CRAN (R 4.3.1)</span></span>
-<span><span class="co">##   curl            5.0.2     2023-08-14 [2] CRAN (R 4.3.1)</span></span>
+<span><span class="co">##   curl            5.1.0     2023-10-02 [2] CRAN (R 4.3.1)</span></span>
 <span><span class="co">##   datasets      * 4.3.1     2023-09-27 [3] local</span></span>
 <span><span class="co">##   DBI             1.1.3     2022-06-18 [2] CRAN (R 4.3.1)</span></span>
 <span><span class="co">##   dbplyr          2.3.4     2023-09-26 [2] CRAN (R 4.3.1)</span></span>
@@ -540,7 +541,7 @@ Click to expand 👇
 <span><span class="co">##   yaml            2.3.7     2023-01-23 [2] CRAN (R 4.3.1)</span></span>
 <span><span class="co">##   zip             2.3.0     2023-04-17 [2] CRAN (R 4.3.1)</span></span>
 <span><span class="co">##  </span></span>
-<span><span class="co">##   [1] /tmp/RtmppffxMZ/Rinsta3e5fd085</span></span>
+<span><span class="co">##   [1] /tmp/RtmpR7voJa/Rinsta27bc1a0e</span></span>
 <span><span class="co">##   [2] /usr/local/lib/R/site-library</span></span>
 <span><span class="co">##   [3] /usr/local/lib/R/library</span></span>
 <span><span class="co">##  </span></span>
