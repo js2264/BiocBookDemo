@@ -316,16 +316,16 @@ Saving your Github token for later use
 <span class="header-section-number">2.2.1.1</span> R</h4>
 <p>Creating a <code>BiocBook</code> in <code>R</code> is straightforward with the {<code>BiocBook</code>} package.</p>
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va">BiocBook</span><span class="op">)</span><span class="op">)</span> <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html">install</a></span><span class="op">(</span><span class="st">'js2264/BiocBook'</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://bioconductor.github.io/BiocManager/">"BiocManager"</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st">"BiocBook"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html">install</a></span><span class="op">(</span><span class="st">"BiocBook"</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">BiocBook</span><span class="op">)</span></span>
 <span><span class="va">biocbook</span> <span class="op">&lt;-</span> <span class="fu">init</span><span class="op">(</span><span class="st">"myBook"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The steps performed under the hood by <code>init()</code> are detailed in the console. Briefly, the following steps are followed:</p>
 <ol type="1">
-<li>Creating a Github repository in your account, using the <code>js2264/BiocBook.template</code> repository as a template</li>
-<li>Clone the Github package locally</li>
+<li>Creating a local git repository using the <code>BiocBook</code> package template</li>
 <li>Fillout placeholders from the template</li>
-<li>Committing and pushing the changes to Github</li>
+<li>Push local commits to your Github account, creating a new GitHub repository</li>
 </ol></section><section id="vs-code" class="level4" data-number="2.2.1.2"><h4 data-number="2.2.1.2" class="anchored" data-anchor-id="vs-code">
 <span class="header-section-number">2.2.1.2</span> VS Code</h4>
 <div class="callout callout-style-default callout-warning callout-titled">
@@ -342,7 +342,7 @@ This approach is significantly more hazardous. It is highly recommended to stick
 </div>
 </div>
 <section id="use-the-biocbook.template-package-template" class="level5 unnumbered"><h5 class="unnumbered anchored" data-anchor-id="use-the-biocbook.template-package-template">Use the {<code>BiocBook.template</code>} package template</h5>
-<p>This template is available from <a href="https://github.com/js2264/BiocBook.template"><code>js2264/BiocBook.template</code></a></p>
+<p>This template can be cloned from <a href="https://github.com/js2264/BiocBook.template"><code>js2264/BiocBook.template</code></a></p>
 <p><img src="images/use_template.jpg" class="img-fluid"></p>
 </section><section id="create-a-new-repo" class="level5 unnumbered"><h5 class="unnumbered anchored" data-anchor-id="create-a-new-repo">Create a new repo</h5>
 <p><img src="images/new_repo.jpg" class="img-fluid" style="width:70.0%"></p>
