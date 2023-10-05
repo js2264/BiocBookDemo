@@ -72,7 +72,8 @@ Creating a `BiocBook` in `R` is straightforward with the {`BiocBook`} package.
 
 ```{r}
 #| eval: false
-if (!require(BiocBook)) BiocManager::install('js2264/BiocBook')
+if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager")
+if (!require("BiocBook", quietly = TRUE)) BiocManager::install("BiocBook")
 library(BiocBook)
 biocbook <- init("myBook")
 ```
@@ -80,10 +81,9 @@ biocbook <- init("myBook")
 The steps performed under the hood by `init()` are detailed in the 
 console. Briefly, the following steps are followed: 
 
-1. Creating a Github repository in your account, using the `js2264/BiocBook.template` repository as a template
-2. Clone the Github package locally
-3. Fillout placeholders from the template
-4. Committing and pushing the changes to Github
+1. Creating a local git repository using the `BiocBook` package template
+2. Fillout placeholders from the template
+3. Push local commits to your Github account, creating a new GitHub repository
 
 #### VS Code
 
@@ -95,7 +95,7 @@ console. Briefly, the following steps are followed:
 
 ##### Use the {`BiocBook.template`} package template {-}
 
-This template is available from 
+This template can be cloned from 
 [`js2264/BiocBook.template`](https://github.com/js2264/BiocBook.template)
 
 ![](images/use_template.jpg)
