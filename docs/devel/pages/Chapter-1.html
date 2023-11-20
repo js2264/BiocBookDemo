@@ -328,7 +328,7 @@ Note
 <p>The <code>BIOCONDUCTOR_DOCKER_VERSION</code> variable is set in all <code>Bioconductor</code> Docker images. For instance, this version of the <code>BiocBookDemo</code> package online book relies on:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">"BIOCONDUCTOR_DOCKER_VERSION"</span><span class="op">)</span></span>
-<span><span class="co">##  [1] "3.19.5"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">##  [1] "3.19.6"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -350,7 +350,7 @@ Tip
 </section><section id="so-what-packages-can-i-use" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="so-what-packages-can-i-use">
 <span class="header-section-number">1.4</span> So what packages can I use?</h2>
 <p>Any package that has been released in the Bioconductor version you are using (in this book version, this is 3.19.1).</p>
-<p>The <code>BiocBaseUtils</code> package is available in Bioconductor since <code>3.16</code>, while the <code>BiocHail</code> package was only made available in <code>3.17</code>. <code>CuratedAtlasQueryR</code> has recently been accepted in <code>3.18</code> (current <code>devel</code>, on Tue Nov 7 11:26:01 2023). Let’s check this!</p>
+<p>The <code>BiocBaseUtils</code> package is available in Bioconductor since <code>3.16</code>, while the <code>BiocHail</code> package was only made available in <code>3.17</code>. <code>CuratedAtlasQueryR</code> has recently been accepted in <code>3.18</code> (current <code>devel</code>, on Mon Nov 20 08:26:17 2023). Let’s check this!</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageVersion</a></span><span class="op">(</span><span class="st">"BiocVersion"</span><span class="op">)</span></span>
 <span><span class="co">##  [1] '3.19.1'</span></span>
