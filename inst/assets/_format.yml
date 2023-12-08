@@ -14,4 +14,4 @@ format:
     citation-location: margin
     bibliography: assets/bibliography.bib
     from: markdown+emoji
-  # pdf: default
+  pdf: default
