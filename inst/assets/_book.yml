@@ -7,6 +7,7 @@ book:
     - pages/Chapter-2.qmd
     - pages/Chapter-3.qmd
     - pages/biocbook-vs-rebook.qmd
+  downloads: pdf
   cover-image: assets/cover.png
   favicon: assets/favicon.png
   sidebar: 
