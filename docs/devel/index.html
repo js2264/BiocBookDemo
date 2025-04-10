@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.5.57">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Write Quarto books with Bioconductor</title>
 <style>
@@ -19,7 +19,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -30,7 +30,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -55,6 +55,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -80,7 +81,6 @@ div.csl-indent {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./pages/preamble.html" rel="next">
-<link href="./assets/favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -95,7 +95,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -104,49 +110,32 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
 </head>
-<body class="nav-sidebar docked">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">What are <code>BiocBook</code>s?</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">What are <code>BiocBook</code>s?</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Write Quarto books with Bioconductor</a> 
-        <div class="sidebar-tools-main">
-    <div class="dropdown">
-      <a href="" title="" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label=""><i class="bi bi-git"></i></a>
-      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-<li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://github.com/js2264/BiocBookDemo/">
-            Source Code
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item sidebar-tools-main-item" href="https://js2264.github.io/BiocBookDemo/devel/">
-            Browse version `devel`
-            </a>
-          </li>
-      </ul>
-</div>
-    <a href="./Write-Quarto-books-with-Bioconductor.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
-</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -194,7 +183,7 @@ div.csl-indent {
 </li>
     </ul>
 </div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
@@ -214,7 +203,7 @@ div.csl-indent {
   <li><a href="#acknowledgments" id="toc-acknowledgments" class="nav-link" data-scroll-target="#acknowledgments">Acknowledgments</a></li>
   <li><a href="#session-info" id="toc-session-info" class="nav-link" data-scroll-target="#session-info">Session info</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul><div class="toc-actions"><div class="action-links"><p><a href="https://github.com/js2264/BiocBookDemo/" class="toc-action">Report an issue</a></p></div></div></nav>
+  </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
@@ -231,8 +220,9 @@ div.csl-indent {
   </div>
   
 
+
 </header><p><img src="assets/cover.png" title="Write Quarto books with Bioconductor" class="quarto-cover-image img-fluid"></p>
-<p><strong>Package:</strong> BiocBookDemo<br><strong>Authors:</strong> Jacques Serizay [aut, cre]<br><strong>Compiled:</strong> 2023-12-08<br><strong>Package version:</strong> 1.1.3<br><strong>R version:</strong> <b style="color:red;">R Under development (unstable) (2023-11-22 r85609)</b><br><strong>BioC version:</strong> <b style="color:red;">3.19</b><br><strong>License:</strong> MIT + file LICENSE<br></p>
+<p><strong>Package:</strong> BiocBookDemo<br><strong>Authors:</strong> Jacques Serizay [aut, cre]<br><strong>Compiled:</strong> 2025-04-10<br><strong>Package version:</strong> 1.5.0<br><strong>R version:</strong> <b style="color:red;">R Under development (unstable) (2025-03-08 r87910)</b><br><strong>BioC version:</strong> <b style="color:red;">3.21</b><br><strong>License:</strong> MIT + file LICENSE<br></p>
 <section id="what-are-biocbooks" class="level1 unnumbered"><h1 class="unnumbered">What are <code>BiocBook</code>s?</h1>
 <p><code>BiocBook</code>s are <strong>package-based, versioned online books</strong> with a <strong>supporting <code>Docker</code> image</strong> for each book version.</p>
 <p>A <code>BiocBook</code> can be created by authors (e.g.&nbsp;<code>R</code> developers, but also scientists, teachers, communicators, …) who wish to:</p>
@@ -360,162 +350,162 @@ Click to expand 👇
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell" data-layout-align="center">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="https://r-lib.github.io/sessioninfo/reference/session_info.html">session_info</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="https://sessioninfo.r-lib.org/reference/session_info.html">session_info</a></span><span class="op">(</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/utils/installed.packages.html">installed.packages</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span>,<span class="st">"Package"</span><span class="op">]</span>, </span>
 <span>    include_base <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">##  ─ Session info ────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">##   setting  value</span></span>
-<span><span class="co">##   version  R Under development (unstable) (2023-11-22 r85609)</span></span>
-<span><span class="co">##   os       Ubuntu 22.04.3 LTS</span></span>
+<span><span class="co">##   version  R Under development (unstable) (2025-03-08 r87910)</span></span>
+<span><span class="co">##   os       Ubuntu 24.04.1 LTS</span></span>
 <span><span class="co">##   system   x86_64, linux-gnu</span></span>
 <span><span class="co">##   ui       X11</span></span>
 <span><span class="co">##   language (EN)</span></span>
 <span><span class="co">##   collate  C</span></span>
 <span><span class="co">##   ctype    en_US.UTF-8</span></span>
 <span><span class="co">##   tz       Etc/UTC</span></span>
-<span><span class="co">##   date     2023-12-08</span></span>
-<span><span class="co">##   pandoc   3.1.1 @ /usr/local/bin/ (via rmarkdown)</span></span>
+<span><span class="co">##   date     2025-04-10</span></span>
+<span><span class="co">##   pandoc   3.6.3 @ /usr/bin/ (via rmarkdown)</span></span>
+<span><span class="co">##   quarto   1.5.57 @ /usr/local/bin/quarto</span></span>
 <span><span class="co">##  </span></span>
 <span><span class="co">##  ─ Packages ────────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">##   package        * version  date (UTC) lib source</span></span>
-<span><span class="co">##   askpass          1.2.0    2023-09-03 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   base           * 4.4.0    2023-11-26 [3] local</span></span>
-<span><span class="co">##   base64enc        0.1-3    2015-07-28 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   BiocBookDemo     1.1.3    2023-12-08 [1] local</span></span>
-<span><span class="co">##   BiocManager      1.30.22  2023-08-08 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   BiocStyle        2.31.0   2023-10-24 [2] Bioconductor</span></span>
-<span><span class="co">##   BiocVersion      3.19.1   2023-10-26 [2] Bioconductor</span></span>
-<span><span class="co">##   bookdown         0.37     2023-12-01 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   boot             1.3-28.1 2022-11-22 [3] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   brew             1.0-8    2022-09-29 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   brio             1.1.3    2021-11-30 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   bslib            0.6.1    2023-11-28 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   cachem           1.0.8    2023-05-01 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   callr            3.7.3    2022-11-02 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   class            7.3-22   2023-05-03 [3] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   cli              3.6.1    2023-03-23 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   clipr            0.8.0    2022-02-22 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   cluster          2.1.5    2023-11-27 [3] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   codetools        0.2-19   2023-02-01 [3] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   commonmark       1.9.0    2023-03-17 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   compiler         4.4.0    2023-11-26 [3] local</span></span>
-<span><span class="co">##   cpp11            0.4.6    2023-08-10 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   crayon           1.5.2    2022-09-29 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   credentials      2.0.1    2023-09-06 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   curl             5.1.0    2023-10-02 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   datasets       * 4.4.0    2023-11-26 [3] local</span></span>
-<span><span class="co">##   desc             1.4.2    2022-09-08 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   devtools         2.4.5    2022-10-11 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   diffobj          0.3.5    2021-10-05 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   digest           0.6.33   2023-07-07 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   docopt           0.7.1    2020-06-24 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   downlit          0.4.3    2023-06-29 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   ellipsis         0.3.2    2021-04-29 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   evaluate         0.23     2023-11-01 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   fansi            1.0.5    2023-10-08 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   fastmap          1.1.1    2023-02-24 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   fontawesome      0.5.2    2023-08-19 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   foreign          0.8-86   2023-11-28 [3] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   fs               1.6.3    2023-07-20 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   gert             2.0.0    2023-09-26 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   gh               1.4.0    2023-02-22 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   gitcreds         0.1.2    2022-09-08 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   glue             1.6.2    2022-02-24 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   graphics       * 4.4.0    2023-11-26 [3] local</span></span>
-<span><span class="co">##   grDevices      * 4.4.0    2023-11-26 [3] local</span></span>
-<span><span class="co">##   grid             4.4.0    2023-11-26 [3] local</span></span>
-<span><span class="co">##   highr            0.10     2022-12-22 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   htmltools        0.5.7    2023-11-03 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   htmlwidgets      1.6.3    2023-11-22 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   httpuv           1.6.12   2023-10-23 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   httr             1.4.7    2023-08-15 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   httr2            1.0.0    2023-11-14 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   ini              0.3.1    2018-05-20 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   jquerylib        0.1.4    2021-04-26 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   jsonlite         1.8.8    2023-12-04 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   KernSmooth       2.23-22  2023-07-10 [3] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   knitr            1.45     2023-10-30 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   later            1.3.1    2023-05-02 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   lattice          0.22-5   2023-10-24 [3] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   lifecycle        1.0.4    2023-11-07 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   littler          0.3.18   2023-03-26 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   magrittr         2.0.3    2022-03-30 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   MASS             7.3-60.1 2023-11-26 [3] local</span></span>
-<span><span class="co">##   Matrix           1.6-4    2023-11-30 [3] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   memoise          2.0.1    2021-11-26 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   methods        * 4.4.0    2023-11-26 [3] local</span></span>
-<span><span class="co">##   mgcv             1.9-0    2023-07-11 [3] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   mime             0.12     2021-09-28 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   miniUI           0.1.1.1  2018-05-18 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   nlme             3.1-164  2023-11-27 [3] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   nnet             7.3-19   2023-05-03 [3] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   openssl          2.1.1    2023-09-25 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   parallel         4.4.0    2023-11-26 [3] local</span></span>
-<span><span class="co">##   pillar           1.9.0    2023-03-22 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   pkgbuild         1.4.2    2023-06-26 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   pkgconfig        2.0.3    2019-09-22 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   pkgdown          2.0.7    2022-12-14 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   pkgload          1.3.3    2023-09-22 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   praise           1.0.0    2015-08-11 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   preprocessCore   1.65.0   2023-10-24 [2] Bioconductor</span></span>
-<span><span class="co">##   prettyunits      1.2.0    2023-09-24 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   processx         3.8.2    2023-06-30 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   profvis          0.3.8    2023-05-02 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   promises         1.2.1    2023-08-10 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   ps               1.7.5    2023-04-18 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   purrr            1.0.2    2023-08-10 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   R6               2.5.1    2021-08-19 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   ragg             1.2.6    2023-10-10 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   rappdirs         0.3.3    2021-01-31 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   rcmdcheck        1.4.0    2021-09-27 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   Rcpp             1.0.11   2023-07-06 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   rematch2         2.1.2    2020-05-01 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   remotes          2.4.2.1  2023-07-18 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   rlang            1.1.2    2023-11-04 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   rmarkdown        2.25     2023-09-18 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   roxygen2         7.2.3    2022-12-08 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   rpart            4.1.21   2023-10-09 [3] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   rprojroot        2.0.4    2023-11-05 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   rstudioapi       0.15.0   2023-07-07 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   rversions        2.1.2    2022-08-31 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   sass             0.4.8    2023-12-06 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   sessioninfo      1.2.2    2021-12-06 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   shiny            1.8.0    2023-11-17 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   sourcetools      0.1.7-1  2023-02-01 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   spatial          7.3-17   2023-07-20 [3] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   splines          4.4.0    2023-11-26 [3] local</span></span>
-<span><span class="co">##   stats          * 4.4.0    2023-11-26 [3] local</span></span>
-<span><span class="co">##   stats4           4.4.0    2023-11-26 [3] local</span></span>
-<span><span class="co">##   stringi          1.8.2    2023-11-23 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   stringr          1.5.1    2023-11-14 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   survival         3.5-7    2023-08-14 [3] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   sys              3.4.2    2023-05-23 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   systemfonts      1.0.5    2023-10-09 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   tcltk            4.4.0    2023-11-26 [3] local</span></span>
-<span><span class="co">##   testthat         3.2.0    2023-10-06 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   textshaping      0.3.7    2023-10-09 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   tibble           3.2.1    2023-03-20 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   tinytex          0.49     2023-11-22 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   tools            4.4.0    2023-11-26 [3] local</span></span>
-<span><span class="co">##   urlchecker       1.0.1    2021-11-30 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   usethis          2.2.2    2023-07-06 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   utf8             1.2.4    2023-10-22 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   utils          * 4.4.0    2023-11-26 [3] local</span></span>
-<span><span class="co">##   vctrs            0.6.5    2023-12-01 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   waldo            0.5.2    2023-11-02 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   whisker          0.4.1    2022-12-05 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   withr            2.5.2    2023-10-30 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   xfun             0.41     2023-11-01 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   xml2             1.3.5    2023-07-06 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   xopen            1.0.0    2018-09-17 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   xtable           1.8-4    2019-04-21 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   yaml             2.3.7    2023-01-23 [2] CRAN (R 4.4.0)</span></span>
-<span><span class="co">##   zip              2.3.0    2023-04-17 [2] CRAN (R 4.4.0)</span></span>
+<span><span class="co">##   package        * version date (UTC) lib source</span></span>
+<span><span class="co">##   askpass          1.2.1   2024-10-04 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   base           * 4.5.0   2025-03-09 [3] local</span></span>
+<span><span class="co">##   base64enc        0.1-3   2015-07-28 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   BiocBookDemo     1.5.0   2025-04-10 [1] local</span></span>
+<span><span class="co">##   BiocManager      1.30.25 2024-08-28 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   BiocStyle        2.35.0  2024-10-29 [2] Bioconductor 3.21 (R 4.5.0)</span></span>
+<span><span class="co">##   BiocVersion      3.21.1  2024-10-29 [2] Bioconductor 3.21 (R 4.5.0)</span></span>
+<span><span class="co">##   bookdown         0.42    2025-01-07 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   boot             1.3-31  2024-08-28 [3] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   brew             1.0-10  2023-12-16 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   brio             1.1.5   2024-04-24 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   bslib            0.9.0   2025-01-30 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   cachem           1.1.0   2024-05-16 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   callr            3.7.6   2024-03-25 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   class            7.3-23  2025-01-01 [3] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   cli              3.6.4   2025-02-13 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   clipr            0.8.0   2022-02-22 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   cluster          2.1.8.1 2025-03-12 [3] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   codetools        0.2-20  2024-03-31 [3] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   commonmark       1.9.5   2025-03-17 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   compiler         4.5.0   2025-03-09 [3] local</span></span>
+<span><span class="co">##   cpp11            0.5.2   2025-03-03 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   crayon           1.5.3   2024-06-20 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   credentials      2.0.2   2024-10-04 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   curl             6.2.2   2025-03-24 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   datasets       * 4.5.0   2025-03-09 [3] local</span></span>
+<span><span class="co">##   desc             1.4.3   2023-12-10 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   devtools         2.4.5   2022-10-11 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   diffobj          0.3.5   2021-10-05 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   digest           0.6.37  2024-08-19 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   docopt           0.7.2   2025-03-25 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   downlit          0.4.4   2024-06-10 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   ellipsis         0.3.2   2021-04-29 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   evaluate         1.0.3   2025-01-10 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   fansi            1.0.6   2023-12-08 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   fastmap          1.2.0   2024-05-15 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   fontawesome      0.5.3   2024-11-16 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   foreign          0.8-90  2025-03-31 [3] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   fs               1.6.5   2024-10-30 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   gert             2.1.5   2025-03-25 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   gh               1.4.1   2024-03-28 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   gitcreds         0.1.2   2022-09-08 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   glue             1.8.0   2024-09-30 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   graphics       * 4.5.0   2025-03-09 [3] local</span></span>
+<span><span class="co">##   grDevices      * 4.5.0   2025-03-09 [3] local</span></span>
+<span><span class="co">##   grid             4.5.0   2025-03-09 [3] local</span></span>
+<span><span class="co">##   highr            0.11    2024-05-26 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   htmltools        0.5.8.1 2024-04-04 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   htmlwidgets      1.6.4   2023-12-06 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   httpuv           1.6.15  2024-03-26 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   httr2            1.1.2   2025-03-26 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   ini              0.3.1   2018-05-20 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   jquerylib        0.1.4   2021-04-26 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   jsonlite         2.0.0   2025-03-27 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   KernSmooth       2.23-26 2025-01-01 [3] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   knitr            1.50    2025-03-16 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   later            1.4.1   2024-11-27 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   lattice          0.22-7  2025-04-02 [3] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   lifecycle        1.0.4   2023-11-07 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   littler          0.3.21  2025-03-25 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   magrittr         2.0.3   2022-03-30 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   MASS             7.3-65  2025-02-28 [3] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   Matrix           1.7-3   2025-03-11 [3] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   memoise          2.0.1   2021-11-26 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   methods        * 4.5.0   2025-03-09 [3] local</span></span>
+<span><span class="co">##   mgcv             1.9-3   2025-04-04 [3] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   mime             0.13    2025-03-17 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   miniUI           0.1.1.1 2018-05-18 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   nlme             3.1-168 2025-03-31 [3] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   nnet             7.3-20  2025-01-01 [3] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   openssl          2.3.2   2025-02-03 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   parallel         4.5.0   2025-03-09 [3] local</span></span>
+<span><span class="co">##   pillar           1.10.1  2025-01-07 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   pkgbuild         1.4.7   2025-03-24 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   pkgconfig        2.0.3   2019-09-22 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   pkgdown          2.1.1   2024-09-17 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   pkgload          1.4.0   2024-06-28 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   praise           1.0.0   2015-08-11 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   preprocessCore   1.69.0  2024-10-29 [2] Bioconductor 3.21 (R 4.5.0)</span></span>
+<span><span class="co">##   prettyunits      1.2.0   2023-09-24 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   processx         3.8.6   2025-02-21 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   profvis          0.4.0   2024-09-20 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   promises         1.3.2   2024-11-28 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   ps               1.9.0   2025-02-18 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   purrr            1.0.4   2025-02-05 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   R6               2.6.1   2025-02-15 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   ragg             1.3.3   2024-09-11 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   rappdirs         0.3.3   2021-01-31 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   rcmdcheck        1.4.0   2021-09-27 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   Rcpp             1.0.14  2025-01-12 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   remotes          2.5.0   2024-03-17 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   rlang            1.1.5   2025-01-17 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   rmarkdown        2.29    2024-11-04 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   roxygen2         7.3.2   2024-06-28 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   rpart            4.1.24  2025-01-07 [3] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   rprojroot        2.0.4   2023-11-05 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   rstudioapi       0.17.1  2024-10-22 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   rversions        2.1.2   2022-08-31 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   sass             0.4.9   2024-03-15 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   sessioninfo      1.2.3   2025-02-05 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   shiny            1.10.0  2024-12-14 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   sourcetools      0.1.7-1 2023-02-01 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   spatial          7.3-18  2025-01-01 [3] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   splines          4.5.0   2025-03-09 [3] local</span></span>
+<span><span class="co">##   stats          * 4.5.0   2025-03-09 [3] local</span></span>
+<span><span class="co">##   stats4           4.5.0   2025-03-09 [3] local</span></span>
+<span><span class="co">##   stringi          1.8.7   2025-03-27 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   stringr          1.5.1   2023-11-14 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   survival         3.8-3   2024-12-17 [3] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   sys              3.4.3   2024-10-04 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   systemfonts      1.2.2   2025-04-04 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   tcltk            4.5.0   2025-03-09 [3] local</span></span>
+<span><span class="co">##   testthat         3.2.3   2025-01-13 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   textshaping      1.0.0   2025-01-20 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   tibble           3.2.1   2023-03-20 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   tinytex          0.56    2025-02-26 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   tools            4.5.0   2025-03-09 [3] local</span></span>
+<span><span class="co">##   urlchecker       1.0.1   2021-11-30 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   usethis          3.1.0   2024-11-26 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   utf8             1.2.4   2023-10-22 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   utils          * 4.5.0   2025-03-09 [3] local</span></span>
+<span><span class="co">##   vctrs            0.6.5   2023-12-01 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   waldo            0.6.1   2024-11-07 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   whisker          0.4.1   2022-12-05 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   withr            3.0.2   2024-10-28 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   xfun             0.52    2025-04-02 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   xml2             1.3.8   2025-03-14 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   xopen            1.0.1   2024-04-25 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   xtable           1.8-4   2019-04-21 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   yaml             2.3.10  2024-07-26 [2] CRAN (R 4.5.0)</span></span>
+<span><span class="co">##   zip              2.3.2   2025-02-01 [2] CRAN (R 4.5.0)</span></span>
 <span><span class="co">##  </span></span>
-<span><span class="co">##   [1] /tmp/Rtmpdf9t5c/Rinst55b4648fc</span></span>
+<span><span class="co">##   [1] /tmp/RtmpPGbMkT/Rinst8c7847d0cc</span></span>
 <span><span class="co">##   [2] /usr/local/lib/R/site-library</span></span>
 <span><span class="co">##   [3] /usr/local/lib/R/library</span></span>
+<span><span class="co">##   * ── Packages attached to the search path.</span></span>
 <span><span class="co">##  </span></span>
 <span><span class="co">##  ───────────────────────────────────────────────────────────────────────────</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -525,7 +515,7 @@ Click to expand 👇
 </section><section id="references" class="level1 unnumbered"><h1 class="unnumbered">References</h1>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-SingleR" class="csl-entry" role="listitem">
 <em><span class="nocase">Assigning cell types with SingleR</span></em>. 2023. <a href="https://bioconductor.org/books/3.17/SingleRBook">https://bioconductor.org/books/3.17/SingleRBook</a>.
 </div>
@@ -580,18 +570,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -623,11 +602,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -637,8 +655,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -650,7 +677,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -694,6 +844,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -719,6 +870,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -780,14 +957,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./pages/preamble.html" class="pagination-link">
+      <a href="./pages/preamble.html" class="pagination-link" aria-label="Preamble">
         <span class="nav-page-text">Preamble</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
-    <div class="nav-footer-left">This book was built with <a href="https://github.com/js2264/BiocBook/">BiocBook</a> with <span class="emoji" data-emoji="heart">❤️</span></div>   
+    <div class="nav-footer-left">
+<p>This book was built with <a href="https://github.com/js2264/BiocBook/">BiocBook</a> with <span class="emoji" data-emoji="heart">❤️</span></p>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
