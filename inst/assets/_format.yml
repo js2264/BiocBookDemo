@@ -1,5 +1,11 @@
 format: 
   html:
+    fontsize: 16px
+    highlight-style: atom-one
+    code-link: true
+    editor: visual
+    bibliography: assets/bibliography.bib
+    from: markdown+emoji
     grid:
       sidebar-width: 500px
       body-width: 800px
@@ -7,11 +13,8 @@ format:
       - cosmo
       - assets/book.scss
     mainfont: "Atkinson Hyperlegible, sans-serif"
-    fontsize: 16px
-    highlight-style: atom-one
-    code-link: true
-    editor: visual
     citation-location: margin
-    bibliography: assets/bibliography.bib
-    from: markdown+emoji
+    cover-image: assets/cover.png
+    favicon: assets/favicon.png
+    downloads: pdf
   pdf: default
