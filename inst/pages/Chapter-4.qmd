@@ -45,8 +45,9 @@ BiocBook::setup_python()
 ```
 
 `setup_python()` finds `inst/requirements.yml`,  creates the `conda` environment 
-declared there and activates it, addressing it by full path rather than by name. 
-If the environment already exists it is re-used rather than resolved again, 
+declared there (if not installed yet) and activates it, 
+addressing it by full path rather than by name. 
+If the environment already exists, it is re-used rather than resolved again, 
 and if `RETICULATE_PYTHON` is already set (as it is inside the book's `Docker` 
 image) the whole step short-circuits.
 
@@ -68,13 +69,6 @@ no base environment, no `python`.
 4. failing all of those, it downloads a **pinned** release and checks it against
    a recorded `SHA256` before using it.
 
-That is the only provisioning dependency the book has, on any machine.
-Later chapters do not repeat the setup. They just re-activate:
-
-```{r}
-reticulate::use_condaenv("BiocBook", required = TRUE)
-```
-
 ::: {.callout-note icon='true'}
 
 ## Keep an `R` chunk on the page
@@ -93,6 +87,7 @@ if it is empty.
 
 `reticulate` hosts a single, persistent `python` session that is shared with
 `R`, so objects can be passed in both directions.
+
 Start from an `R` object:
 
 ```{r "r-object"}
@@ -136,17 +131,13 @@ from the `bioconda` channel, e.g. `cooler`:
 
 ```{python "python-cooler"}
 import cooler
-c = cooler.Cooler("inst/extdata/example.cool")
-chroms = c.chromnames
-print("chromosomes:", chroms)
-print("shape:", c.shape)
+v = cooler.__version__
 ```
 
-Then read them into `R`:
+Then read that in `R`:
 
 ```{r "r-reads-cooler"}
-chrs <- reticulate::py$chroms
-chrs
+reticulate::py$v
 ```
 
 ## Session info
