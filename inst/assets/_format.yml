@@ -16,5 +16,5 @@ format:
     citation-location: margin
     cover-image: assets/cover.png
     favicon: assets/favicon.png
-    # downloads: pdf
-  # pdf: default
+    downloads: pdf
+  pdf: default
