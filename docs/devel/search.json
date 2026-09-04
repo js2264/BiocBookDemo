@@ -24,7 +24,7 @@
     "href": "index.html#automated-versioning-of-docker-images",
     "title": "Write Quarto books with Bioconductor",
     "section": "Automated versioning of Docker images",
-    "text": "Automated versioning of Docker images\nA separate Docker image is built for each branch (named devel or RELEASE_X_Y) of a {BiocBook}-based Github repository.\nEach Docker image provides pre-installed R packages:\n\nBioconductor release X.Y;\nSpecific book dependencies from Bioconductor release X.Y (listed in DESCRIPTION);\nThe book package itself\n\nThe Docker images also include a micromamba-based environment, named BiocBook, in which all the softwares listed in requirements.yml are installed.\nFor example, Docker images built from the {BiocBookDemo} package repository are available here:\n👉 ghcr.io/js2264/biocbookdemo 🐳\n\n\n\n\n\n\nTipGet started now 🎉\n\n\n\nYou can get access to all the packages used in this book in &lt; 1 minute, using this command in a terminal:\n\n\n\nbash\n\ndocker run -it ghcr.io/js2264/biocbookdemo:devel R",
+    "text": "Automated versioning of Docker images\nA separate Docker image is built for each branch (named devel or RELEASE_X_Y) of a {BiocBook}-based Github repository.\nEach Docker image provides pre-installed R packages:\n\nBioconductor release X.Y;\nSpecific book dependencies from Bioconductor release X.Y (listed in DESCRIPTION);\nThe book package itself\n\nThe Docker images also include a python environment, named BiocBook, in which all the packages listed in requirements.yml are installed, and which reticulate picks up automatically in any R session started from the image (see 4  Executing python code).\nFor example, Docker images built from the {BiocBookDemo} package repository are available here:\n👉 ghcr.io/js2264/biocbookdemo 🐳\n\n\n\n\n\n\nTipGet started now 🎉\n\n\n\nYou can get access to all the packages used in this book in &lt; 1 minute, using this command in a terminal:\n\n\n\nbash\n\ndocker run -it ghcr.io/js2264/biocbookdemo:devel R",
     "crumbs": [
       "What are `BiocBook`s?"
     ]
@@ -94,7 +94,7 @@
     "href": "pages/Chapter-1.html#does-this-really-work",
     "title": "\n1  BiocBook versioning system\n",
     "section": "\n1.3 Does this really work?",
-    "text": "1.3 Does this really work?\nThe BIOCONDUCTOR_DOCKER_VERSION variable is set in all Bioconductor Docker images. For instance, this version of the BiocBookDemo package online book relies on:\n\nSys.getenv(\"BIOCONDUCTOR_DOCKER_VERSION\")\n##  [1] \"3.24.13\"\n\n\n\n\n\n\n\nTip\n\n\n\nNote that this variable will always match the X.Y version returned by BiocVersion used to render the online book.\n\npackageVersion(\"BiocVersion\")\n##  [1] '3.24.0'",
+    "text": "1.3 Does this really work?\nThe BIOCONDUCTOR_DOCKER_VERSION variable is set in all Bioconductor Docker images. For instance, this version of the BiocBookDemo package online book relies on:\n\nSys.getenv(\"BIOCONDUCTOR_DOCKER_VERSION\")\n##  [1] \"3.24.14\"\n\n\n\n\n\n\n\nTip\n\n\n\nNote that this variable will always match the X.Y version returned by BiocVersion used to render the online book.\n\npackageVersion(\"BiocVersion\")\n##  [1] '3.24.0'",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>`BiocBook` versioning system</span>"
     ]
@@ -104,7 +104,17 @@
     "href": "pages/Chapter-1.html#so-what-packages-can-i-use",
     "title": "\n1  BiocBook versioning system\n",
     "section": "\n1.4 So what packages can I use?",
-    "text": "1.4 So what packages can I use?\nAny package that has been released in the Bioconductor version you are using (in this book version, this is 3.24.0).\nThe BiocBaseUtils package is available in Bioconductor since 3.16, while the BiocHail package was only made available in 3.17. CuratedAtlasQueryR has recently been accepted in 3.18 (current devel, on Fri Sep 4 11:39:47 2026). Let’s check this!\n\npackageVersion(\"BiocVersion\")\n##  [1] '3.24.0'\nBiocManager::available(\"BiocBaseUtils\")\n##  [1] \"BiocBaseUtils\"\nBiocManager::available(\"BiocHail\")\n##  [1] \"BiocHail\"\nBiocManager::available(\"CuratedAtlasQueryR\")\n##  character(0)",
+    "text": "1.4 So what packages can I use?\nAny package that has been released in the Bioconductor version you are using (in this book version, this is 3.24.0).\nThe BiocBaseUtils package is available in Bioconductor since 3.16, while the BiocHail package was only made available in 3.17. CuratedAtlasQueryR has recently been accepted in 3.18 (current devel, on Fri Sep 4 20:40:13 2026). Let’s check this!\n\npackageVersion(\"BiocVersion\")\n##  [1] '3.24.0'\nBiocManager::available(\"BiocBaseUtils\")\n##  [1] \"BiocBaseUtils\"\nBiocManager::available(\"BiocHail\")\n##  [1] \"BiocHail\"\nBiocManager::available(\"CuratedAtlasQueryR\")\n##  character(0)",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>`BiocBook` versioning system</span>"
+    ]
+  },
+  {
+    "objectID": "pages/Chapter-1.html#session-info",
+    "href": "pages/Chapter-1.html#session-info",
+    "title": "\n1  BiocBook versioning system\n",
+    "section": "\n1.5 Session info",
+    "text": "1.5 Session info\n\nsessioninfo::session_info()\n##  ─ Session info ────────────────────────────────────────────────────────────\n##   setting  value\n##   version  R version 4.6.1 (2026-06-24)\n##   os       Ubuntu 24.04.4 LTS\n##   system   x86_64, linux-gnu\n##   ui       X11\n##   language (EN)\n##   collate  C\n##   ctype    en_US.UTF-8\n##   tz       Etc/UTC\n##   date     2026-09-04\n##   pandoc   3.10.2 @ /usr/bin/ (via rmarkdown)\n##   quarto   1.9.38 @ /usr/local/bin/quarto\n##  \n##  ─ Packages ────────────────────────────────────────────────────────────────\n##   package     * version date (UTC) lib source\n##   BiocManager   1.30.27 2025-11-14 [2] CRAN (R 4.6.1)\n##   cli           3.6.6   2026-04-09 [2] RSPM (R 4.6.0)\n##   digest        0.6.39  2025-11-19 [2] RSPM (R 4.6.0)\n##   evaluate      1.0.5   2025-08-27 [2] RSPM (R 4.6.0)\n##   fastmap       1.2.0   2024-05-15 [2] RSPM (R 4.6.0)\n##   htmltools     0.5.9   2025-12-04 [2] RSPM (R 4.6.0)\n##   htmlwidgets   1.6.4   2023-12-06 [2] RSPM (R 4.6.0)\n##   jsonlite      2.0.0   2025-03-27 [2] RSPM (R 4.6.0)\n##   knitr         1.51    2025-12-20 [2] RSPM (R 4.6.0)\n##   otel          0.2.0   2025-08-29 [2] RSPM (R 4.6.0)\n##   rlang         1.3.0   2026-07-05 [2] RSPM (R 4.6.0)\n##   rmarkdown     2.32    2026-09-01 [2] RSPM (R 4.6.0)\n##   sessioninfo   1.2.4   2026-06-04 [2] RSPM (R 4.6.0)\n##   xfun          0.60    2026-07-09 [2] RSPM (R 4.6.0)\n##  \n##   [1] /tmp/Rtmpg83CZ3/Rinst8e21da1063\n##   [2] /usr/local/lib/R/site-library\n##   [3] /usr/local/lib/R/library\n##  \n##  ───────────────────────────────────────────────────────────────────────────",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>`BiocBook` versioning system</span>"
     ]
@@ -144,7 +154,17 @@
     "href": "pages/Chapter-2.html#writing-features",
     "title": "\n2  Writing a {BiocBook} package\n",
     "section": "\n2.3 Writing features",
-    "text": "2.3 Writing features\n\n2.3.1 Executing code\nIt’s super easy to execute actual code from any BiocBook page when rendering the BiocBook website.\n\n2.3.1.1 R code\nR code can be executed and rendered:\n\n\n\nR\n\nutils::packageVersion(\"BiocVersion\")\n##  [1] '3.24.0'\n\n\n\n2.3.1.2 bash code\nbash code can also be executed and rendered:\n\n\n\nbash\n\nfind ../ -name \"*.qmd\"\n##  ../index.qmd\n##  ../pages/biocbook-vs-rebook.qmd\n##  ../pages/Chapter-3.qmd\n##  ../pages/Chapter-2.qmd\n##  ../pages/preamble.qmd\n##  ../pages/Chapter-1.qmd\n\n\n\n\n2.3.2 Creating data object\nWhile writing chapters, you can save objects as .rds files to reuse them in subsequent chapters (e.g. here).\n\nisthisworking &lt;- \"yes\"\nsaveRDS(isthisworking, 'isthisworking.rds')\n\n\n2.3.3 Adding references\nReferences can be listed as .bib entries in the bibliography file located in inst/assets/bibliography.bib. The references can be added in-line using the @ notation, e.g. by typing @serizay2023, this will insert the following reference: Serizay (2023).\nSerizay, Jacques. 2023. BiocBook: Write, Publish and Maintain Versioned Quarto Books with Bioconductor. https://github.com/js2264/BiocBook.",
+    "text": "2.3 Writing features\n\n2.3.1 Executing code\nIt’s super easy to execute actual code from any BiocBook page when rendering the BiocBook website.\n\n2.3.1.1 R code\nR code can be executed and rendered:\n\n\n\nR\n\nutils::packageVersion(\"BiocVersion\")\n##  [1] '3.24.0'\n\n\n\n2.3.1.2 bash code\nbash code can also be executed and rendered:\n\n\n\nbash\n\nfind ../ -name \"*.qmd\"\n##  ../index.qmd\n##  ../pages/Chapter-4.qmd\n##  ../pages/biocbook-vs-rebook.qmd\n##  ../pages/Chapter-3.qmd\n##  ../pages/Chapter-2.qmd\n##  ../pages/preamble.qmd\n##  ../pages/Chapter-1.qmd\n\n\n\n2.3.1.3 python code\npython code can also be executed and rendered:\n\n\n\npython\n\nimport os\nos.getcwd()\n\n\npython needs a little more care than R or bash, because the book is also re-rendered by the Bioconductor Build System, which provides no python packages. A book therefore installs its own: the packages are declared as a conda environment in inst/requirements.yml and installed at build time by BiocBook::setup_python().\nSee the chapter on executing python code for the full story.\n\n2.3.2 Creating data object\nWhile writing chapters, you can save objects as .rds files to reuse them in subsequent chapters (e.g. here).\n\nisthisworking &lt;- \"yes\"\nsaveRDS(isthisworking, 'isthisworking.rds')\n\n\n2.3.3 Adding references\nReferences can be listed as .bib entries in the bibliography file located in inst/assets/bibliography.bib. The references can be added in-line using the @ notation, e.g. by typing @serizay2023, this will insert the following reference: Serizay (2023).\nSerizay, Jacques. 2023. BiocBook: Write, Publish and Maintain Versioned Quarto Books with Bioconductor. https://github.com/js2264/BiocBook.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Writing a {`BiocBook`} package</span>"
+    ]
+  },
+  {
+    "objectID": "pages/Chapter-2.html#session-info",
+    "href": "pages/Chapter-2.html#session-info",
+    "title": "\n2  Writing a {BiocBook} package\n",
+    "section": "\n2.4 Session info",
+    "text": "2.4 Session info\n\nsessioninfo::session_info()\n##  ─ Session info ────────────────────────────────────────────────────────────\n##   setting  value\n##   version  R version 4.6.1 (2026-06-24)\n##   os       Ubuntu 24.04.4 LTS\n##   system   x86_64, linux-gnu\n##   ui       X11\n##   language (EN)\n##   collate  C\n##   ctype    en_US.UTF-8\n##   tz       Etc/UTC\n##   date     2026-09-04\n##   pandoc   3.10.2 @ /usr/bin/ (via rmarkdown)\n##   quarto   1.9.38 @ /usr/local/bin/quarto\n##  \n##  ─ Packages ────────────────────────────────────────────────────────────────\n##   package     * version date (UTC) lib source\n##   cli           3.6.6   2026-04-09 [2] RSPM (R 4.6.0)\n##   digest        0.6.39  2025-11-19 [2] RSPM (R 4.6.0)\n##   evaluate      1.0.5   2025-08-27 [2] RSPM (R 4.6.0)\n##   fastmap       1.2.0   2024-05-15 [2] RSPM (R 4.6.0)\n##   htmltools     0.5.9   2025-12-04 [2] RSPM (R 4.6.0)\n##   htmlwidgets   1.6.4   2023-12-06 [2] RSPM (R 4.6.0)\n##   jsonlite      2.0.0   2025-03-27 [2] RSPM (R 4.6.0)\n##   knitr         1.51    2025-12-20 [2] RSPM (R 4.6.0)\n##   lattice       0.23-1  2026-08-12 [2] RSPM (R 4.6.0)\n##   Matrix        1.7-6   2026-07-25 [2] RSPM (R 4.6.0)\n##   otel          0.2.0   2025-08-29 [2] RSPM (R 4.6.0)\n##   png           0.1-9   2026-03-15 [2] RSPM (R 4.6.0)\n##   Rcpp          1.1.2   2026-07-05 [2] RSPM (R 4.6.0)\n##   reticulate    1.47.0  2026-09-03 [2] RSPM (R 4.6.0)\n##   rlang         1.3.0   2026-07-05 [2] RSPM (R 4.6.0)\n##   rmarkdown     2.32    2026-09-01 [2] RSPM (R 4.6.0)\n##   sessioninfo   1.2.4   2026-06-04 [2] RSPM (R 4.6.0)\n##   xfun          0.60    2026-07-09 [2] RSPM (R 4.6.0)\n##   yaml          2.3.12  2025-12-10 [2] RSPM (R 4.6.0)\n##  \n##   [1] /tmp/Rtmpg83CZ3/Rinst8e21da1063\n##   [2] /usr/local/lib/R/site-library\n##   [3] /usr/local/lib/R/library\n##  \n##  ───────────────────────────────────────────────────────────────────────────",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Writing a {`BiocBook`} package</span>"
     ]
@@ -180,43 +200,123 @@
     ]
   },
   {
+    "objectID": "pages/Chapter-3.html#session-info",
+    "href": "pages/Chapter-3.html#session-info",
+    "title": "\n3  Containerizing and Publishing against specific Bioconductor release versions\n",
+    "section": "\n3.3 Session info",
+    "text": "3.3 Session info\n\nsessioninfo::session_info()",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Containerizing and Publishing against specific Bioconductor release versions</span>"
+    ]
+  },
+  {
+    "objectID": "pages/Chapter-4.html",
+    "href": "pages/Chapter-4.html",
+    "title": "4  Executing python code",
+    "section": "",
+    "text": "4.1 Declaring and installing the python environment\npython packages are listed, pinned, in inst/requirements.yml – a plain conda environment file, e.g.\nNote the presence of the nodefaults channel: the defaults channel is covered by the Anaconda Terms of Service, which require a paid licence for many organisations. conda-forge and bioconda are community channels that are free to use.\nThe first page that needs python installs and activates them:\nlibrary(reticulate)\nBiocBook::setup_python()\n##  ✔ Using the `python` already configured for this session: '/opt/R-cache/R/BiocBook/envs/BiocBook/bin/python'\nsetup_python() finds inst/requirements.yml, creates the conda environment declared there (if not installed yet) and activates it, addressing it by full path rather than by name. If the environment already exists, it is re-used rather than resolved again, and if RETICULATE_PYTHON is already set (as it is inside the book’s Docker image) the whole step short-circuits.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Executing `python` code</span>"
+    ]
+  },
+  {
+    "objectID": "pages/Chapter-4.html#declaring-and-installing-the-python-environment",
+    "href": "pages/Chapter-4.html#declaring-and-installing-the-python-environment",
+    "title": "4  Executing python code",
+    "section": "",
+    "text": "name:\n    BiocBook\nchannels:\n    - conda-forge\n    - bioconda\n    - nodefaults\ndependencies:\n    - python=3.12\n    - numpy=1.26\n    - matplotlib",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Executing `python` code</span>"
+    ]
+  },
+  {
+    "objectID": "pages/Chapter-4.html#where-conda-itself-comes-from",
+    "href": "pages/Chapter-4.html#where-conda-itself-comes-from",
+    "title": "4  Executing python code",
+    "section": "\n4.2 Where conda itself comes from",
+    "text": "4.2 Where conda itself comes from\nBuilding a conda environment needs a conda implementation, and the machines that build this book do not necessarily have one. Bioconductor’s current builders may, and the r-universe build image ships quarto, python3 and pip, but no conda at all. So BiocBook brings its own.\nmicromamba is a single self-contained binary: no conda installation, no base environment, no python.\nBiocBook::micromamba() resolves it in order:\n\n\nRETICULATE_CONDA, if you have set it;\na micromamba already on the PATH (this book’s Docker image installs one);\na copy previously downloaded into BiocBook’s cache;\nfailing all of those, it downloads a pinned release and checks it against a recorded SHA256 before using it.\n\n\n\n\n\n\n\nNoteKeep an R chunk on the page\n\n\n\nquarto chooses its execution engine per file. A page with at least one R chunk uses knitr, and runs its python chunks through reticulate. A page whose only code is python uses jupyter instead. However, the Bioconductor builders do not provide jupyter, so a jupyter page cannot be rendered there at all.\nTo force quarto to use knitr, keep at least one R chunk on the page, even if it is empty.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Executing `python` code</span>"
+    ]
+  },
+  {
+    "objectID": "pages/Chapter-4.html#a-worked-example",
+    "href": "pages/Chapter-4.html#a-worked-example",
+    "title": "4  Executing python code",
+    "section": "\n4.3 A worked example",
+    "text": "4.3 A worked example\nreticulate hosts a single, persistent python session that is shared with R, so objects can be passed in both directions.\nStart from an R object:\n\ncounts &lt;- matrix(\n    c(12, 0, 45, 3, 7, 91, 0, 5, 33),\n    nrow = 3,\n    dimnames = list(c(\"geneA\", \"geneB\", \"geneC\"), c(\"s1\", \"s2\", \"s3\"))\n)\ncounts\n##        s1 s2 s3\n##  geneA 12  3  0\n##  geneB  0  7  5\n##  geneC 45 91 33\n\nThe R object is reachable from python through the r object:\n\nimport numpy as np\ncounts = np.array(r.counts)\nprint(\"shape:\", counts.shape)\n##  shape: (3, 3)\nprint(\"library sizes:\", counts.sum(axis = 0))\n##  library sizes: [ 57. 101.  38.]\n\nState persists from one python chunk to the next, exactly as it would in a notebook:\n\ncpm = counts / counts.sum(axis = 0) * 1e6\nprint(\"CPM values:\")\n##  CPM values:\nprint(np.round(cpm, 1))\n##  [[210526.3  29703.       0. ]\n##   [     0.   69306.9 131578.9]\n##   [789473.7 900990.1 868421.1]]\n\nFinally, the python object can be passed back to R:\n\ncpm &lt;- reticulate::py$cpm\ncpm\n##           [,1]      [,2]     [,3]\n##  [1,] 210526.3  29702.97      0.0\n##  [2,]      0.0  69306.93 131578.9\n##  [3,] 789473.7 900990.10 868421.1",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Executing `python` code</span>"
+    ]
+  },
+  {
+    "objectID": "pages/Chapter-4.html#bioconda-packages",
+    "href": "pages/Chapter-4.html#bioconda-packages",
+    "title": "4  Executing python code",
+    "section": "\n4.4 Bioconda packages",
+    "text": "4.4 Bioconda packages\nBecause the BiocBook environment is a conda environment, it can install any package from the bioconda channel, e.g. deeptools:\n\nfrom importlib.metadata import version\nv = version(\"deeptools\")\n\nThen read that in R:\n\nreticulate::py$v\n##  [1] \"3.5.5\"",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Executing `python` code</span>"
+    ]
+  },
+  {
+    "objectID": "pages/Chapter-4.html#session-info",
+    "href": "pages/Chapter-4.html#session-info",
+    "title": "4  Executing python code",
+    "section": "\n4.5 Session info",
+    "text": "4.5 Session info\n\nsessioninfo::session_info()\n##  ─ Session info ────────────────────────────────────────────────────────────\n##   setting  value\n##   version  R version 4.6.1 (2026-06-24)\n##   os       Ubuntu 24.04.4 LTS\n##   system   x86_64, linux-gnu\n##   ui       X11\n##   language (EN)\n##   collate  C\n##   ctype    en_US.UTF-8\n##   tz       Etc/UTC\n##   date     2026-09-04\n##   pandoc   3.10.2 @ /usr/bin/ (via rmarkdown)\n##   quarto   1.9.38 @ /usr/local/bin/quarto\n##  \n##  ─ Packages ────────────────────────────────────────────────────────────────\n##   package      * version date (UTC) lib source\n##   askpass        1.2.1   2024-10-04 [2] RSPM (R 4.6.0)\n##   BiocBook       1.11.0  2026-09-04 [2] Github (js2264/BiocBook@489b2fc)\n##   BiocGenerics   0.59.12 2026-08-11 [2] Bioconductor 3.24 (R 4.6.1)\n##   cli            3.6.6   2026-04-09 [2] RSPM (R 4.6.0)\n##   credentials    2.0.3   2025-09-12 [2] RSPM (R 4.6.0)\n##   digest         0.6.39  2025-11-19 [2] RSPM (R 4.6.0)\n##   dplyr          1.2.1   2026-04-03 [2] RSPM (R 4.6.0)\n##   evaluate       1.0.5   2025-08-27 [2] RSPM (R 4.6.0)\n##   fastmap        1.2.0   2024-05-15 [2] RSPM (R 4.6.0)\n##   fs             2.1.0   2026-04-18 [2] RSPM (R 4.6.0)\n##   generics       0.1.4   2025-05-09 [2] RSPM (R 4.6.0)\n##   gert           2.4.1   2026-08-19 [2] RSPM (R 4.6.0)\n##   gh             1.6.1   2026-07-20 [2] RSPM (R 4.6.0)\n##   gitcreds       0.1.2   2022-09-08 [2] RSPM (R 4.6.0)\n##   glue           1.8.1   2026-04-17 [2] RSPM (R 4.6.0)\n##   htmltools      0.5.9   2025-12-04 [2] RSPM (R 4.6.0)\n##   htmlwidgets    1.6.4   2023-12-06 [2] RSPM (R 4.6.0)\n##   httr           1.4.9   2026-09-01 [2] RSPM (R 4.6.0)\n##   jsonlite       2.0.0   2025-03-27 [2] RSPM (R 4.6.0)\n##   knitr          1.51    2025-12-20 [2] RSPM (R 4.6.0)\n##   lattice        0.23-1  2026-08-12 [2] RSPM (R 4.6.0)\n##   lifecycle      1.0.5   2026-01-08 [2] RSPM (R 4.6.0)\n##   magrittr       2.0.5   2026-04-04 [2] RSPM (R 4.6.0)\n##   Matrix         1.7-6   2026-07-25 [2] RSPM (R 4.6.0)\n##   openssl        2.4.2   2026-06-09 [2] RSPM (R 4.6.0)\n##   otel           0.2.0   2025-08-29 [2] RSPM (R 4.6.0)\n##   pak            0.11.1  2026-07-22 [2] RSPM (R 4.6.0)\n##   pillar         1.11.1  2025-09-17 [2] RSPM (R 4.6.0)\n##   pkgconfig      2.0.3   2019-09-22 [2] RSPM (R 4.6.0)\n##   png            0.1-9   2026-03-15 [2] RSPM (R 4.6.0)\n##   purrr          1.2.2   2026-04-10 [2] RSPM (R 4.6.0)\n##   R6             2.6.1   2025-02-15 [2] RSPM (R 4.6.0)\n##   Rcpp           1.1.2   2026-07-05 [2] RSPM (R 4.6.0)\n##   renv           1.2.4   2026-08-03 [2] RSPM (R 4.6.0)\n##   reticulate   * 1.47.0  2026-09-03 [2] RSPM (R 4.6.0)\n##   rlang          1.3.0   2026-07-05 [2] RSPM (R 4.6.0)\n##   rmarkdown      2.32    2026-09-01 [2] RSPM (R 4.6.0)\n##   rprojroot      2.1.1   2025-08-26 [2] RSPM (R 4.6.0)\n##   sessioninfo    1.2.4   2026-06-04 [2] RSPM (R 4.6.0)\n##   stringi        1.8.9   2026-08-04 [2] RSPM (R 4.6.0)\n##   stringr        1.6.0   2025-11-04 [2] RSPM (R 4.6.0)\n##   sys            3.4.3   2024-10-04 [2] RSPM (R 4.6.0)\n##   tibble         3.3.1   2026-01-11 [2] RSPM (R 4.6.0)\n##   tidyselect     1.2.1   2024-03-11 [2] RSPM (R 4.6.0)\n##   usethis        3.2.1   2025-09-06 [2] RSPM (R 4.6.0)\n##   vctrs          0.7.3   2026-04-11 [2] RSPM (R 4.6.0)\n##   withr          3.0.3   2026-06-19 [2] RSPM (R 4.6.0)\n##   xfun           0.60    2026-07-09 [2] RSPM (R 4.6.0)\n##   yaml           2.3.12  2025-12-10 [2] RSPM (R 4.6.0)\n##  \n##   [1] /tmp/Rtmpg83CZ3/Rinst8e21da1063\n##   [2] /usr/local/lib/R/site-library\n##   [3] /usr/local/lib/R/library\n##   * ── Packages attached to the search path.\n##  \n##  ─ Python configuration ────────────────────────────────────────────────────\n##   python:         /opt/R-cache/R/BiocBook/envs/BiocBook/bin/python\n##   libpython:      /opt/R-cache/R/BiocBook/envs/BiocBook/lib/libpython3.12.so\n##   pythonhome:     /opt/R-cache/R/BiocBook/envs/BiocBook:/opt/R-cache/R/BiocBook/envs/BiocBook\n##   version:        3.12.14 (main, Sep  2 2026, 23:27:36) [GCC 15.3.0]\n##   numpy:          /opt/R-cache/R/BiocBook/envs/BiocBook/lib/python3.12/site-packages/numpy\n##   numpy_version:  1.26.4\n##   \n##   NOTE: Python version was forced by RETICULATE_PYTHON\n##  \n##  ───────────────────────────────────────────────────────────────────────────",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Executing `python` code</span>"
+    ]
+  },
+  {
     "objectID": "pages/biocbook-vs-rebook.html",
     "href": "pages/biocbook-vs-rebook.html",
-    "title": "\n4  {BiocBook}-based books vs. {rebook}-based books\n",
+    "title": "\n5  {BiocBook}-based books vs. {rebook}-based books\n",
     "section": "",
-    "text": "4.1 Differences with {rebook}-based books\n{rebook} is another book rendering package currently used by Bioconductor to build book packages such as OSCA.* and SingleRBook.\nOSCA books provided by Bioconductor are rendered upon building by the Bioconductor Build System (BBS). They rely on {rebook} to orchestrate the rendering. Briefly, OSCA books have their book pages in /inst/book/, while the vignettes/ folder contains (1) a Makefile and (2) a dummy stub.Rmd vignette (required to trigger vignette rendering and thus make).\nWhen the BBS triggers OSCA.intro package building, upon vignette rendering, the Makefile triggers the following commands:\nR\n\nwork.dir &lt;- rebook::bookCache('OSCA.intro')\nhandle &lt;- rebook::preCompileBook('../inst/book', work.dir=work.dir, desc='../DESCRIPTION')\nold.dir &lt;- setwd(work.dir)\nbookdown::render_book('index.Rmd')\nsetwd(old.dir)\nrebook::postCompileBook(work.dir=work.dir, final.dir='../inst/doc/book', handle=handle)\nThe resulting book, pre-compiled by {rebook} and assembled by {bookdown}, is eventually served by Bioconductor from the /inst/doc/book/ folder.\n{BiocBook}-based packages follow a strategy similar to that of OSCA books: they provide a Makefile in the vignettes/ folder to trigger book rendering when building the package. However, the executed command does not rely on {rebook} and {bookdown}, but on a render command from the quarto software.\nshell\n\nquarto render ../inst/\nmv ../inst/docs ../inst/doc/book\nThe resulting book, fully compiled by native quarto, is also located in /inst/doc/book/ once the package is built (and in doc/book in the library directory once installed).",
+    "text": "5.1 Differences with {rebook}-based books\n{rebook} is another book rendering package currently used by Bioconductor to build book packages such as OSCA.* and SingleRBook.\nOSCA books provided by Bioconductor are rendered upon building by the Bioconductor Build System (BBS). They rely on {rebook} to orchestrate the rendering. Briefly, OSCA books have their book pages in /inst/book/, while the vignettes/ folder contains (1) a Makefile and (2) a dummy stub.Rmd vignette (required to trigger vignette rendering and thus make).\nWhen the BBS triggers OSCA.intro package building, upon vignette rendering, the Makefile triggers the following commands:\nR\n\nwork.dir &lt;- rebook::bookCache('OSCA.intro')\nhandle &lt;- rebook::preCompileBook('../inst/book', work.dir=work.dir, desc='../DESCRIPTION')\nold.dir &lt;- setwd(work.dir)\nbookdown::render_book('index.Rmd')\nsetwd(old.dir)\nrebook::postCompileBook(work.dir=work.dir, final.dir='../inst/doc/book', handle=handle)\nThe resulting book, pre-compiled by {rebook} and assembled by {bookdown}, is eventually served by Bioconductor from the /inst/doc/book/ folder.\n{BiocBook}-based packages follow a strategy similar to that of OSCA books: they provide a Makefile in the vignettes/ folder to trigger book rendering when building the package. However, the executed command does not rely on {rebook} and {bookdown}, but on a render command from the quarto software.\nshell\n\nquarto render ../inst/\nmv ../inst/docs ../inst/doc/book\nThe resulting book, fully compiled by native quarto, is also located in /inst/doc/book/ once the package is built (and in doc/book in the library directory once installed).",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>{`BiocBook`}-based books vs. {`rebook`}-based books</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>{`BiocBook`}-based books vs. {`rebook`}-based books</span>"
     ]
   },
   {
     "objectID": "pages/biocbook-vs-rebook.html#differences-with-rebook-based-books",
     "href": "pages/biocbook-vs-rebook.html#differences-with-rebook-based-books",
-    "title": "\n4  {BiocBook}-based books vs. {rebook}-based books\n",
+    "title": "\n5  {BiocBook}-based books vs. {rebook}-based books\n",
     "section": "",
     "text": "WarningThis implies that quarto (&gt;= 1.3) has to be installed in the system building the package!",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>{`BiocBook`}-based books vs. {`rebook`}-based books</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>{`BiocBook`}-based books vs. {`rebook`}-based books</span>"
     ]
   },
   {
     "objectID": "pages/biocbook-vs-rebook.html#biocbook-features-missing-from-rebook",
     "href": "pages/biocbook-vs-rebook.html#biocbook-features-missing-from-rebook",
-    "title": "\n4  {BiocBook}-based books vs. {rebook}-based books\n",
-    "section": "\n4.2 BiocBook features missing from rebook\n",
-    "text": "4.2 BiocBook features missing from rebook\n\n\nA BiocBook can be readily initiated using BiocBook::init();\nIt relies on modern .qmd files supported by Quarto;\nIt can work as a standalone Github-hosted package, without necessarily having to be submitted to/built by Bioconductor. The book should be rendered exactly the same way through Github or by the BBS;\nIt supports versioning of the online book served by gh-pages through the author Github account;\nIt distributes versioned Dockerfiles through the author Github account;\n\nBiocBook-based packages can actually provide fully-fledged functions in R/, manual pages and vignettes. They can be installed exactly the same way than other software packages.",
+    "title": "\n5  {BiocBook}-based books vs. {rebook}-based books\n",
+    "section": "\n5.2 BiocBook features missing from rebook\n",
+    "text": "5.2 BiocBook features missing from rebook\n\n\nA BiocBook can be readily initiated using BiocBook::init();\nIt relies on modern .qmd files supported by Quarto;\nIt can work as a standalone Github-hosted package, without necessarily having to be submitted to/built by Bioconductor. The book should be rendered exactly the same way through Github or by the BBS;\nIt supports versioning of the online book served by gh-pages through the author Github account;\nIt distributes versioned Dockerfiles through the author Github account;\n\nBiocBook-based packages can actually provide fully-fledged functions in R/, manual pages and vignettes. They can be installed exactly the same way than other software packages.",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>{`BiocBook`}-based books vs. {`rebook`}-based books</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>{`BiocBook`}-based books vs. {`rebook`}-based books</span>"
     ]
   },
   {
     "objectID": "pages/biocbook-vs-rebook.html#rebook-features-missing-from-biocbook",
     "href": "pages/biocbook-vs-rebook.html#rebook-features-missing-from-biocbook",
-    "title": "\n4  {BiocBook}-based books vs. {rebook}-based books\n",
-    "section": "\n4.3 rebook features missing from BiocBook\n",
-    "text": "4.3 rebook features missing from BiocBook\n\n\nSmart reuse of objects generated in one book in another book;\n\n\n\n\n\n\n\nTip\n\n\n\nThis can still be achieved within a book by saving a data object as an .rds file and loading it in a subsequent chapter.\n\nisthisworking &lt;- readRDS('isthisworking.rds')\nisthisworking\n##  [1] \"yes\"\n\n\n\n\nNative support of cross-references across books.",
+    "title": "\n5  {BiocBook}-based books vs. {rebook}-based books\n",
+    "section": "\n5.3 rebook features missing from BiocBook\n",
+    "text": "5.3 rebook features missing from BiocBook\n\n\nSmart reuse of objects generated in one book in another book;\n\n\n\n\n\n\n\nTip\n\n\n\nThis can still be achieved within a book by saving a data object as an .rds file and loading it in a subsequent chapter.\n\nisthisworking &lt;- readRDS('isthisworking.rds')\nisthisworking\n##  [1] \"yes\"\n\n\n\n\nNative support of cross-references across books.",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>{`BiocBook`}-based books vs. {`rebook`}-based books</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>{`BiocBook`}-based books vs. {`rebook`}-based books</span>"
+    ]
+  },
+  {
+    "objectID": "pages/biocbook-vs-rebook.html#session-info",
+    "href": "pages/biocbook-vs-rebook.html#session-info",
+    "title": "\n5  {BiocBook}-based books vs. {rebook}-based books\n",
+    "section": "\n5.4 Session info",
+    "text": "5.4 Session info\n\nsessioninfo::session_info()\n##  ─ Session info ────────────────────────────────────────────────────────────\n##   setting  value\n##   version  R version 4.6.1 (2026-06-24)\n##   os       Ubuntu 24.04.4 LTS\n##   system   x86_64, linux-gnu\n##   ui       X11\n##   language (EN)\n##   collate  C\n##   ctype    en_US.UTF-8\n##   tz       Etc/UTC\n##   date     2026-09-04\n##   pandoc   3.10.2 @ /usr/bin/ (via rmarkdown)\n##   quarto   1.9.38 @ /usr/local/bin/quarto\n##  \n##  ─ Packages ────────────────────────────────────────────────────────────────\n##   package     * version date (UTC) lib source\n##   cli           3.6.6   2026-04-09 [2] RSPM (R 4.6.0)\n##   digest        0.6.39  2025-11-19 [2] RSPM (R 4.6.0)\n##   evaluate      1.0.5   2025-08-27 [2] RSPM (R 4.6.0)\n##   fastmap       1.2.0   2024-05-15 [2] RSPM (R 4.6.0)\n##   htmltools     0.5.9   2025-12-04 [2] RSPM (R 4.6.0)\n##   htmlwidgets   1.6.4   2023-12-06 [2] RSPM (R 4.6.0)\n##   jsonlite      2.0.0   2025-03-27 [2] RSPM (R 4.6.0)\n##   knitr         1.51    2025-12-20 [2] RSPM (R 4.6.0)\n##   otel          0.2.0   2025-08-29 [2] RSPM (R 4.6.0)\n##   rlang         1.3.0   2026-07-05 [2] RSPM (R 4.6.0)\n##   rmarkdown     2.32    2026-09-01 [2] RSPM (R 4.6.0)\n##   sessioninfo   1.2.4   2026-06-04 [2] RSPM (R 4.6.0)\n##   xfun          0.60    2026-07-09 [2] RSPM (R 4.6.0)\n##   yaml          2.3.12  2025-12-10 [2] RSPM (R 4.6.0)\n##  \n##   [1] /tmp/Rtmpg83CZ3/Rinst8e21da1063\n##   [2] /usr/local/lib/R/site-library\n##   [3] /usr/local/lib/R/library\n##  \n##  ───────────────────────────────────────────────────────────────────────────",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>{`BiocBook`}-based books vs. {`rebook`}-based books</span>"
     ]
   }
 ]

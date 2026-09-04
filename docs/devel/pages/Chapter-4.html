@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.9.38">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>1&nbsp; BiocBook versioning system – Write Quarto books with Bioconductor</title>
+<title>4&nbsp; Executing python code – Write Quarto books with Bioconductor</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../pages/Chapter-2.html" rel="next">
-<link href="../pages/preamble.html" rel="prev">
+<link href="../pages/biocbook-vs-rebook.html" rel="next">
+<link href="../pages/Chapter-3.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -110,7 +110,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/Chapter-1.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><code>BiocBook</code> versioning system</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/Chapter-4.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Executing <code>python</code> code</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -145,7 +145,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../pages/Chapter-1.html" class="sidebar-item-text sidebar-link active">
+  <a href="../pages/Chapter-1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><code>BiocBook</code> versioning system</span></span></a>
   </div>
 </li>
@@ -163,7 +163,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../pages/Chapter-4.html" class="sidebar-item-text sidebar-link">
+  <a href="../pages/Chapter-4.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Executing <code>python</code> code</span></span></a>
   </div>
 </li>
@@ -181,32 +181,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li>
-<a href="#continuous-integration-and-continuous-delivery" id="toc-continuous-integration-and-continuous-delivery" class="nav-link active" data-scroll-target="#continuous-integration-and-continuous-delivery"><span class="header-section-number">1.1</span> Continuous Integration and Continuous Delivery</a>
-  <ul class="collapse">
-<li><a href="#from-local-to-github" id="toc-from-local-to-github" class="nav-link" data-scroll-target="#from-local-to-github"><span class="header-section-number">1.1.1</span> From local to Github</a></li>
-  <li><a href="#package-submission-to-bioconductor" id="toc-package-submission-to-bioconductor" class="nav-link" data-scroll-target="#package-submission-to-bioconductor"><span class="header-section-number">1.1.2</span> Package submission to Bioconductor</a></li>
-  <li><a href="#new-bioconductor-releases" id="toc-new-bioconductor-releases" class="nav-link" data-scroll-target="#new-bioconductor-releases"><span class="header-section-number">1.1.3</span> New Bioconductor releases</a></li>
-  <li><a href="#updates" id="toc-updates" class="nav-link" data-scroll-target="#updates"><span class="header-section-number">1.1.4</span> Updates</a></li>
-  </ul>
-</li>
-  <li>
-<a href="#access-to-versioned-docker-and-online-book" id="toc-access-to-versioned-docker-and-online-book" class="nav-link" data-scroll-target="#access-to-versioned-docker-and-online-book"><span class="header-section-number">1.2</span> Access to versioned Docker and online book</a>
-  <ul class="collapse">
-<li><a href="#docker-images-versioning" id="toc-docker-images-versioning" class="nav-link" data-scroll-target="#docker-images-versioning"><span class="header-section-number">1.2.1</span> Docker images versioning</a></li>
-  <li><a href="#website-versioning" id="toc-website-versioning" class="nav-link" data-scroll-target="#website-versioning"><span class="header-section-number">1.2.2</span> Website versioning</a></li>
-  </ul>
-</li>
-  <li><a href="#does-this-really-work" id="toc-does-this-really-work" class="nav-link" data-scroll-target="#does-this-really-work"><span class="header-section-number">1.3</span> Does this really work?</a></li>
-  <li><a href="#so-what-packages-can-i-use" id="toc-so-what-packages-can-i-use" class="nav-link" data-scroll-target="#so-what-packages-can-i-use"><span class="header-section-number">1.4</span> So what packages can I use?</a></li>
-  <li><a href="#session-info" id="toc-session-info" class="nav-link" data-scroll-target="#session-info"><span class="header-section-number">1.5</span> Session info</a></li>
+<li><a href="#declaring-and-installing-the-python-environment" id="toc-declaring-and-installing-the-python-environment" class="nav-link active" data-scroll-target="#declaring-and-installing-the-python-environment"><span class="header-section-number">4.1</span> Declaring and installing the python environment</a></li>
+  <li><a href="#where-conda-itself-comes-from" id="toc-where-conda-itself-comes-from" class="nav-link" data-scroll-target="#where-conda-itself-comes-from"><span class="header-section-number">4.2</span> Where <code>conda</code> itself comes from</a></li>
+  <li><a href="#a-worked-example" id="toc-a-worked-example" class="nav-link" data-scroll-target="#a-worked-example"><span class="header-section-number">4.3</span> A worked example</a></li>
+  <li><a href="#bioconda-packages" id="toc-bioconda-packages" class="nav-link" data-scroll-target="#bioconda-packages"><span class="header-section-number">4.4</span> Bioconda packages</a></li>
+  <li><a href="#session-info" id="toc-session-info" class="nav-link" data-scroll-target="#session-info"><span class="header-section-number">4.5</span> Session info</a></li>
   </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title">
-<span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><code>BiocBook</code> versioning system</span>
-</h1>
+<h1 class="title"><span id="sec-python" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Executing <code>python</code> code</span></span></h1>
 </div>
 
 
@@ -231,142 +215,122 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>Any <strong>package</strong> built using the {<code>BiocBook</code>} package is itself a {<code>BiocBook</code>}-based package;</li>
-<li>As such, it follows the release schedule from <code>Bioconducor</code>;</li>
-<li>The <code>pages/</code> folder contains a number of pages which are rendered as a <strong>website</strong> using Quarto;</li>
-<li>The <strong>name</strong> of the branch (<code>devel</code> or <code>RELEASE_X_Y</code>) is <strong><em>crucial</em></strong>, as it is used to select a Bioconductor version to 1) build a <strong>Docker image</strong> for the {<code>BiocBook</code>}-based package and 2) render the <code>BiocBook</code> <strong>website</strong>.</li>
+<li>
+<code>BiocBook</code>s can execute <strong><code>python</code> code</strong>, not just <code>R</code> code;</li>
+<li>The code runs on <strong>every render</strong>, including when the <em>Bioconductor Build System</em> builds the book;</li>
+<li>The <code>python</code> packages the book needs are therefore installed <strong>at build time</strong>, by the book itself, from the <code>conda</code> environment declared in <code>inst/requirements.yml</code>;</li>
+<li>
+<strong>Keep at least one <code>R</code> chunk on a <code>python</code> page</strong>: it is what keeps <code>quarto</code> on the <code>knitr</code> engine.</li>
 </ul>
 </div>
 </div>
-<section id="continuous-integration-and-continuous-delivery" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="continuous-integration-and-continuous-delivery">
-<span class="header-section-number">1.1</span> Continuous Integration and Continuous Delivery</h2>
-<section id="from-local-to-github" class="level3" data-number="1.1.1"><h3 data-number="1.1.1" class="anchored" data-anchor-id="from-local-to-github">
-<span class="header-section-number">1.1.1</span> From local to Github</h3>
-<p>When pushing a {<code>BiocBook</code>}-based <strong>package</strong> from a local <code>devel</code> branch to Github, (e.g.&nbsp;when writing new articles), two jobs are automatically triggered from a single Github Actions workflow:</p>
+<section id="declaring-and-installing-the-python-environment" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="declaring-and-installing-the-python-environment">
+<span class="header-section-number">4.1</span> Declaring and installing the python environment</h2>
+<p><code>python</code> packages are listed, pinned, in <code>inst/requirements.yml</code> – a plain <code>conda</code> environment file, e.g.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">    BiocBook</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">channels</span><span class="kw">:</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> conda-forge</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> bioconda</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> nodefaults</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> python=3.12</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> numpy=1.26</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> matplotlib</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Note the presence of the <code>nodefaults</code> channel: the <code>defaults</code> channel is covered by the Anaconda Terms of Service, which require a paid licence for many organisations. <code>conda-forge</code> and <code>bioconda</code> are community channels that are free to use.</p>
+<p>The first page that needs <code>python</code> installs and activates them:</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/reticulate/">reticulate</a></span><span class="op">)</span></span>
+<span><span class="fu">BiocBook</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook-python.html">setup_python</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">##  ✔ Using the `python` already configured for this session: '/opt/R-cache/R/BiocBook/envs/BiocBook/bin/python'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>setup_python()</code> finds <code>inst/requirements.yml</code>, creates the <code>conda</code> environment declared there (if not installed yet) and activates it, addressing it by full path rather than by name. If the environment already exists, it is re-used rather than resolved again, and if <code>RETICULATE_PYTHON</code> is already set (as it is inside the book’s <code>Docker</code> image) the whole step short-circuits.</p>
+</section><section id="where-conda-itself-comes-from" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="where-conda-itself-comes-from">
+<span class="header-section-number">4.2</span> Where <code>conda</code> itself comes from</h2>
+<p>Building a <code>conda</code> environment needs a <code>conda</code> implementation, and the machines that build this book do not necessarily have one. Bioconductor’s current builders may, and the <code>r-universe</code> build image ships <code>quarto</code>, <code>python3</code> and <code>pip</code>, but no <code>conda</code> at all. So <code>BiocBook</code> brings its own.</p>
+<p><code>micromamba</code> is a single self-contained binary: no <code>conda</code> installation, no base environment, no <code>python</code>.</p>
+<p><code><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook-python.html">BiocBook::micromamba()</a></code> resolves it in order:</p>
 <ol type="1">
-<li>First, a <strong>Docker image</strong> will be created to build the {<code>BiocBook</code>} package against the Bioconductor <code>devel</code> branch and push the resulting image to <code>ghcr.io/&lt;github_user&gt;/&lt;package_name&gt;:devel</code>;</li>
-<li>Then, this image will be used to render the <code>BiocBook</code> <strong>website</strong> and deploy it to <code>https://&lt;github_user&gt;.github.io/&lt;package_name&gt;/devel/</code>
-</li>
+<li>
+<code>RETICULATE_CONDA</code>, if you have set it;</li>
+<li>a <code>micromamba</code> already on the <code>PATH</code> (this book’s <code>Docker</code> image installs one);</li>
+<li>a copy previously downloaded into <code>BiocBook</code>’s cache;</li>
+<li>failing all of those, it downloads a <strong>pinned</strong> release and checks it against a recorded <code>SHA256</code> before using it.</li>
 </ol>
-<p><img src="images/local_to_gh.jpg" class="img-fluid"></p>
-<p>Additional commits on the <code>devel</code> branch will trigger regeneration of the <code>devel</code> Docker image and the online book <code>devel</code> version.</p>
-<p><img src="images/commits.jpg" class="img-fluid"></p>
-</section><section id="package-submission-to-bioconductor" class="level3" data-number="1.1.2"><h3 data-number="1.1.2" class="anchored" data-anchor-id="package-submission-to-bioconductor">
-<span class="header-section-number">1.1.2</span> Package submission to Bioconductor</h3>
-<p>Submission to Biconductor can follow the <a href="https://contributions.bioconductor.org/bioconductor-package-submissions.html#whattoexpect">same reviewing process</a> as other standard packages.</p>
-<ol type="1">
-<li>The author submits a book package to <code>Bioconductor/Contributions</code>;</li>
-<li>Once review starts, the package gets tested by Bioconductor’s <a href="https://github.com/Bioconductor/packagebuilder"><em>Single Package Builder</em></a> (<em>SPB</em>);</li>
-<li>The author pushes changes to its Github repository; this will update the <code>devel</code> Docker image and the online book <code>devel</code> version;</li>
-<li>Regularly, the author bumps versions and push to Bioconductor’s <code>upstream</code> branch to trigger a new <em>SPB</em> test run;</li>
-<li>Once the <em>SPB</em> returns no error/warnings, the package may be accepted;</li>
-<li>When a book package is accepted, it starts being regularly built by the <a href="https://github.com/Bioconductor/BBS"><em>Bioconductor Build System</em></a> (<em>BBS</em>).</li>
-<li>The <em>BBS</em> build automatically renders the book and deploys it online.</li>
-</ol>
-<p><img src="images/submission.jpg" class="img-fluid"></p>
-<p>At all time, the author’s local <code>devel</code> branch should be synchronized with its Github remote <code>origin</code> as well as the Bioconductor <code>upstream</code> remote.</p>
-<ul>
-<li>Any commit pushed to the remote Github <code>origin</code> remote will trigger a new Github Actions workflow and regenerate the <code>devel</code> Docker image and the online book <strong>served by Github</strong>.</li>
-<li>Any commit pushed to the remote Bioconductor <code>upstream</code> remote will result in a new build by the <strong>BBS</strong> and an update of the <strong>Bioconductor’s hosted book</strong>.</li>
-</ul>
-<p><img src="images/more_commits.jpg" class="img-fluid"></p>
-</section><section id="new-bioconductor-releases" class="level3" data-number="1.1.3"><h3 data-number="1.1.3" class="anchored" data-anchor-id="new-bioconductor-releases">
-<span class="header-section-number">1.1.3</span> New Bioconductor releases</h3>
-<p>When Bioconductor releases a version <code>X.Y</code>, the core team will automatically create a new <code>upstream:&lt;package_name&gt;@RELEASE_X_Y</code>. This will automatically trigger new builds of the <strong>Bioconductor’s hosted book</strong> against the new release.</p>
-<p>When this occurs, the <code>upstream</code> branch can also be pulled to <code>origin:&lt;package_name&gt;@RELEASE_X_Y</code> to:</p>
-<ol type="1">
-<li>Create a <strong>Docker image</strong> @ <code>ghcr.io/&lt;github_user&gt;/&lt;package_name&gt;:RELEASE_X_Y</code>, with the book <strong>package</strong> installed using Bioconductor <code>X.Y</code>;</li>
-<li>Publish the book <strong>website</strong> to <code>https://&lt;github_user&gt;.github.io/&lt;package_name&gt;/X.Y/</code>, using packages from Bioconductor <code>X.Y</code>.</li>
-</ol>
-<p><img src="images/new_release.jpg" class="img-fluid"></p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+<span class="screen-reader-only">Note</span>Keep an <code>R</code> chunk on the page
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>A {<code>BiocBook</code>}-based <strong>package</strong> can follow its own release life cycle if the autor does not intend to submit it to Bioconductor.</p>
-<p>If the author of a {<code>BiocBook</code>}-based <strong>package</strong> intends to submit this package/book/website to Bioconductor, the <a href="https://contributions.bioconductor.org/versionnum.html">Bioconductor submission and release life cycle</a>:</p>
-<ul>
-<li>When developing a {<code>BiocBook</code>}-based <strong>package</strong> (at the submission and during review), the <strong>package</strong> version should be between <code>0.99.0</code> and <code>1.0.0</code>.</li>
-<li>Once the submission is accepted and Bioconductor releases a new version <code>X.Y</code>, the {<code>BiocBook</code>}-based <strong>package</strong> version will automatically be bumped to <code>1.0.0</code> in Bioconductor release <code>X.Y</code> and to <code>1.1.0</code> in the continuing Bioconductor <code>devel</code>.</li>
-</ul>
+<p><code>quarto</code> chooses its execution engine <strong>per file</strong>. A page with at least one <code>R</code> chunk uses <code>knitr</code>, and runs its <code>python</code> chunks through <code>reticulate</code>. A page whose only code is <code>python</code> uses <code>jupyter</code> instead. However, the Bioconductor builders do not provide <code>jupyter</code>, so a <code>jupyter</code> page cannot be rendered there at all.</p>
+<p>To force <code>quarto</code> to use <code>knitr</code>, keep at least one <code>R</code> chunk on the page, even if it is empty.</p>
 </div>
 </div>
-</section><section id="updates" class="level3" data-number="1.1.4"><h3 data-number="1.1.4" class="anchored" data-anchor-id="updates">
-<span class="header-section-number">1.1.4</span> Updates</h3>
-<p>After new releases, updates and/or hot fixes can still made, both on the latest Bioconductor release and on the <code>devel</code> branch. New commits will automatically trigger the regeneration of the Docker image and the online book for the modified branch(es).</p>
-<p><img src="images/hot_fixes.jpg" class="img-fluid"></p>
-<p>Additional Bioconductor releases will generate new versions of the Docker image and of the online book.</p>
-<p><img src="images/next_release.jpg" class="img-fluid"></p>
-</section></section><section id="access-to-versioned-docker-and-online-book" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="access-to-versioned-docker-and-online-book">
-<span class="header-section-number">1.2</span> Access to versioned Docker and online book</h2>
-<section id="docker-images-versioning" class="level3" data-number="1.2.1"><h3 data-number="1.2.1" class="anchored" data-anchor-id="docker-images-versioning">
-<span class="header-section-number">1.2.1</span> Docker images versioning</h3>
-<p>The different versions of a <code>BiocBook</code> <strong>Docker image</strong> are availabed at the following URL:</p>
-<p><code>ghcr.io/&lt;github_user&gt;/&lt;package_name&gt;</code></p>
-<p>For example, for this package ({<code>BiocBookDemo</code>}), the following <strong>Docker image</strong> versions are available:</p>
-<ul>
-<li><a href="https://github.com/js2264?tab=packages&amp;repo_name=BiocBookDemo">ghcr.io/js2264/biocbookdemo:devel</a></li>
-<li><a href="https://github.com/js2264?tab=packages&amp;repo_name=BiocBookDemo">ghcr.io/js2264/biocbookdemo:3.17</a></li>
-<li><a href="https://github.com/js2264?tab=packages&amp;repo_name=BiocBookDemo">ghcr.io/js2264/biocbookdemo:3.16</a></li>
-<li><a href="https://github.com/js2264?tab=packages&amp;repo_name=BiocBookDemo">ghcr.io/js2264/biocbookdemo:3.15</a></li>
-</ul></section><section id="website-versioning" class="level3" data-number="1.2.2"><h3 data-number="1.2.2" class="anchored" data-anchor-id="website-versioning">
-<span class="header-section-number">1.2.2</span> Website versioning</h3>
-<p>The different versions of a <code>BiocBook</code> <strong>website</strong> are hosted at the following URL:</p>
-<p><code>https://&lt;github_user&gt;.github.io/&lt;package_name&gt;/&lt;version&gt;</code></p>
-<p>For example, for this package ({<code>BiocBookDemo</code>}), the following <strong>website</strong> versions are available:</p>
-<ul>
-<li><a href="https://js2264.github.io/BiocBookDemo/devel/">https://js2264.github.io/BiocBookDemo/devel/</a></li>
-<li><a href="https://js2264.github.io/BiocBookDemo/3.17/">https://js2264.github.io/BiocBookDemo/3.17/</a></li>
-<li><a href="https://js2264.github.io/BiocBookDemo/3.16/">https://js2264.github.io/BiocBookDemo/3.16/</a></li>
-<li><a href="https://js2264.github.io/BiocBookDemo/3.15/">https://js2264.github.io/BiocBookDemo/3.15/</a></li>
-</ul></section></section><section id="does-this-really-work" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="does-this-really-work">
-<span class="header-section-number">1.3</span> Does this really work?</h2>
-<p>The <code>BIOCONDUCTOR_DOCKER_VERSION</code> variable is set in all <code>Bioconductor</code> Docker images. For instance, this version of the <code>BiocBookDemo</code> package online book relies on:</p>
+</section><section id="a-worked-example" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="a-worked-example">
+<span class="header-section-number">4.3</span> A worked example</h2>
+<p><code>reticulate</code> hosts a single, persistent <code>python</code> session that is shared with <code>R</code>, so objects can be passed in both directions.</p>
+<p>Start from an <code>R</code> object:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span><span class="op">(</span><span class="st">"BIOCONDUCTOR_DOCKER_VERSION"</span><span class="op">)</span></span>
-<span><span class="co">##  [1] "3.24.14"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">0</span>, <span class="fl">45</span>, <span class="fl">3</span>, <span class="fl">7</span>, <span class="fl">91</span>, <span class="fl">0</span>, <span class="fl">5</span>, <span class="fl">33</span><span class="op">)</span>,</span>
+<span>    nrow <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>    dimnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"geneA"</span>, <span class="st">"geneB"</span>, <span class="st">"geneC"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"s1"</span>, <span class="st">"s2"</span>, <span class="st">"s3"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">counts</span></span>
+<span><span class="co">##        s1 s2 s3</span></span>
+<span><span class="co">##  geneA 12  3  0</span></span>
+<span><span class="co">##  geneB  0  7  5</span></span>
+<span><span class="co">##  geneC 45 91 33</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Note that this variable will always match the <code>X.Y</code> version returned by <code>BiocVersion</code> used to render the online book.</p>
+<p>The <code>R</code> object is reachable from <code>python</code> through the <code>r</code> object:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageVersion</a></span><span class="op">(</span><span class="st">"BiocVersion"</span><span class="op">)</span></span>
-<span><span class="co">##  [1] '3.24.0'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> np.array(r.counts)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"shape:"</span>, counts.shape)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">##  shape: (3, 3)</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"library sizes:"</span>, counts.<span class="bu">sum</span>(axis <span class="op">=</span> <span class="dv">0</span>))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">##  library sizes: [ 57. 101.  38.]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-</div>
-</section><section id="so-what-packages-can-i-use" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="so-what-packages-can-i-use">
-<span class="header-section-number">1.4</span> So what packages can I use?</h2>
-<p>Any package that has been released in the Bioconductor version you are using (in this book version, this is 3.24.0).</p>
-<p>The <code>BiocBaseUtils</code> package is available in Bioconductor since <code>3.16</code>, while the <code>BiocHail</code> package was only made available in <code>3.17</code>. <code>CuratedAtlasQueryR</code> has recently been accepted in <code>3.18</code> (current <code>devel</code>, on Fri Sep 4 20:40:13 2026). Let’s check this!</p>
+<p>State persists from one <code>python</code> chunk to the next, exactly as it would in a notebook:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageVersion</a></span><span class="op">(</span><span class="st">"BiocVersion"</span><span class="op">)</span></span>
-<span><span class="co">##  [1] '3.24.0'</span></span>
-<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/available.html">available</a></span><span class="op">(</span><span class="st">"BiocBaseUtils"</span><span class="op">)</span></span>
-<span><span class="co">##  [1] "BiocBaseUtils"</span></span>
-<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/available.html">available</a></span><span class="op">(</span><span class="st">"BiocHail"</span><span class="op">)</span></span>
-<span><span class="co">##  [1] "BiocHail"</span></span>
-<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/available.html">available</a></span><span class="op">(</span><span class="st">"CuratedAtlasQueryR"</span><span class="op">)</span></span>
-<span><span class="co">##  character(0)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>cpm <span class="op">=</span> counts <span class="op">/</span> counts.<span class="bu">sum</span>(axis <span class="op">=</span> <span class="dv">0</span>) <span class="op">*</span> <span class="fl">1e6</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"CPM values:"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">##  CPM values:</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.<span class="bu">round</span>(cpm, <span class="dv">1</span>))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">##  [[210526.3  29703.       0. ]</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">##   [     0.   69306.9 131578.9]</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">##   [789473.7 900990.1 868421.1]]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section><section id="session-info" class="level2" data-number="1.5"><h2 data-number="1.5" class="anchored" data-anchor-id="session-info">
-<span class="header-section-number">1.5</span> Session info</h2>
+<p>Finally, the <code>python</code> object can be passed back to <code>R</code>:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="https://sessioninfo.r-lib.org/reference/session_info.html">session_info</a></span><span class="op">(</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cpm</span> <span class="op">&lt;-</span> <span class="fu">reticulate</span><span class="fu">::</span><span class="va"><a href="https://rstudio.github.io/reticulate/reference/py.html">py</a></span><span class="op">$</span><span class="va">cpm</span></span>
+<span><span class="va">cpm</span></span>
+<span><span class="co">##           [,1]      [,2]     [,3]</span></span>
+<span><span class="co">##  [1,] 210526.3  29702.97      0.0</span></span>
+<span><span class="co">##  [2,]      0.0  69306.93 131578.9</span></span>
+<span><span class="co">##  [3,] 789473.7 900990.10 868421.1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section><section id="bioconda-packages" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="bioconda-packages">
+<span class="header-section-number">4.4</span> Bioconda packages</h2>
+<p>Because the <code>BiocBook</code> environment is a <code>conda</code> environment, it can install any package from the <code>bioconda</code> channel, e.g.&nbsp;<code>deeptools</code>:</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> importlib.metadata <span class="im">import</span> version</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> version(<span class="st">"deeptools"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Then read that in <code>R</code>:</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">reticulate</span><span class="fu">::</span><span class="va"><a href="https://rstudio.github.io/reticulate/reference/py.html">py</a></span><span class="op">$</span><span class="va">v</span></span>
+<span><span class="co">##  [1] "3.5.5"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section><section id="session-info" class="level2" data-number="4.5"><h2 data-number="4.5" class="anchored" data-anchor-id="session-info">
+<span class="header-section-number">4.5</span> Session info</h2>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="https://sessioninfo.r-lib.org/reference/session_info.html">session_info</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">##  ─ Session info ────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">##   setting  value</span></span>
 <span><span class="co">##   version  R version 4.6.1 (2026-06-24)</span></span>
@@ -382,25 +346,71 @@ Tip
 <span><span class="co">##   quarto   1.9.38 @ /usr/local/bin/quarto</span></span>
 <span><span class="co">##  </span></span>
 <span><span class="co">##  ─ Packages ────────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">##   package     * version date (UTC) lib source</span></span>
-<span><span class="co">##   BiocManager   1.30.27 2025-11-14 [2] CRAN (R 4.6.1)</span></span>
-<span><span class="co">##   cli           3.6.6   2026-04-09 [2] RSPM (R 4.6.0)</span></span>
-<span><span class="co">##   digest        0.6.39  2025-11-19 [2] RSPM (R 4.6.0)</span></span>
-<span><span class="co">##   evaluate      1.0.5   2025-08-27 [2] RSPM (R 4.6.0)</span></span>
-<span><span class="co">##   fastmap       1.2.0   2024-05-15 [2] RSPM (R 4.6.0)</span></span>
-<span><span class="co">##   htmltools     0.5.9   2025-12-04 [2] RSPM (R 4.6.0)</span></span>
-<span><span class="co">##   htmlwidgets   1.6.4   2023-12-06 [2] RSPM (R 4.6.0)</span></span>
-<span><span class="co">##   jsonlite      2.0.0   2025-03-27 [2] RSPM (R 4.6.0)</span></span>
-<span><span class="co">##   knitr         1.51    2025-12-20 [2] RSPM (R 4.6.0)</span></span>
-<span><span class="co">##   otel          0.2.0   2025-08-29 [2] RSPM (R 4.6.0)</span></span>
-<span><span class="co">##   rlang         1.3.0   2026-07-05 [2] RSPM (R 4.6.0)</span></span>
-<span><span class="co">##   rmarkdown     2.32    2026-09-01 [2] RSPM (R 4.6.0)</span></span>
-<span><span class="co">##   sessioninfo   1.2.4   2026-06-04 [2] RSPM (R 4.6.0)</span></span>
-<span><span class="co">##   xfun          0.60    2026-07-09 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   package      * version date (UTC) lib source</span></span>
+<span><span class="co">##   askpass        1.2.1   2024-10-04 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   BiocBook       1.11.0  2026-09-04 [2] Github (js2264/BiocBook@489b2fc)</span></span>
+<span><span class="co">##   BiocGenerics   0.59.12 2026-08-11 [2] Bioconductor 3.24 (R 4.6.1)</span></span>
+<span><span class="co">##   cli            3.6.6   2026-04-09 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   credentials    2.0.3   2025-09-12 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   digest         0.6.39  2025-11-19 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   dplyr          1.2.1   2026-04-03 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   evaluate       1.0.5   2025-08-27 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   fastmap        1.2.0   2024-05-15 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   fs             2.1.0   2026-04-18 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   generics       0.1.4   2025-05-09 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   gert           2.4.1   2026-08-19 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   gh             1.6.1   2026-07-20 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   gitcreds       0.1.2   2022-09-08 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   glue           1.8.1   2026-04-17 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   htmltools      0.5.9   2025-12-04 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   htmlwidgets    1.6.4   2023-12-06 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   httr           1.4.9   2026-09-01 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   jsonlite       2.0.0   2025-03-27 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   knitr          1.51    2025-12-20 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   lattice        0.23-1  2026-08-12 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   lifecycle      1.0.5   2026-01-08 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   magrittr       2.0.5   2026-04-04 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   Matrix         1.7-6   2026-07-25 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   openssl        2.4.2   2026-06-09 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   otel           0.2.0   2025-08-29 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   pak            0.11.1  2026-07-22 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   pillar         1.11.1  2025-09-17 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   pkgconfig      2.0.3   2019-09-22 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   png            0.1-9   2026-03-15 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   purrr          1.2.2   2026-04-10 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   R6             2.6.1   2025-02-15 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   Rcpp           1.1.2   2026-07-05 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   renv           1.2.4   2026-08-03 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   reticulate   * 1.47.0  2026-09-03 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   rlang          1.3.0   2026-07-05 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   rmarkdown      2.32    2026-09-01 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   rprojroot      2.1.1   2025-08-26 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   sessioninfo    1.2.4   2026-06-04 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   stringi        1.8.9   2026-08-04 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   stringr        1.6.0   2025-11-04 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   sys            3.4.3   2024-10-04 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   tibble         3.3.1   2026-01-11 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   tidyselect     1.2.1   2024-03-11 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   usethis        3.2.1   2025-09-06 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   vctrs          0.7.3   2026-04-11 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   withr          3.0.3   2026-06-19 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   xfun           0.60    2026-07-09 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   yaml           2.3.12  2025-12-10 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##  </span></span>
 <span><span class="co">##   [1] /tmp/Rtmpg83CZ3/Rinst8e21da1063</span></span>
 <span><span class="co">##   [2] /usr/local/lib/R/site-library</span></span>
 <span><span class="co">##   [3] /usr/local/lib/R/library</span></span>
+<span><span class="co">##   * ── Packages attached to the search path.</span></span>
+<span><span class="co">##  </span></span>
+<span><span class="co">##  ─ Python configuration ────────────────────────────────────────────────────</span></span>
+<span><span class="co">##   python:         /opt/R-cache/R/BiocBook/envs/BiocBook/bin/python</span></span>
+<span><span class="co">##   libpython:      /opt/R-cache/R/BiocBook/envs/BiocBook/lib/libpython3.12.so</span></span>
+<span><span class="co">##   pythonhome:     /opt/R-cache/R/BiocBook/envs/BiocBook:/opt/R-cache/R/BiocBook/envs/BiocBook</span></span>
+<span><span class="co">##   version:        3.12.14 (main, Sep  2 2026, 23:27:36) [GCC 15.3.0]</span></span>
+<span><span class="co">##   numpy:          /opt/R-cache/R/BiocBook/envs/BiocBook/lib/python3.12/site-packages/numpy</span></span>
+<span><span class="co">##   numpy_version:  1.26.4</span></span>
+<span><span class="co">##   </span></span>
+<span><span class="co">##   NOTE: Python version was forced by RETICULATE_PYTHON</span></span>
 <span><span class="co">##  </span></span>
 <span><span class="co">##  ───────────────────────────────────────────────────────────────────────────</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -806,13 +816,13 @@ Tip
     }
   });
   </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../pages/preamble.html" class="pagination-link" aria-label="Preamble">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preamble</span>
+      <a href="../pages/Chapter-3.html" class="pagination-link" aria-label="Containerizing and Publishing against specific Bioconductor release versions">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Containerizing and Publishing against specific Bioconductor release versions</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../pages/Chapter-2.html" class="pagination-link" aria-label="Writing a {`BiocBook`} package">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Writing a {<code>BiocBook</code>} package</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../pages/biocbook-vs-rebook.html" class="pagination-link" aria-label="{`BiocBook`}-based books vs. {`rebook`}-based books">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">{<code>BiocBook</code>}-based books vs.&nbsp;{<code>rebook</code>}-based books</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
