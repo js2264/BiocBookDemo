@@ -127,16 +127,16 @@ cpm
 ## Bioconda packages 
 
 Because the `BiocBook` environment is a `conda` environment, it can install any package
-from the `bioconda` channel, e.g. `cooler`:
+from the `bioconda` channel, e.g. `deeptools`:
 
-```{python "python-cooler"}
-import cooler
-v = cooler.__version__
+```{python "python-deeptools"}
+from importlib.metadata import version
+v = version("deeptools")
 ```
 
 Then read that in `R`:
 
-```{r "r-reads-cooler"}
+```{r "r-reads-deeptools"}
 reticulate::py$v
 ```
 
