@@ -150,3 +150,8 @@ BiocManager::available("BiocHail")
 BiocManager::available("CuratedAtlasQueryR")
 ```
 
+## Session info
+
+```{r}
+sessioninfo::session_info()
+```

@@ -98,8 +98,10 @@ Each Docker image provides pre-installed `R` packages:
 - Specific book dependencies from Bioconductor release `X.Y` (listed in `DESCRIPTION`);
 - The book package itself
 
-The Docker images also include a `micromamba`-based environment, named `BiocBook`, 
-in which all the softwares listed in `requirements.yml` are installed. 
+The Docker images also include a `python` environment, named `BiocBook`, in 
+which all the packages listed in `requirements.yml` are installed, and which 
+`reticulate` picks up automatically in any `R` session started from the image 
+(see @sec-python). 
 
 For example, `Docker` images built from the {`BiocBookDemo`} package repository are available here: 
 

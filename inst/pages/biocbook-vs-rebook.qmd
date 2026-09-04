@@ -69,3 +69,8 @@ isthisworking
 
 - Native support of cross-references across books.
 
+## Session info
+
+```{r}
+sessioninfo::session_info()
+```

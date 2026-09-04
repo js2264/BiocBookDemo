@@ -231,10 +231,9 @@ utils::packageVersion("BiocVersion")
 find ../ -name "*.qmd"
 ```
 
-<!-- 
 #### `python` code
 
-Finally, `python` code can also be executed and rendered: 
+`python` code can also be executed and rendered: 
 
 ```{python filename="python"}
 #| eval: false
@@ -242,16 +241,13 @@ import os
 os.getcwd()
 ```
 
-For the rendering of `python` code, you will be limited to 
-the `python` packages installed in the Github worker. These packages can be 
-listed in the `inst/assets/requirements.txt` file, e.g.: 
+`python` needs a little more care than `R` or `bash`, because the book is also
+re-rendered by the Bioconductor Build System, which provides no `python`
+packages. A book therefore installs its own: the packages are declared as a
+`conda` environment in `inst/requirements.yml` and installed at build time by
+`BiocBook::setup_python()`.
 
-```{txt filename="requirements.txt"}
-#| eval: false
-numpy
-pandas >= 2.0.0
-```
- -->
+See [the chapter on executing `python` code](Chapter-4.html) for the full story.
 
 ### Creating data object
 
@@ -268,3 +264,9 @@ saveRDS(isthisworking, 'isthisworking.rds')
 References can be listed as `.bib` entries in the bibliography file located in 
 `inst/assets/bibliography.bib`. The references can be added in-line using the @ notation, 
 e.g. by typing **\@serizay2023**, this will insert the following reference: **@serizay2023**. 
+
+## Session info
+
+```{r}
+sessioninfo::session_info()
+```

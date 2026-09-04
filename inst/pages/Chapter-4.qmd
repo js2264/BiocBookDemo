@@ -1,0 +1,156 @@
+# Executing `python` code {#sec-python}
+
+::: {.callout-warning icon='true'}
+
+## Important points
+
+- `BiocBook`s can execute **`python` code**, not just `R` code;
+- The code runs on **every render**, including when the *Bioconductor Build System* 
+  builds the book;
+- The `python` packages the book needs are therefore installed **at build time**,
+  by the book itself, from the `conda` environment declared in `inst/requirements.yml`;
+- **Keep at least one `R` chunk on a `python` page**: it is what keeps `quarto` on 
+  the `knitr` engine.
+
+:::
+
+## Declaring and installing the python environment
+
+`python` packages are listed, pinned, in `inst/requirements.yml` -- a plain
+`conda` environment file, e.g.
+
+``` yaml
+name:
+    BiocBook
+channels:
+    - conda-forge
+    - bioconda
+    - nodefaults
+dependencies:
+    - python=3.12
+    - numpy=1.26
+    - matplotlib
+```
+
+Note the presence of the `nodefaults` channel: the `defaults` channel is covered by the Anaconda Terms
+of Service, which require a paid licence for many organisations. `conda-forge`
+and `bioconda` are community channels that are free to use.
+
+The first page that needs `python` installs and activates them:
+
+```{r "setup-python"}
+#| include: true
+library(reticulate)
+BiocBook::setup_python()
+```
+
+`setup_python()` finds `inst/requirements.yml`,  creates the `conda` environment 
+declared there and activates it, addressing it by full path rather than by name. 
+If the environment already exists it is re-used rather than resolved again, 
+and if `RETICULATE_PYTHON` is already set (as it is inside the book's `Docker` 
+image) the whole step short-circuits.
+
+## Where `conda` itself comes from
+
+Building a `conda` environment needs a `conda` implementation, and the machines
+that build this book do not necessarily have one. Bioconductor's current builders
+may, and the `r-universe` build image ships `quarto`, `python3` and `pip`, 
+but no `conda` at all. So `BiocBook` brings its own. 
+
+`micromamba` is a single self-contained binary: no `conda` installation, 
+no base environment, no `python`. 
+
+`BiocBook::micromamba()` resolves it in order:
+
+1. `RETICULATE_CONDA`, if you have set it;
+2. a `micromamba` already on the `PATH` (this book's `Docker` image installs one);
+3. a copy previously downloaded into `BiocBook`'s cache;
+4. failing all of those, it downloads a **pinned** release and checks it against
+   a recorded `SHA256` before using it.
+
+That is the only provisioning dependency the book has, on any machine.
+Later chapters do not repeat the setup. They just re-activate:
+
+```{r}
+reticulate::use_condaenv("BiocBook", required = TRUE)
+```
+
+::: {.callout-note icon='true'}
+
+## Keep an `R` chunk on the page
+
+`quarto` chooses its execution engine **per file**. A page with at least one
+`R` chunk uses `knitr`, and runs its `python` chunks through `reticulate`. A
+page whose only code is `python` uses `jupyter` instead. However, the Bioconductor 
+builders do not provide `jupyter`, so a `jupyter` page cannot be rendered there at all.
+
+To force `quarto` to use `knitr`, keep at least one `R` chunk on the page, even 
+if it is empty.
+
+:::
+
+## A worked example
+
+`reticulate` hosts a single, persistent `python` session that is shared with
+`R`, so objects can be passed in both directions.
+Start from an `R` object:
+
+```{r "r-object"}
+counts <- matrix(
+    c(12, 0, 45, 3, 7, 91, 0, 5, 33),
+    nrow = 3,
+    dimnames = list(c("geneA", "geneB", "geneC"), c("s1", "s2", "s3"))
+)
+counts
+```
+
+The `R` object is reachable from `python` through the `r` object:
+
+```{python "python-reads-r"}
+import numpy as np
+counts = np.array(r.counts)
+print("shape:", counts.shape)
+print("library sizes:", counts.sum(axis = 0))
+```
+
+State persists from one `python` chunk to the next, exactly as it would in a
+notebook:
+
+```{python "python-state"}
+cpm = counts / counts.sum(axis = 0) * 1e6
+print("CPM values:")
+print(np.round(cpm, 1))
+```
+
+Finally, the `python` object can be passed back to `R`:
+
+```{r "r-reads-python"}
+cpm <- reticulate::py$cpm
+cpm
+```
+
+## Bioconda packages 
+
+Because the `BiocBook` environment is a `conda` environment, it can install any package
+from the `bioconda` channel, e.g. `cooler`:
+
+```{python "python-cooler"}
+import cooler
+c = cooler.Cooler("inst/extdata/example.cool")
+chroms = c.chromnames
+print("chromosomes:", chroms)
+print("shape:", c.shape)
+```
+
+Then read them into `R`:
+
+```{r "r-reads-cooler"}
+chrs <- reticulate::py$chroms
+chrs
+```
+
+## Session info
+
+```{r}
+sessioninfo::session_info()
+```

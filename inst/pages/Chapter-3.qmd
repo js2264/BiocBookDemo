@@ -61,3 +61,8 @@ gert::git_pull("RELEASE_3_15", remote = "upstream")
 gert::git_push("RELEASE_3_15", remote = "origin")
 ```
 
+## Session info
+
+```{r}
+sessioninfo::session_info()
+```

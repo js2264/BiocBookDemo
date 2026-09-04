@@ -1,8 +1,11 @@
-name: 
+name:
     BiocBook
 channels:
-    - bioconda
     - conda-forge
-    - defaults
+    - bioconda
+    - nodefaults
 dependencies:
-    - python>=3.6
+    - python=3.12
+    - numpy=1.26
+    - matplotlib=3.8
+    - cooler
