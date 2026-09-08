@@ -238,13 +238,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> numpy=1.26</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> matplotlib</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Note the presence of the <code>nodefaults</code> channel: the <code>defaults</code> channel is covered by the Anaconda Terms of Service, which require a paid licence for many organisations. <code>conda-forge</code> and <code>bioconda</code> are community channels that are free to use.</p>
-<p>The first page that needs <code>python</code> installs and activates them:</p>
+<p>Any page that needs <code>python</code> would need to have this chunk at the top:</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/reticulate/">reticulate</a></span><span class="op">)</span></span>
 <span><span class="fu">BiocBook</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook-python.html">setup_python</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">##  ✔ Using the `python` already configured for this session: '/opt/R-cache/R/BiocBook/envs/BiocBook/bin/python'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><code>setup_python()</code> finds <code>inst/requirements.yml</code>, creates the <code>conda</code> environment declared there (if not installed yet) and activates it, addressing it by full path rather than by name. If the environment already exists, it is re-used rather than resolved again, and if <code>RETICULATE_PYTHON</code> is already set (as it is inside the book’s <code>Docker</code> image) the whole step short-circuits.</p>
+<p><code>setup_python()</code> finds <code>inst/requirements.yml</code>, creates the <code>conda</code> environment if it is not already, and activates it, addressing it by full path rather than by name. If the environment already exists it is re-used rather than resolved again, and if <code>RETICULATE_PYTHON</code> is already set (as it is inside the book’s <code>Docker</code> image) the whole step short-circuits.</p>
 </section><section id="where-conda-itself-comes-from" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="where-conda-itself-comes-from">
 <span class="header-section-number">4.2</span> Where <code>conda</code> itself comes from</h2>
 <p>Building a <code>conda</code> environment needs a <code>conda</code> implementation, and the machines that build this book do not necessarily have one. Bioconductor’s current builders may, and the <code>r-universe</code> build image ships <code>quarto</code>, <code>python3</code> and <code>pip</code>, but no <code>conda</code> at all. So <code>BiocBook</code> brings its own.</p>
@@ -341,14 +341,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="co">##   collate  C</span></span>
 <span><span class="co">##   ctype    en_US.UTF-8</span></span>
 <span><span class="co">##   tz       Etc/UTC</span></span>
-<span><span class="co">##   date     2026-09-04</span></span>
+<span><span class="co">##   date     2026-09-08</span></span>
 <span><span class="co">##   pandoc   3.10.2 @ /usr/bin/ (via rmarkdown)</span></span>
 <span><span class="co">##   quarto   1.9.38 @ /usr/local/bin/quarto</span></span>
 <span><span class="co">##  </span></span>
 <span><span class="co">##  ─ Packages ────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">##   package      * version date (UTC) lib source</span></span>
 <span><span class="co">##   askpass        1.2.1   2024-10-04 [2] RSPM (R 4.6.0)</span></span>
-<span><span class="co">##   BiocBook       1.11.1  2026-09-04 [2] Github (js2264/BiocBook@562ccc6)</span></span>
+<span><span class="co">##   BiocBook       1.11.1  2026-09-08 [2] Github (js2264/BiocBook@562ccc6)</span></span>
 <span><span class="co">##   BiocGenerics   0.59.12 2026-08-11 [2] Bioconductor 3.24 (R 4.6.1)</span></span>
 <span><span class="co">##   cli            3.6.6   2026-04-09 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   credentials    2.0.3   2025-09-12 [2] RSPM (R 4.6.0)</span></span>
@@ -366,7 +366,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="co">##   htmlwidgets    1.6.4   2023-12-06 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   httr           1.4.9   2026-09-01 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   jsonlite       2.0.0   2025-03-27 [2] RSPM (R 4.6.0)</span></span>
-<span><span class="co">##   knitr          1.51    2025-12-20 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   knitr          1.52    2026-09-06 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   lattice        0.23-1  2026-08-12 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   lifecycle      1.0.5   2026-01-08 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   magrittr       2.0.5   2026-04-04 [2] RSPM (R 4.6.0)</span></span>
@@ -397,7 +397,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="co">##   xfun           0.60    2026-07-09 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   yaml           2.3.12  2025-12-10 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##  </span></span>
-<span><span class="co">##   [1] /tmp/RtmpopvETa/Rinst8e262e157d</span></span>
+<span><span class="co">##   [1] /tmp/Rtmpd32CtU/Rinst8f53ca96f0</span></span>
 <span><span class="co">##   [2] /usr/local/lib/R/site-library</span></span>
 <span><span class="co">##   [3] /usr/local/lib/R/library</span></span>
 <span><span class="co">##   * ── Packages attached to the search path.</span></span>
