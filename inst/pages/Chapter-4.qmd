@@ -36,7 +36,7 @@ Note the presence of the `nodefaults` channel: the `defaults` channel is covered
 of Service, which require a paid licence for many organisations. `conda-forge`
 and `bioconda` are community channels that are free to use.
 
-The first page that needs `python` installs and activates them:
+Any page that needs `python` would need to have this chunk at the top:
 
 ```{r "setup-python"}
 #| include: true
@@ -45,9 +45,8 @@ BiocBook::setup_python()
 ```
 
 `setup_python()` finds `inst/requirements.yml`,  creates the `conda` environment 
-declared there (if not installed yet) and activates it, 
-addressing it by full path rather than by name. 
-If the environment already exists, it is re-used rather than resolved again, 
+if it is not already, and activates it, addressing it by full path rather than by name. 
+If the environment already exists it is re-used rather than resolved again, 
 and if `RETICULATE_PYTHON` is already set (as it is inside the book's `Docker` 
 image) the whole step short-circuits.
 
