@@ -61,6 +61,35 @@ gert::git_pull("RELEASE_3_15", remote = "upstream")
 gert::git_push("RELEASE_3_15", remote = "origin")
 ```
 
+## Serving the book to AI assistants
+
+Each version of a `BiocBook` also serves an `llms.txt` file (e.g. 
+[`devel/llms.txt`](https://js2264.github.io/BiocBookDemo/devel/llms.txt)), 
+following the [llms.txt proposal](https://llmstxt.org/): a Markdown index of 
+the book that AI assistants can read instead of crawling its HTML pages. It 
+links to a Markdown copy of every page, e.g. `pages/Chapter-4.llms.md` next to 
+`pages/Chapter-4.html`.
+
+- `quarto` >= 1.11 writes these files when the book's `llms-txt` option is on. 
+  Books created from template >= 1.1.0 switch it on through the `llms` `quarto` 
+  profile (`inst/_quarto-llms.yml`), which `vignettes/Makefile` activates 
+  whenever the installed `quarto` supports it (older versions reject the 
+  option). The `biocbook` GitHub workflow pins such a `quarto` with its 
+  `QUARTO_VERSION` setting, and copies built by Bioconductor get these files 
+  once the Bioconductor builders run `quarto` >= 1.11.
+- After every render, `inst/assets/post-render.R` calls 
+  `BiocBook::enrich_llms_txt()`, which adds what an assistant needs to run the 
+  book's code to `llms.txt`: the book package and its version, how to install 
+  it, its `Docker` image, its `python` environment and where the other 
+  versions of the book live. With an older `quarto`, it writes a minimal 
+  `llms.txt` listing the chapters.
+
+To render these files locally: 
+
+```{sh filename="bash"}
+QUARTO_PROFILE=llms quarto render inst/
+```
+
 ## Session info
 
 ```{r}

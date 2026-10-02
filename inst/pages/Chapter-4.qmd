@@ -21,7 +21,7 @@
 
 ``` yaml
 name:
-    BiocBook
+    BiocBookDemo
 channels:
     - conda-forge
     - bioconda
@@ -46,9 +46,17 @@ BiocBook::setup_python()
 
 `setup_python()` finds `inst/requirements.yml`,  creates the `conda` environment 
 if it is not already, and activates it, addressing it by full path rather than by name. 
-If the environment already exists it is re-used rather than resolved again, 
-and if `RETICULATE_PYTHON` is already set (as it is inside the book's `Docker` 
+If `RETICULATE_PYTHON` is already set (as it is inside the book's `Docker` 
 image) the whole step short-circuits.
+
+Environments are cached, and keyed on the contents of `requirements.yml`: an 
+environment is re-used rather than resolved again **as long as `requirements.yml` 
+is unchanged**. Editing the file (adding, removing or re-pinning a package) gives 
+a new environment on the next render, including on machines that build the book 
+every day, and two books only share an environment when they declare exactly 
+the same thing. `BiocBook::python_envs()` lists the environments cached on a 
+machine, and `python_envs(remove = ...)` deletes the ones that are no longer 
+needed.
 
 ## Where `conda` itself comes from
 
