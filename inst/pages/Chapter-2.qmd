@@ -145,6 +145,34 @@ Three different files contain these placeholders:
 
 ##### Clone the package to a local computer {-}
 
+### Starting from an existing `bookdown` book
+
+An existing `bookdown` book can be turned into a `BiocBook` with `from_bookdown()`. 
+It creates the new book package from the template, as `init()` does, and 
+converts the `bookdown` project into it: 
+
+```{r}
+#| eval: false
+biocbook <- from_bookdown("path/to/my/bookdown/book", "myBook")
+```
+
+- **Pages**: `index.Rmd` becomes the landing page and every chapter a `.qmd` 
+  page in `inst/pages/`, listed in `_book.yml` in the same order, with its parts 
+  and appendices;
+- **Syntax**: `bookdown` cross-references (`\@ref()`), figure layout options and 
+  the question/solution blocks of [`msmbstyle`](https://github.com/lgatto/msmbstyle) 
+  are rewritten for `quarto`;
+- **Assets** (bibliography, CSS, images) are copied, and `DESCRIPTION` is filled 
+  with the title and authors of the book and the packages its pages use;
+- **Shared session**: `bookdown` renders every chapter in a single `R` session, 
+  `quarto` renders each in its own, so the `library()` and `options()` calls of 
+  `index.Rmd` are repeated at the top of each chapter.
+
+What still needs a human is listed in `MIGRATION.md`, at the root of the new 
+book: downloads while the book builds, cached chunks, unresolved 
+cross-references, dependencies that are not on CRAN or Bioconductor, objects 
+created in a chapter and used in a later one...
+
 ### Edit new `BiocBook` chapters
 
 - `add_chapter(biocbook, title)` is used to write new chapters; 
