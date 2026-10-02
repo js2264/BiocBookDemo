@@ -71,8 +71,9 @@ no base environment, no `python`.
 `BiocBook::micromamba()` resolves it in order:
 
 1. `RETICULATE_CONDA`, if you have set it;
-2. a `micromamba` already on the `PATH` (this book's `Docker` image installs one);
-3. a copy previously downloaded into `BiocBook`'s cache;
+2. a `micromamba` already on the `PATH`;
+3. a copy previously downloaded into `BiocBook`'s cache (this book's `Docker` 
+   image keeps the one it downloads while it is built);
 4. failing all of those, it downloads a **pinned** release and checks it against
    a recorded `SHA256` before using it.
 
