@@ -2,17 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.11.5">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>3&nbsp; Containerizing and Publishing against specific Bioconductor release versions – Write Quarto books with Bioconductor</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -72,10 +75,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-6d40f8af7092f34acea1908532066003.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-5f883865545033bfab6feb3d329ab180.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-06d693999afc7194853354b6db3b10fa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap-f55a7b866f6476f4bfd126d49c39e786.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -103,15 +106,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 </head>
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" aria-label="Toolbar"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/Chapter-3.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Containerizing and Publishing against specific Bioconductor release versions</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/Chapter-3.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Containerizing and Publishing against specific Bioconductor release versions</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
@@ -119,7 +122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Write Quarto books with Bioconductor</a> 
     </div>
@@ -178,16 +181,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
 <li><a href="#for-a-biocbook-package-not-currently-in-bioconductor" id="toc-for-a-biocbook-package-not-currently-in-bioconductor" class="nav-link active" data-scroll-target="#for-a-biocbook-package-not-currently-in-bioconductor"><span class="header-section-number">3.1</span> For a {<code>BiocBook</code>} package not currently in Bioconductor</a></li>
   <li><a href="#for-a-biocbook-package-accepted-in-bioconductor-6-months-ago" id="toc-for-a-biocbook-package-accepted-in-bioconductor-6-months-ago" class="nav-link" data-scroll-target="#for-a-biocbook-package-accepted-in-bioconductor-6-months-ago"><span class="header-section-number">3.2</span> For a {<code>BiocBook</code>} package accepted in Bioconductor &gt; 6 months ago</a></li>
-  <li><a href="#session-info" id="toc-session-info" class="nav-link" data-scroll-target="#session-info"><span class="header-section-number">3.3</span> Session info</a></li>
+  <li><a href="#serving-the-book-to-ai-assistants" id="toc-serving-the-book-to-ai-assistants" class="nav-link" data-scroll-target="#serving-the-book-to-ai-assistants"><span class="header-section-number">3.3</span> Serving the book to AI assistants</a></li>
+  <li><a href="#session-info" id="toc-session-info" class="nav-link" data-scroll-target="#session-info"><span class="header-section-number">3.4</span> Session info</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content" tabindex="-1"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title">
 <span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Containerizing and Publishing against specific Bioconductor release versions</span>
 </h1>
@@ -253,14 +257,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">gert</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/gert/reference/git_fetch.html">git_push</a></span><span class="op">(</span><span class="st">"RELEASE_3_15"</span>, remote <span class="op">=</span> <span class="st">"origin"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section><section id="session-info" class="level2" data-number="3.3"><h2 data-number="3.3" class="anchored" data-anchor-id="session-info">
-<span class="header-section-number">3.3</span> Session info</h2>
+</section><section id="serving-the-book-to-ai-assistants" class="level2" data-number="3.3"><h2 data-number="3.3" class="anchored" data-anchor-id="serving-the-book-to-ai-assistants">
+<span class="header-section-number">3.3</span> Serving the book to AI assistants</h2>
+<p>Each version of a <code>BiocBook</code> also serves an <code>llms.txt</code> file (e.g.&nbsp; <a href="https://js2264.github.io/BiocBookDemo/devel/llms.txt"><code>devel/llms.txt</code></a>), following the <a href="https://llmstxt.org/">llms.txt proposal</a>: a Markdown index of the book that AI assistants can read instead of crawling its HTML pages. It links to a Markdown copy of every page, e.g.&nbsp;<code>pages/Chapter-4.llms.md</code> next to <code>pages/Chapter-4.html</code>.</p>
+<ul>
+<li>
+<code>quarto</code> &gt;= 1.11 writes these files when the book’s <code>llms-txt</code> option is on. Books created from template &gt;= 1.1.0 switch it on through the <code>llms</code> <code>quarto</code> profile (<code>inst/_quarto-llms.yml</code>), which <code>vignettes/Makefile</code> activates whenever the installed <code>quarto</code> supports it (older versions reject the option). The <code>biocbook</code> GitHub workflow pins such a <code>quarto</code> with its <code>QUARTO_VERSION</code> setting, and copies built by Bioconductor get these files once the Bioconductor builders run <code>quarto</code> &gt;= 1.11.</li>
+<li>After every render, <code>inst/assets/post-render.R</code> calls <code><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook-llms.html">BiocBook::enrich_llms_txt()</a></code>, which adds what an assistant needs to run the book’s code to <code>llms.txt</code>: the book package and its version, how to install it, its <code>Docker</code> image, its <code>python</code> environment and where the other versions of the book live. With an older <code>quarto</code>, it writes a minimal <code>llms.txt</code> listing the chapters.</li>
+</ul>
+<p>To render these files locally:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="https://sessioninfo.r-lib.org/reference/session_info.html">session_info</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>bash</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="va">QUARTO_PROFILE</span><span class="op">=</span>llms <span class="ex">quarto</span> render inst/</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</section><section id="session-info" class="level2" data-number="3.4"><h2 data-number="3.4" class="anchored" data-anchor-id="session-info">
+<span class="header-section-number">3.4</span> Session info</h2>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="https://sessioninfo.r-lib.org/reference/session_info.html">session_info</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
-</section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -659,7 +680,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       }
     }
   });
-  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation" aria-label="Page"><div class="nav-page nav-page-previous">
       <a href="../pages/Chapter-2.html" class="pagination-link" aria-label="Writing a {`BiocBook`} package">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Writing a {<code>BiocBook</code>} package</span></span>
       </a>          

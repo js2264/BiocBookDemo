@@ -2,17 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.11.5">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>2&nbsp; Writing a {BiocBook} package – Write Quarto books with Bioconductor</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -91,10 +94,10 @@ div.csl-indent {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-6d40f8af7092f34acea1908532066003.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-5f883865545033bfab6feb3d329ab180.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-06d693999afc7194853354b6db3b10fa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap-f55a7b866f6476f4bfd126d49c39e786.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -122,15 +125,15 @@ div.csl-indent {
   }
 }</script>
 </head>
-<body class="nav-sidebar floating slimcontent quarto-light">
+<body class="nav-sidebar floating slimcontent quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" aria-label="Toolbar"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/Chapter-2.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Writing a {<code>BiocBook</code>} package</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/Chapter-2.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Writing a {<code>BiocBook</code>} package</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
@@ -138,7 +141,7 @@ div.csl-indent {
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Write Quarto books with Bioconductor</a> 
     </div>
@@ -197,7 +200,7 @@ div.csl-indent {
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
 <li>
@@ -212,9 +215,10 @@ div.csl-indent {
 <a href="#biocbook-workflow" id="toc-biocbook-workflow" class="nav-link" data-scroll-target="#biocbook-workflow"><span class="header-section-number">2.2</span> <code>BiocBook</code> workflow</a>
   <ul class="collapse">
 <li><a href="#initiate-a-biocbook-package" id="toc-initiate-a-biocbook-package" class="nav-link" data-scroll-target="#initiate-a-biocbook-package"><span class="header-section-number">2.2.1</span> Initiate a {<code>BiocBook</code>} package</a></li>
-  <li><a href="#edit-new-biocbook-chapters" id="toc-edit-new-biocbook-chapters" class="nav-link" data-scroll-target="#edit-new-biocbook-chapters"><span class="header-section-number">2.2.2</span> Edit new <code>BiocBook</code> chapters</a></li>
-  <li><a href="#edit-assets" id="toc-edit-assets" class="nav-link" data-scroll-target="#edit-assets"><span class="header-section-number">2.2.3</span> Edit assets</a></li>
-  <li><a href="#previewing-and-publishing-changes" id="toc-previewing-and-publishing-changes" class="nav-link" data-scroll-target="#previewing-and-publishing-changes"><span class="header-section-number">2.2.4</span> Previewing and publishing changes</a></li>
+  <li><a href="#starting-from-an-existing-bookdown-book" id="toc-starting-from-an-existing-bookdown-book" class="nav-link" data-scroll-target="#starting-from-an-existing-bookdown-book"><span class="header-section-number">2.2.2</span> Starting from an existing <code>bookdown</code> book</a></li>
+  <li><a href="#edit-new-biocbook-chapters" id="toc-edit-new-biocbook-chapters" class="nav-link" data-scroll-target="#edit-new-biocbook-chapters"><span class="header-section-number">2.2.3</span> Edit new <code>BiocBook</code> chapters</a></li>
+  <li><a href="#edit-assets" id="toc-edit-assets" class="nav-link" data-scroll-target="#edit-assets"><span class="header-section-number">2.2.4</span> Edit assets</a></li>
+  <li><a href="#previewing-and-publishing-changes" id="toc-previewing-and-publishing-changes" class="nav-link" data-scroll-target="#previewing-and-publishing-changes"><span class="header-section-number">2.2.5</span> Previewing and publishing changes</a></li>
   </ul>
 </li>
   <li>
@@ -229,7 +233,7 @@ div.csl-indent {
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content page-columns page-full" id="quarto-document-content" tabindex="-1"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title">
 <span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Writing a {<code>BiocBook</code>} package</span>
 </h1>
@@ -390,8 +394,25 @@ Warning
 </section><section id="commit-changes" class="level5 unnumbered"><h5 class="unnumbered anchored" data-anchor-id="commit-changes">Commit changes</h5>
 <p><img src="images/github_commit.jpg" class="img-fluid"></p>
 </section><section id="clone-the-package-to-a-local-computer" class="level5 unnumbered"><h5 class="unnumbered anchored" data-anchor-id="clone-the-package-to-a-local-computer">Clone the package to a local computer</h5>
-</section></section></section><section id="edit-new-biocbook-chapters" class="level3" data-number="2.2.2"><h3 data-number="2.2.2" class="anchored" data-anchor-id="edit-new-biocbook-chapters">
-<span class="header-section-number">2.2.2</span> Edit new <code>BiocBook</code> chapters</h3>
+</section></section></section><section id="starting-from-an-existing-bookdown-book" class="level3" data-number="2.2.2"><h3 data-number="2.2.2" class="anchored" data-anchor-id="starting-from-an-existing-bookdown-book">
+<span class="header-section-number">2.2.2</span> Starting from an existing <code>bookdown</code> book</h3>
+<p>An existing <code>bookdown</code> book can be turned into a <code>BiocBook</code> with <code><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook-bookdown.html">from_bookdown()</a></code>. It creates the new book package from the template, as <code><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook.html">init()</a></code> does, and converts the <code>bookdown</code> project into it:</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">biocbook</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook-bookdown.html">from_bookdown</a></span><span class="op">(</span><span class="st">"path/to/my/bookdown/book"</span>, <span class="st">"myBook"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ul>
+<li>
+<strong>Pages</strong>: <code>index.Rmd</code> becomes the landing page and every chapter a <code>.qmd</code> page in <code>inst/pages/</code>, listed in <code>_book.yml</code> in the same order, with its parts and appendices;</li>
+<li>
+<strong>Syntax</strong>: <code>bookdown</code> cross-references (<code>\@ref()</code>), figure layout options and the question/solution blocks of <a href="https://github.com/lgatto/msmbstyle"><code>msmbstyle</code></a> are rewritten for <code>quarto</code>;</li>
+<li>
+<strong>Assets</strong> (bibliography, CSS, images) are copied, and <code>DESCRIPTION</code> is filled with the title and authors of the book and the packages its pages use;</li>
+<li>
+<strong>Shared session</strong>: <code>bookdown</code> renders every chapter in a single <code>R</code> session, <code>quarto</code> renders each in its own, so the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> and <code><a href="https://rdrr.io/r/base/options.html">options()</a></code> calls of <code>index.Rmd</code> are repeated at the top of each chapter.</li>
+</ul>
+<p>What still needs a human is listed in <code>MIGRATION.md</code>, at the root of the new book: downloads while the book builds, cached chunks, unresolved cross-references, dependencies that are not on CRAN or Bioconductor, objects created in a chapter and used in a later one…</p>
+</section><section id="edit-new-biocbook-chapters" class="level3" data-number="2.2.3"><h3 data-number="2.2.3" class="anchored" data-anchor-id="edit-new-biocbook-chapters">
+<span class="header-section-number">2.2.3</span> Edit new <code>BiocBook</code> chapters</h3>
 <ul>
 <li>
 <code>add_chapter(biocbook, title)</code> is used to write new chapters;</li>
@@ -411,8 +432,8 @@ Warning
 <p>This ensures that these packages are installed in the Docker image prior to rendering.</p>
 </div>
 </div>
-</section><section id="edit-assets" class="level3" data-number="2.2.3"><h3 data-number="2.2.3" class="anchored" data-anchor-id="edit-assets">
-<span class="header-section-number">2.2.3</span> Edit assets</h3>
+</section><section id="edit-assets" class="level3" data-number="2.2.4"><h3 data-number="2.2.4" class="anchored" data-anchor-id="edit-assets">
+<span class="header-section-number">2.2.4</span> Edit assets</h3>
 <p>A BiocBook relies on several assets, located in <code>/inst/assets</code>.:</p>
 <ul>
 <li>
@@ -423,30 +444,30 @@ Warning
 </ul>
 <p>To quickly edit these assets, use the corresponding <code>edit_*</code> functions:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook-editing.html">edit_yml</a></span><span class="op">(</span><span class="va">biocbook</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook-editing.html">edit_yml</a></span><span class="op">(</span><span class="va">biocbook</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook-editing.html">edit_bib</a></span><span class="op">(</span><span class="va">biocbook</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook-editing.html">edit_css</a></span><span class="op">(</span><span class="va">biocbook</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section><section id="previewing-and-publishing-changes" class="level3" data-number="2.2.4"><h3 data-number="2.2.4" class="anchored" data-anchor-id="previewing-and-publishing-changes">
-<span class="header-section-number">2.2.4</span> Previewing and publishing changes</h3>
-<section id="previewing" class="level4" data-number="2.2.4.1"><h4 data-number="2.2.4.1" class="anchored" data-anchor-id="previewing">
-<span class="header-section-number">2.2.4.1</span> Previewing</h4>
+</section><section id="previewing-and-publishing-changes" class="level3" data-number="2.2.5"><h3 data-number="2.2.5" class="anchored" data-anchor-id="previewing-and-publishing-changes">
+<span class="header-section-number">2.2.5</span> Previewing and publishing changes</h3>
+<section id="previewing" class="level4" data-number="2.2.5.1"><h4 data-number="2.2.5.1" class="anchored" data-anchor-id="previewing">
+<span class="header-section-number">2.2.5.1</span> Previewing</h4>
 <p>While writing, you can monitor the rendering of your book live as follows:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook-editing.html">preview</a></span><span class="op">(</span><span class="va">biocbook</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook-editing.html">preview</a></span><span class="op">(</span><span class="va">biocbook</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This will serve a local live rendering of your book.</p>
-</section><section id="publishing" class="level4" data-number="2.2.4.2"><h4 data-number="2.2.4.2" class="anchored" data-anchor-id="publishing">
-<span class="header-section-number">2.2.4.2</span> Publishing</h4>
+</section><section id="publishing" class="level4" data-number="2.2.5.2"><h4 data-number="2.2.5.2" class="anchored" data-anchor-id="publishing">
+<span class="header-section-number">2.2.5.2</span> Publishing</h4>
 <p>Once you are done writing pages of your new book, you should always commit your changes and push them to Github. This can be done as follows:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook-editing.html">publish</a></span><span class="op">(</span><span class="va">biocbook</span>, message <span class="op">=</span> <span class="st">"🚀 Publish"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook-editing.html">publish</a></span><span class="op">(</span><span class="va">biocbook</span>, message <span class="op">=</span> <span class="st">"🚀 Publish"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section><section id="check-your-published-book-and-dockerfiles" class="level4" data-number="2.2.4.3"><h4 data-number="2.2.4.3" class="anchored" data-anchor-id="check-your-published-book-and-dockerfiles">
-<span class="header-section-number">2.2.4.3</span> Check your published book and Dockerfiles</h4>
+</section><section id="check-your-published-book-and-dockerfiles" class="level4" data-number="2.2.5.3"><h4 data-number="2.2.5.3" class="anchored" data-anchor-id="check-your-published-book-and-dockerfiles">
+<span class="header-section-number">2.2.5.3</span> Check your published book and Dockerfiles</h4>
 <p>This connects to the Github repository associated with a local book and checks the existing branches and Dockerfiles.</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook-editing.html">status</a></span><span class="op">(</span><span class="va">biocbook</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook-editing.html">status</a></span><span class="op">(</span><span class="va">biocbook</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section></section></section><section id="writing-features" class="level2 page-columns page-full" data-number="2.3"><h2 data-number="2.3" class="anchored" data-anchor-id="writing-features">
 <span class="header-section-number">2.3</span> Writing features</h2>
@@ -461,7 +482,7 @@ Warning
 <div class="code-with-filename-file">
 <pre><strong>R</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageVersion</a></span><span class="op">(</span><span class="st">"BiocVersion"</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageVersion</a></span><span class="op">(</span><span class="st">"BiocVersion"</span><span class="op">)</span></span>
 <span><span class="co">##  [1] '3.24.0'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
@@ -473,14 +494,14 @@ Warning
 <div class="code-with-filename-file">
 <pre><strong>bash</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> ../ <span class="at">-name</span> <span class="st">"*.qmd"</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">##  ../index.qmd</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">##  ../pages/Chapter-4.qmd</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">##  ../pages/biocbook-vs-rebook.qmd</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">##  ../pages/Chapter-3.qmd</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">##  ../pages/Chapter-2.qmd</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">##  ../pages/preamble.qmd</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">##  ../pages/Chapter-1.qmd</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> ../ <span class="at">-name</span> <span class="st">"*.qmd"</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">##  ../index.qmd</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">##  ../pages/biocbook-vs-rebook.qmd</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">##  ../pages/Chapter-4.qmd</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">##  ../pages/Chapter-2.qmd</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">##  ../pages/Chapter-1.qmd</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">##  ../pages/preamble.qmd</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">##  ../pages/Chapter-3.qmd</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </section><section id="python-code" class="level4" data-number="2.3.1.3"><h4 data-number="2.3.1.3" class="anchored" data-anchor-id="python-code">
@@ -491,8 +512,8 @@ Warning
 <div class="code-with-filename-file">
 <pre><strong>python</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>os.getcwd()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>os.getcwd()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <p><code>python</code> needs a little more care than <code>R</code> or <code>bash</code>, because the book is also re-rendered by the Bioconductor Build System, which provides no <code>python</code> packages. A book therefore installs its own: the packages are declared as a <code>conda</code> environment in <code>inst/requirements.yml</code> and installed at build time by <code><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook-python.html">BiocBook::setup_python()</a></code>.</p>
@@ -501,7 +522,7 @@ Warning
 <span class="header-section-number">2.3.2</span> Creating data object</h3>
 <p>While writing chapters, you can save objects as <code>.rds</code> files to reuse them in subsequent chapters (e.g.&nbsp;<a href="biocbook-vs-rebook.html#rebook-features-missing-from-biocbook">here</a>).</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">isthisworking</span> <span class="op">&lt;-</span> <span class="st">"yes"</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">isthisworking</span> <span class="op">&lt;-</span> <span class="st">"yes"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">isthisworking</span>, <span class="st">'isthisworking.rds'</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section><section id="adding-references" class="level3 page-columns page-full" data-number="2.3.3"><h3 data-number="2.3.3" class="anchored" data-anchor-id="adding-references">
@@ -512,7 +533,7 @@ Serizay, Jacques. 2023. <em>BiocBook: Write, Publish and Maintain Versioned Quar
 </section></section><section id="session-info" class="level2" data-number="2.4"><h2 data-number="2.4" class="anchored" data-anchor-id="session-info">
 <span class="header-section-number">2.4</span> Session info</h2>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="https://sessioninfo.r-lib.org/reference/session_info.html">session_info</a></span><span class="op">(</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="https://sessioninfo.r-lib.org/reference/session_info.html">session_info</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">##  ─ Session info ────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">##   setting  value</span></span>
 <span><span class="co">##   version  R version 4.6.1 (2026-06-24)</span></span>
@@ -523,9 +544,9 @@ Serizay, Jacques. 2023. <em>BiocBook: Write, Publish and Maintain Versioned Quar
 <span><span class="co">##   collate  C</span></span>
 <span><span class="co">##   ctype    en_US.UTF-8</span></span>
 <span><span class="co">##   tz       Etc/UTC</span></span>
-<span><span class="co">##   date     2026-09-08</span></span>
-<span><span class="co">##   pandoc   3.10.2 @ /usr/bin/ (via rmarkdown)</span></span>
-<span><span class="co">##   quarto   1.9.38 @ /usr/local/bin/quarto</span></span>
+<span><span class="co">##   date     2026-10-04</span></span>
+<span><span class="co">##   pandoc   3.11 @ /usr/bin/ (via rmarkdown)</span></span>
+<span><span class="co">##   quarto   1.11.5 @ /usr/local/bin/quarto</span></span>
 <span><span class="co">##  </span></span>
 <span><span class="co">##  ─ Packages ────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">##   package     * version date (UTC) lib source</span></span>
@@ -546,10 +567,10 @@ Serizay, Jacques. 2023. <em>BiocBook: Write, Publish and Maintain Versioned Quar
 <span><span class="co">##   rlang         1.3.0   2026-07-05 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   rmarkdown     2.32    2026-09-01 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   sessioninfo   1.2.4   2026-06-04 [2] RSPM (R 4.6.0)</span></span>
-<span><span class="co">##   xfun          0.60    2026-07-09 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   xfun          0.61    2026-09-16 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   yaml          2.3.12  2025-12-10 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##  </span></span>
-<span><span class="co">##   [1] /tmp/Rtmpd32CtU/Rinst8f53ca96f0</span></span>
+<span><span class="co">##   [1] /tmp/RtmpASCh25/Rinstb7e21def1</span></span>
 <span><span class="co">##   [2] /usr/local/lib/R/site-library</span></span>
 <span><span class="co">##   [3] /usr/local/lib/R/library</span></span>
 <span><span class="co">##  </span></span>
@@ -558,7 +579,7 @@ Serizay, Jacques. 2023. <em>BiocBook: Write, Publish and Maintain Versioned Quar
 
 
 
-</section><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
     const anchorJS = new window.AnchorJS();
@@ -957,7 +978,7 @@ Serizay, Jacques. 2023. <em>BiocBook: Write, Publish and Maintain Versioned Quar
       }
     }
   });
-  </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+  </script><nav class="page-navigation" aria-label="Page"><div class="nav-page nav-page-previous">
       <a href="../pages/Chapter-1.html" class="pagination-link" aria-label="`BiocBook` versioning system">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><code>BiocBook</code> versioning system</span></span>
       </a>          

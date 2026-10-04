@@ -1,0 +1,72 @@
+# 3  Containerizing and Publishing against specific Bioconductor release versions
+
+## 3.1 For a {`BiocBook`} package not currently in Bioconductor
+
+One can build against older Bioconductor releases as follows:
+
+- Commit current changes before switching branches (should be in `devel` branch)
+
+``` r
+gert::git_commit_all("Commit current changes")
+```
+
+- Create a new branch named `RELEASE_X_Y` and checkout
+
+``` r
+gert::git_branch_create("RELEASE_3_17")
+```
+
+- Push local `RELEASE_X_Y` to Github
+
+``` r
+gert::git_push()
+```
+
+## 3.2 For a {`BiocBook`} package accepted in Bioconductor \> 6 months ago
+
+Once your package is accepted in Bioconductor, your repository will have access to a new **remote** named `upstream`, pointing to `git@git.bioconductor.org`. When Bioconductor releases a new version, your package will change version on the `upstream` remote, in a dedicated release branch `RELEASE_X_Y`. All details are available [here](https://contributions.bioconductor.org/git-version-control.html).
+
+To generate a Docker image and a version of the `BiocBook` website built on new Bioconductor releases, you can:
+
+- Add the `Bioconductor` remote to your local repository (this might already be set up)
+
+``` r
+gert::git_remote_add(name = 'upstream', url = 'git@git.bioconductor.org:packages/<YOUR-REPOSITORY>.git')
+```
+
+- Create a new local `RELEASE_X_Y` branch
+
+``` r
+gert::git_branch_create("RELEASE_3_15")
+```
+
+- Pull the `upstream` `RELEASE_X_Y` commits
+
+``` r
+gert::git_pull("RELEASE_3_15", remote = "upstream")
+```
+
+- Push the local `RELEASE_X_Y` branch to `origin` remote (your own Github repository)
+
+``` r
+gert::git_push("RELEASE_3_15", remote = "origin")
+```
+
+## 3.3 Serving the book to AI assistants
+
+Each version of a `BiocBook` also serves an `llms.txt` file (e.g.  [`devel/llms.txt`](https://js2264.github.io/BiocBookDemo/devel/llms.txt)), following the [llms.txt proposal](https://llmstxt.org/): a Markdown index of the book that AI assistants can read instead of crawling its HTML pages. It links to a Markdown copy of every page, e.g. `pages/Chapter-4.llms.md` next to `pages/Chapter-4.html`.
+
+- `quarto` \>= 1.11 writes these files when the book’s `llms-txt` option is on. Books created from template \>= 1.1.0 switch it on through the `llms` `quarto` profile (`inst/_quarto-llms.yml`), which `vignettes/Makefile` activates whenever the installed `quarto` supports it (older versions reject the option). The `biocbook` GitHub workflow pins such a `quarto` with its `QUARTO_VERSION` setting, and copies built by Bioconductor get these files once the Bioconductor builders run `quarto` \>= 1.11.
+- After every render, `inst/assets/post-render.R` calls [`BiocBook::enrich_llms_txt()`](https://rdrr.io/pkg/BiocBook/man/BiocBook-llms.html), which adds what an assistant needs to run the book’s code to `llms.txt`: the book package and its version, how to install it, its `Docker` image, its `python` environment and where the other versions of the book live. With an older `quarto`, it writes a minimal `llms.txt` listing the chapters.
+
+To render these files locally:
+
+``` sh
+QUARTO_PROFILE=llms quarto render inst/
+```
+
+## 3.4 Session info
+
+``` r
+sessioninfo::session_info()
+```
