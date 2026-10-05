@@ -140,14 +140,14 @@ sessioninfo::session_info()
 ##   collate  C
 ##   ctype    en_US.UTF-8
 ##   tz       Etc/UTC
-##   date     2026-10-04
+##   date     2026-10-05
 ##   pandoc   3.11 @ /usr/bin/ (via rmarkdown)
 ##   quarto   1.11.5 @ /usr/local/bin/quarto
 ##  
 ##  ─ Packages ────────────────────────────────────────────────────────────────
 ##   package      * version date (UTC) lib source
 ##   askpass        1.2.1   2024-10-04 [2] RSPM (R 4.6.0)
-##   BiocBook       1.11.3  2026-10-04 [2] Github (js2264/BiocBook@9f32ed4)
+##   BiocBook       1.11.4  2026-10-05 [2] Github (js2264/BiocBook@15e8d15)
 ##   BiocGenerics   0.59.12 2026-08-11 [2] Bioconductor 3.24 (R 4.6.1)
 ##   cli            3.6.6   2026-04-09 [2] RSPM (R 4.6.0)
 ##   credentials    2.0.3   2025-09-12 [2] RSPM (R 4.6.0)
@@ -196,7 +196,7 @@ sessioninfo::session_info()
 ##   xfun           0.61    2026-09-16 [2] RSPM (R 4.6.0)
 ##   yaml           2.3.12  2025-12-10 [2] RSPM (R 4.6.0)
 ##  
-##   [1] /tmp/RtmpASCh25/Rinstb7e21def1
+##   [1] /tmp/RtmpcGMBFb/Rinstb771d3bef
 ##   [2] /usr/local/lib/R/site-library
 ##   [3] /usr/local/lib/R/library
 ##   * ── Packages attached to the search path.

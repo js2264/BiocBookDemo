@@ -69,7 +69,7 @@ sessioninfo::session_info()
 ##   collate  C
 ##   ctype    en_US.UTF-8
 ##   tz       Etc/UTC
-##   date     2026-10-04
+##   date     2026-10-05
 ##   pandoc   3.11 @ /usr/bin/ (via rmarkdown)
 ##   quarto   1.11.5 @ /usr/local/bin/quarto
 ##  
@@ -90,7 +90,7 @@ sessioninfo::session_info()
 ##   xfun          0.61    2026-09-16 [2] RSPM (R 4.6.0)
 ##   yaml          2.3.12  2025-12-10 [2] RSPM (R 4.6.0)
 ##  
-##   [1] /tmp/RtmpASCh25/Rinstb7e21def1
+##   [1] /tmp/RtmpcGMBFb/Rinstb771d3bef
 ##   [2] /usr/local/lib/R/site-library
 ##   [3] /usr/local/lib/R/library
 ##  

@@ -124,18 +124,20 @@ You will need to enable the Github Pages service for your newly created reposito
 
 ### 2.2.2 Starting from an existing `bookdown` book
 
-An existing `bookdown` book can be turned into a `BiocBook` with [`from_bookdown()`](https://rdrr.io/pkg/BiocBook/man/BiocBook-bookdown.html). It creates the new book package from the template, as [`init()`](https://rdrr.io/pkg/BiocBook/man/BiocBook.html) does, and converts the `bookdown` project into it:
+An existing `bookdown` book can be turned into a `BiocBook` with [`from_bookdown()`](https://rdrr.io/pkg/BiocBook/man/BiocBook-bookdown.html), in its own repository. Run it at the root of the repository, on a branch of its own: it converts the book in place, one commit per step, so that the conversion can be reviewed step by step, and squashed or rebased like any other change.
 
 ``` r
-biocbook <- from_bookdown("path/to/my/bookdown/book", "myBook")
+## At the root of the repository of the bookdown book, on a new branch
+biocbook <- from_bookdown()
 ```
 
-- **Pages**: `index.Rmd` becomes the landing page and every chapter a `.qmd` page in `inst/pages/`, listed in `_book.yml` in the same order, with its parts and appendices;
+- **Template**: the package files of a `BiocBook` (`DESCRIPTION`, `Dockerfile`, GitHub workflows, `quarto` configuration) are added, filled in as [`init()`](https://rdrr.io/pkg/BiocBook/man/BiocBook.html) does;
+- **Pages**: `index.Rmd` becomes the landing page and every chapter a `.qmd` page in `inst/pages/`, moved as they are so that git follows them, and listed in `_book.yml` in the same order, with its parts and appendices;
 - **Syntax**: `bookdown` cross-references (`\@ref()`), figure layout options and the question/solution blocks of [`msmbstyle`](https://github.com/lgatto/msmbstyle) are rewritten for `quarto`;
-- **Assets** (bibliography, CSS, images) are copied, and `DESCRIPTION` is filled with the title and authors of the book and the packages its pages use;
+- **Assets** (bibliography, CSS, images) move next to the pages, the `bookdown` build (`_bookdown.yml`, the rendered book…) is removed, and `DESCRIPTION` gets the title, authors and licence of the book and the packages its pages use;
 - **Shared session**: `bookdown` renders every chapter in a single `R` session, `quarto` renders each in its own, so the [`library()`](https://rdrr.io/r/base/library.html) and [`options()`](https://rdrr.io/r/base/options.html) calls of `index.Rmd` are repeated at the top of each chapter.
 
-What still needs a human is listed in `MIGRATION.md`, at the root of the new book: downloads while the book builds, cached chunks, unresolved cross-references, dependencies that are not on CRAN or Bioconductor, objects created in a chapter and used in a later one…
+What still needs a human is listed in `MIGRATION.md`, at the root of the book, which is not committed: downloads while the book builds, cached chunks, unresolved cross-references, dependencies that are not on CRAN or Bioconductor, objects created in a chapter and used in a later one, files that are not part of a `BiocBook`…
 
 ### 2.2.3 Edit new `BiocBook` chapters
 
@@ -260,7 +262,7 @@ sessioninfo::session_info()
 ##   collate  C
 ##   ctype    en_US.UTF-8
 ##   tz       Etc/UTC
-##   date     2026-10-04
+##   date     2026-10-05
 ##   pandoc   3.11 @ /usr/bin/ (via rmarkdown)
 ##   quarto   1.11.5 @ /usr/local/bin/quarto
 ##  
@@ -286,7 +288,7 @@ sessioninfo::session_info()
 ##   xfun          0.61    2026-09-16 [2] RSPM (R 4.6.0)
 ##   yaml          2.3.12  2025-12-10 [2] RSPM (R 4.6.0)
 ##  
-##   [1] /tmp/RtmpASCh25/Rinstb7e21def1
+##   [1] /tmp/RtmpcGMBFb/Rinstb771d3bef
 ##   [2] /usr/local/lib/R/site-library
 ##   [3] /usr/local/lib/R/library
 ##  

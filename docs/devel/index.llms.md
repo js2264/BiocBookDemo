@@ -4,8 +4,8 @@
 
 **Package:** BiocBookDemo\
 **Authors:** Jacques Serizay \[aut, cre\]\
-**Compiled:** 2026-10-04\
-**Package version:** 1.11.4\
+**Compiled:** 2026-10-05\
+**Package version:** 1.11.5\
 **R version:** **R version 4.6.1 (2026-06-24)**\
 **BioC version:** **3.24**\
 **License:** MIT + file LICENSE\
@@ -136,7 +136,7 @@ This package was also inspired by the `*down` package series, including:
 > ##   collate  C
 > ##   ctype    en_US.UTF-8
 > ##   tz       Etc/UTC
-> ##   date     2026-10-04
+> ##   date     2026-10-05
 > ##   pandoc   3.11 @ /usr/bin/ (via rmarkdown)
 > ##   quarto   1.11.5 @ /usr/local/bin/quarto
 > ##  
@@ -145,8 +145,8 @@ This package was also inspired by the `*down` package series, including:
 > ##   askpass          1.2.1   2024-10-04 [2] RSPM (R 4.6.0)
 > ##   base           * 4.6.1   2026-09-11 [3] local
 > ##   base64enc        0.1-6   2026-02-02 [2] RSPM (R 4.6.0)
-> ##   BiocBook         1.11.3  2026-10-04 [2] Github (js2264/BiocBook@9f32ed4)
-> ##   BiocBookDemo     1.11.4  2026-10-04 [1] local
+> ##   BiocBook         1.11.4  2026-10-05 [2] Github (js2264/BiocBook@15e8d15)
+> ##   BiocBookDemo     1.11.5  2026-10-05 [1] local
 > ##   BiocGenerics     0.59.12 2026-08-11 [2] Bioconductor 3.24 (R 4.6.1)
 > ##   BiocManager      1.30.27 2025-11-14 [2] CRAN (R 4.6.1)
 > ##   BiocStyle        2.41.0  2026-04-28 [2] Bioconductor 3.24 (R 4.6.1)
@@ -289,7 +289,7 @@ This package was also inspired by the `*down` package series, including:
 > ##   yaml             2.3.12  2025-12-10 [2] RSPM (R 4.6.0)
 > ##   zip              3.0.2   2026-08-04 [2] RSPM (R 4.6.0)
 > ##  
-> ##   [1] /tmp/RtmpASCh25/Rinstb7e21def1
+> ##   [1] /tmp/RtmpcGMBFb/Rinstb771d3bef
 > ##   [2] /usr/local/lib/R/site-library
 > ##   [3] /usr/local/lib/R/library
 > ##   * ── Packages attached to the search path.

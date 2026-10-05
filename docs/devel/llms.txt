@@ -3,9 +3,9 @@
 > This package has been created using the BiocBook package. It serves as a demo of a `BiocBook` online book. Read `BiocBook` package documentation to know more about BiocBooks.
 
 <!-- biocbook:start -->
-- Book package: `BiocBookDemo` 1.11.4 (Bioconductor 3.24), source: <https://github.com/js2264/BiocBookDemo>
+- Book package: `BiocBookDemo` 1.11.5 (Bioconductor 3.24), source: <https://github.com/js2264/BiocBookDemo>
 - Install: `BiocManager::install("BiocBookDemo")` (Bioconductor) or `BiocManager::install("js2264/BiocBookDemo")` (GitHub)
-- Docker image with every dependency: `docker run -it ghcr.io/js2264/biocbookdemo:1.11.4 R`
+- Docker image with every dependency: `docker run -it ghcr.io/js2264/biocbookdemo:1.11.5 R`
 - Python environment (conda): `python=3.12`, `numpy=1.26`, `matplotlib=3.8`, `deeptools`, provisioned by `BiocBook::setup_python()` from `inst/requirements.yml`
 - Other versions of this book: one per Bioconductor release, at `https://js2264.github.io/BiocBookDemo/<version>/` (e.g. <https://js2264.github.io/BiocBookDemo/devel/>), indexed in <https://js2264.github.io/BiocBookDemo/llms.txt>
 <!-- biocbook:end -->

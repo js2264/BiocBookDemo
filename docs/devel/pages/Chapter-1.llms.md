@@ -123,7 +123,7 @@ Sys.getenv("BIOCONDUCTOR_DOCKER_VERSION")
 
 Any package that has been released in the Bioconductor version you are using (in this book version, this is 3.24.0).
 
-The `BiocBaseUtils` package is available in Bioconductor since `3.16`, while the `BiocHail` package was only made available in `3.17`. `CuratedAtlasQueryR` has recently been accepted in `3.18` (current `devel`, on Sun Oct 4 10:39:46 2026). Let’s check this!
+The `BiocBaseUtils` package is available in Bioconductor since `3.16`, while the `BiocHail` package was only made available in `3.17`. `CuratedAtlasQueryR` has recently been accepted in `3.18` (current `devel`, on Mon Oct 5 11:35:17 2026). Let’s check this!
 
 ``` r
 packageVersion("BiocVersion")
@@ -150,7 +150,7 @@ sessioninfo::session_info()
 ##   collate  C
 ##   ctype    en_US.UTF-8
 ##   tz       Etc/UTC
-##   date     2026-10-04
+##   date     2026-10-05
 ##   pandoc   3.11 @ /usr/bin/ (via rmarkdown)
 ##   quarto   1.11.5 @ /usr/local/bin/quarto
 ##  
@@ -171,7 +171,7 @@ sessioninfo::session_info()
 ##   sessioninfo   1.2.4   2026-06-04 [2] RSPM (R 4.6.0)
 ##   xfun          0.61    2026-09-16 [2] RSPM (R 4.6.0)
 ##  
-##   [1] /tmp/RtmpASCh25/Rinstb7e21def1
+##   [1] /tmp/RtmpcGMBFb/Rinstb771d3bef
 ##   [2] /usr/local/lib/R/site-library
 ##   [3] /usr/local/lib/R/library
 ##  
