@@ -63,39 +63,9 @@ gert::git_push("RELEASE_3_15", remote = "origin")
 
 ## Serving the book to AI assistants
 
-Each version of a `BiocBook` also serves an `llms.txt` file (e.g. 
-[`devel/llms.txt`](https://js2264.github.io/BiocBookDemo/devel/llms.txt)), 
-following the [llms.txt proposal](https://llmstxt.org/): a Markdown index of 
-the book that AI assistants can read instead of crawling its HTML pages. It
-links to a Markdown copy of every page, at the page's URL with `.md` in place
-of `.html`, e.g. `pages/Chapter-4.md` for `pages/Chapter-4.html`. Every page
-links to its own copy, under its title ("View as Markdown"), and in its
-`<head>`, where AI assistants look for it.
-
-- `quarto` >= 1.11 writes these files when the book's `llms-txt` option is on. 
-  Books created from template >= 1.1.0 switch it on through the `llms` `quarto` 
-  profile (`inst/_quarto-llms.yml`), which `vignettes/Makefile` activates 
-  whenever the installed `quarto` supports it (older versions reject the 
-  option). The `biocbook` GitHub workflow pins such a `quarto` with its 
-  `QUARTO_VERSION` setting, and copies built by Bioconductor get these files 
-  once the Bioconductor builders run `quarto` >= 1.11.
-- After every render, `inst/assets/post-render.R` calls 
-  `BiocBook::enrich_llms_txt()`, which adds what an assistant needs to run the 
-  book's code to `llms.txt`: the book package and its version, how to install 
-  it, its `Docker` image, its `python` environment and where the other 
-  versions of the book live. It also renames the Markdown copies, which
-  `quarto` writes as `<page>.llms.md`, and links every page to its own. With
-  an older `quarto`, it writes a minimal `llms.txt` listing the chapters.
-- The `biocbook` GitHub workflow writes a `.nojekyll` file at the root of the
-  book's GitHub Pages site, so that GitHub Pages serves the Markdown copies as
-  they are, rather than running `Jekyll`, which would turn each of them into
-  an HTML page colliding with the book's own.
-
-To render these files locally: 
-
-```{sh filename="bash"}
-QUARTO_PROFILE=llms quarto render inst/
-```
+Each deployed version of the book also serves an `llms.txt` file and a 
+Markdown copy of every page, which AI assistants can read instead of crawling 
+its HTML pages: see @sec-ai.
 
 ## Session info
 
