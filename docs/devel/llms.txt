@@ -12,10 +12,10 @@
 
 ## Pages
 
-- [Write Quarto books with Bioconductor](index.llms.md)
-- [Preamble](pages/preamble.llms.md)
-- [1 `BiocBook` versioning system](pages/Chapter-1.llms.md)
-- [2 Writing a {`BiocBook`} package](pages/Chapter-2.llms.md)
-- [3 Containerizing and Publishing against specific Bioconductor release versions](pages/Chapter-3.llms.md)
-- [4 Executing `python` code](pages/Chapter-4.llms.md)
-- [5 {`BiocBook`}-based books vs. {`rebook`}-based books](pages/biocbook-vs-rebook.llms.md)
+- [Write Quarto books with Bioconductor](index.md)
+- [Preamble](pages/preamble.md)
+- [1 `BiocBook` versioning system](pages/Chapter-1.md)
+- [2 Writing a {`BiocBook`} package](pages/Chapter-2.md)
+- [3 Containerizing and Publishing against specific Bioconductor release versions](pages/Chapter-3.md)
+- [4 Executing `python` code](pages/Chapter-4.md)
+- [5 {`BiocBook`}-based books vs. {`rebook`}-based books](pages/biocbook-vs-rebook.md)

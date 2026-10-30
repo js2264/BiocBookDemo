@@ -104,6 +104,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<link rel="alternate" type="text/markdown" href="biocbook-vs-rebook.md">
 </head>
 <body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
@@ -207,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
 
 
-</header><p>{<code>rebook</code>} is another book rendering package currently used by Bioconductor to build book packages such as <code>OSCA.*</code> and <code>SingleRBook</code>.</p>
+</header><p class="biocbook-md-link small"><a href="biocbook-vs-rebook.md" type="text/markdown"><i class="bi bi-markdown" aria-hidden="true"></i> View as Markdown</a></p><p>{<code>rebook</code>} is another book rendering package currently used by Bioconductor to build book packages such as <code>OSCA.*</code> and <code>SingleRBook</code>.</p>
 <section id="differences-with-rebook-based-books" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="differences-with-rebook-based-books">
 <span class="header-section-number">5.1</span> Differences with {<code>rebook</code>}-based books</h2>
 <p><code>OSCA</code> books provided by Bioconductor are rendered upon building by the <em>Bioconductor Build System</em> (BBS). They rely on {<code>rebook</code>} to orchestrate the rendering. Briefly, <code>OSCA</code> books have their book pages in <code>/inst/book/</code>, while the <code>vignettes/</code> folder contains (1) a <code>Makefile</code> and (2) a dummy <code>stub.Rmd</code> vignette (required to trigger vignette rendering and thus <code>make</code>).</p>
@@ -322,7 +323,7 @@ Tip
 <span><span class="co">##   xfun          0.62    2026-10-16 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   yaml          2.3.12  2025-12-10 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##  </span></span>
-<span><span class="co">##   [1] /tmp/RtmpjIs1D9/Rinstb7477816b</span></span>
+<span><span class="co">##   [1] /tmp/Rtmpb36VSC/Rinstb226c129f</span></span>
 <span><span class="co">##   [2] /usr/local/lib/R/site-library</span></span>
 <span><span class="co">##   [3] /usr/local/lib/R/library</span></span>
 <span><span class="co">##  </span></span>
