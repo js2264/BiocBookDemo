@@ -17,7 +17,7 @@ Depends:
     R (>= 4.3), 
     tinytex
 Suggests:
-    BiocBook,
+    BiocBook (>= 1.11.5),
     BiocManager, 
     BiocVersion, 
     BiocStyle, 

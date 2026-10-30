@@ -8,7 +8,9 @@
 - The code runs on **every render**, including when the *Bioconductor Build System* 
   builds the book;
 - The `python` packages the book needs are therefore installed **at build time**,
-  by the book itself, from the `conda` environment declared in `inst/requirements.yml`;
+  by the book itself, in the environment declared in `inst/requirements.yml`:
+  `python` and command-line tools from `conda`, the packages that `python`
+  chunks import from PyPI;
 - **Keep at least one `R` chunk on a `python` page**: it is what keeps `quarto` on 
   the `knitr` engine.
 
@@ -16,8 +18,8 @@
 
 ## Declaring and installing the python environment
 
-`python` packages are listed, pinned, in `inst/requirements.yml` -- a plain
-`conda` environment file, e.g.
+The environment is declared, with pinned versions, in `inst/requirements.yml`
+-- a plain `conda` environment file. This book's is:
 
 ``` yaml
 name:
@@ -28,9 +30,17 @@ channels:
     - nodefaults
 dependencies:
     - python=3.12
-    - numpy=1.26
-    - matplotlib
+    - samtools=1.24
+    - pip:
+        - numpy==2.5.4
 ```
+
+`conda` provides `python` itself and command-line tools, such as `samtools`
+from `bioconda`. The packages that `python` chunks import go under `pip:`, and
+come from PyPI. `python` chunks run inside the `R` session, and `conda` builds
+of these packages link libraries that `R` may already have loaded, in an older
+version: on the Bioconductor builders, `h5py` and `matplotlib` >= 3.11 then
+fail to import. PyPI wheels carry their own (see `?BiocBook::BiocBook-python`).
 
 Note the presence of the `nodefaults` channel: the `defaults` channel is covered by the Anaconda Terms
 of Service, which require a paid licence for many organisations. `conda-forge`
@@ -44,10 +54,12 @@ library(reticulate)
 BiocBook::setup_python()
 ```
 
-`setup_python()` finds `inst/requirements.yml`,  creates the `conda` environment 
-if it is not already, and activates it, addressing it by full path rather than by name. 
-If `RETICULATE_PYTHON` is already set (as it is inside the book's `Docker` 
-image) the whole step short-circuits.
+`setup_python()` finds `inst/requirements.yml` and creates the environment if
+it does not exist yet: its `conda` packages, then its `pip:` section, with the
+environment's own `pip`. It then activates the environment, addressing it by
+full path rather than by name, and puts its command-line tools on the `PATH`.
+If `RETICULATE_PYTHON` is already set (as it is inside the book's `Docker`
+image), `setup_python()` only puts that interpreter's folder on the `PATH`.
 
 Environments are cached, and keyed on the contents of `requirements.yml`: an 
 environment is re-used rather than resolved again **as long as `requirements.yml` 
@@ -132,19 +144,27 @@ cpm <- reticulate::py$cpm
 cpm
 ```
 
-## Bioconda packages 
+## Command-line tools from `bioconda`
 
-Because the `BiocBook` environment is a `conda` environment, it can install any package
-from the `bioconda` channel, e.g. `deeptools`:
+The `conda` part of the environment can hold any command-line tool from the
+`bioconda` channel, e.g. `samtools`. A tool runs in its own process, with its
+own libraries, so it cannot clash with the `R` session. `setup_python()` puts
+it on the `PATH`, for `bash` chunks...
 
-```{python "python-deeptools"}
-from importlib.metadata import version
-v = version("deeptools")
+```{sh "samtools-bash", filename="bash"}
+samtools --version | head -n 1
+```
+
+... as well as for `system2()` in `R`, and for `subprocess` in `python`:
+
+```{python "python-runs-samtools"}
+import subprocess
+v = subprocess.run(["samtools", "--version"], capture_output = True, text = True).stdout.splitlines()[0]
 ```
 
 Then read that in `R`:
 
-```{r "r-reads-deeptools"}
+```{r "r-reads-samtools"}
 reticulate::py$v
 ```
 
