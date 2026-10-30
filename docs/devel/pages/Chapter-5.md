@@ -15,9 +15,9 @@ Each version of this book serves one, e.g. [`devel/llms.txt`](https://js2264.git
 
 ``` markdown
 <!-- biocbook:start -->
-- Book package: `BiocBookDemo` 1.11.8 (Bioconductor 3.24), source: <https://github.com/js2264/BiocBookDemo>
+- Book package: `BiocBookDemo` 1.11.9 (Bioconductor 3.24), source: <https://github.com/js2264/BiocBookDemo>
 - Install: `BiocManager::install("BiocBookDemo")` (Bioconductor) or `BiocManager::install("js2264/BiocBookDemo")` (GitHub)
-- Docker image with every dependency: `docker run -it ghcr.io/js2264/biocbookdemo:1.11.8 R`
+- Docker image with every dependency: `docker run -it ghcr.io/js2264/biocbookdemo:1.11.9 R`
 - Python environment (conda): `python=3.12`, `samtools=1.24`, `pip`; from PyPI: `numpy==2.5.4`, provisioned by `BiocBook::setup_python()` from `inst/requirements.yml`
 - Other versions of this book: one per Bioconductor release, at `https://js2264.github.io/BiocBookDemo/<version>/` (e.g. <https://js2264.github.io/BiocBookDemo/devel/>), indexed in <https://js2264.github.io/BiocBookDemo/llms.txt>
 <!-- biocbook:end -->
@@ -189,7 +189,7 @@ sessioninfo::session_info()
 ##   xfun           0.62    2026-10-16 [2] RSPM (R 4.6.0)
 ##   yaml           2.3.12  2025-12-10 [2] RSPM (R 4.6.0)
 ##  
-##   [1] /tmp/RtmpR3aWso/Rinstc2ce366bf
+##   [1] /tmp/Rtmp2UlXxq/Rinstb7a8b5f19
 ##   [2] /usr/local/lib/R/site-library
 ##   [3] /usr/local/lib/R/library
 ##  
