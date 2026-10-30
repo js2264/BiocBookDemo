@@ -4,8 +4,8 @@
 
 **Package:** BiocBookDemo\
 **Authors:** Jacques Serizay \[aut, cre\]\
-**Compiled:** 2026-10-05\
-**Package version:** 1.11.5\
+**Compiled:** 2026-10-30\
+**Package version:** 1.11.6\
 **R version:** **R version 4.6.1 (2026-06-24)**\
 **BioC version:** **3.24**\
 **License:** MIT + file LICENSE\
@@ -65,7 +65,7 @@ Each Docker image provides pre-installed `R` packages:
 - Specific book dependencies from Bioconductor release `X.Y` (listed in `DESCRIPTION`);
 - The book package itself
 
-The Docker images also include a `python` environment, named `BiocBook`, in which all the packages listed in `requirements.yml` are installed, and which `reticulate` picks up automatically in any `R` session started from the image (see [sec-python](#sec-python)).
+The Docker images also include the book’s `python` environment, in which everything listed in `requirements.yml` is installed, and which `reticulate` picks up automatically in any `R` session started from the image (see [sec-python](#sec-python)).
 
 For example, `Docker` images built from the {`BiocBookDemo`} package repository are available here:
 
@@ -129,24 +129,24 @@ This package was also inspired by the `*down` package series, including:
 > ##  ─ Session info ────────────────────────────────────────────────────────────
 > ##   setting  value
 > ##   version  R version 4.6.1 (2026-06-24)
-> ##   os       Ubuntu 24.04.4 LTS
+> ##   os       Ubuntu 24.04.5 LTS
 > ##   system   x86_64, linux-gnu
 > ##   ui       X11
 > ##   language (EN)
 > ##   collate  C
 > ##   ctype    en_US.UTF-8
 > ##   tz       Etc/UTC
-> ##   date     2026-10-05
-> ##   pandoc   3.11 @ /usr/bin/ (via rmarkdown)
+> ##   date     2026-10-30
+> ##   pandoc   3.12.1 @ /usr/bin/ (via rmarkdown)
 > ##   quarto   1.11.5 @ /usr/local/bin/quarto
 > ##  
 > ##  ─ Packages ────────────────────────────────────────────────────────────────
 > ##   package        * version date (UTC) lib source
 > ##   askpass          1.2.1   2024-10-04 [2] RSPM (R 4.6.0)
-> ##   base           * 4.6.1   2026-09-11 [3] local
+> ##   base           * 4.6.1   2026-10-15 [3] local
 > ##   base64enc        0.1-6   2026-02-02 [2] RSPM (R 4.6.0)
-> ##   BiocBook         1.11.4  2026-10-05 [2] Github (js2264/BiocBook@15e8d15)
-> ##   BiocBookDemo     1.11.5  2026-10-05 [1] local
+> ##   BiocBook         1.11.6  2026-10-30 [2] Github (js2264/BiocBook@3c3747d)
+> ##   BiocBookDemo     1.11.6  2026-10-30 [1] local
 > ##   BiocGenerics     0.59.12 2026-08-11 [2] Bioconductor 3.24 (R 4.6.1)
 > ##   BiocManager      1.30.27 2025-11-14 [2] CRAN (R 4.6.1)
 > ##   BiocStyle        2.41.0  2026-04-28 [2] Bioconductor 3.24 (R 4.6.1)
@@ -158,18 +158,18 @@ This package was also inspired by the `*down` package series, including:
 > ##   bslib            0.12.0  2026-08-04 [2] RSPM (R 4.6.0)
 > ##   cachem           1.1.0   2024-05-16 [2] RSPM (R 4.6.0)
 > ##   callr            3.8.0   2026-06-05 [2] RSPM (R 4.6.0)
-> ##   class            7.3-24  2026-08-03 [2] RSPM (R 4.6.0)
+> ##   class            7.3-24  2026-08-03 [2] RSPM (R 4.6.1)
 > ##   cli              3.6.6   2026-04-09 [2] RSPM (R 4.6.0)
 > ##   clipr            0.8.1   2026-05-25 [2] RSPM (R 4.6.0)
-> ##   cluster          2.1.8.3 2026-07-30 [2] RSPM (R 4.6.0)
+> ##   cluster          2.1.8.3 2026-07-30 [2] RSPM (R 4.6.1)
 > ##   codetools        0.2-20  2024-03-31 [3] CRAN (R 4.6.1)
 > ##   commonmark       2.0.0   2025-07-07 [2] RSPM (R 4.6.0)
-> ##   compiler         4.6.1   2026-09-11 [3] local
+> ##   compiler         4.6.1   2026-10-15 [3] local
 > ##   cpp11            0.5.5   2026-05-06 [2] RSPM (R 4.6.0)
 > ##   crayon           1.5.3   2024-06-20 [2] RSPM (R 4.6.0)
 > ##   credentials      2.0.3   2025-09-12 [2] RSPM (R 4.6.0)
-> ##   curl             8.0.0   2026-08-25 [2] RSPM (R 4.6.0)
-> ##   datasets       * 4.6.1   2026-09-11 [3] local
+> ##   curl             8.1.0   2026-10-14 [2] RSPM (R 4.6.0)
+> ##   datasets       * 4.6.1   2026-10-15 [3] local
 > ##   desc             1.4.3   2023-12-10 [2] RSPM (R 4.6.0)
 > ##   devtools         2.5.2   2026-04-30 [2] RSPM (R 4.6.0)
 > ##   diffobj          0.3.9   2026-09-11 [2] RSPM (R 4.6.0)
@@ -182,16 +182,16 @@ This package was also inspired by the `*down` package series, including:
 > ##   fansi            1.0.7   2025-11-19 [2] RSPM (R 4.6.0)
 > ##   fastmap          1.2.0   2024-05-15 [2] RSPM (R 4.6.0)
 > ##   fontawesome      0.5.3   2024-11-16 [2] RSPM (R 4.6.0)
-> ##   foreign          0.8-91  2026-01-29 [3] CRAN (R 4.6.1)
+> ##   foreign          0.8-92  2026-10-17 [2] RSPM (R 4.6.1)
 > ##   fs               2.1.0   2026-04-18 [2] RSPM (R 4.6.0)
 > ##   generics         0.1.4   2025-05-09 [2] RSPM (R 4.6.0)
-> ##   gert             2.4.1   2026-08-19 [2] RSPM (R 4.6.0)
+> ##   gert             2.5.0   2026-10-14 [2] RSPM (R 4.6.0)
 > ##   gh               1.6.1   2026-07-20 [2] RSPM (R 4.6.0)
 > ##   gitcreds         0.1.2   2022-09-08 [2] RSPM (R 4.6.0)
 > ##   glue             1.8.1   2026-04-17 [2] RSPM (R 4.6.0)
-> ##   graphics       * 4.6.1   2026-09-11 [3] local
-> ##   grDevices      * 4.6.1   2026-09-11 [3] local
-> ##   grid             4.6.1   2026-09-11 [3] local
+> ##   graphics       * 4.6.1   2026-10-15 [3] local
+> ##   grDevices      * 4.6.1   2026-10-15 [3] local
+> ##   grid             4.6.1   2026-10-15 [3] local
 > ##   here             1.0.2   2025-09-15 [2] RSPM (R 4.6.0)
 > ##   highr            0.12    2026-03-06 [2] RSPM (R 4.6.0)
 > ##   htmltools        0.5.9   2025-12-04 [2] RSPM (R 4.6.0)
@@ -202,26 +202,26 @@ This package was also inspired by the `*down` package series, including:
 > ##   ini              0.3.1   2018-05-20 [2] RSPM (R 4.6.0)
 > ##   jquerylib        0.1.4   2021-04-26 [2] RSPM (R 4.6.0)
 > ##   jsonlite         2.0.0   2025-03-27 [2] RSPM (R 4.6.0)
-> ##   KernSmooth       2.23-27 2026-08-12 [2] RSPM (R 4.6.0)
+> ##   KernSmooth       2.23-27 2026-08-12 [2] RSPM (R 4.6.1)
 > ##   knitr            1.52    2026-09-06 [2] RSPM (R 4.6.0)
 > ##   later            1.4.8   2026-03-05 [2] RSPM (R 4.6.0)
-> ##   lattice          0.23-1  2026-08-12 [2] RSPM (R 4.6.0)
+> ##   lattice          0.23-1  2026-08-12 [2] RSPM (R 4.6.1)
 > ##   lifecycle        1.0.5   2026-01-08 [2] RSPM (R 4.6.0)
 > ##   littler          0.3.23  2026-04-12 [2] RSPM (R 4.6.1)
 > ##   magrittr         2.0.5   2026-04-04 [2] RSPM (R 4.6.0)
-> ##   MASS             7.3-66  2026-07-15 [2] RSPM (R 4.6.0)
-> ##   Matrix           1.7-6   2026-07-25 [2] RSPM (R 4.6.0)
+> ##   MASS             7.3-66  2026-07-15 [2] RSPM (R 4.6.1)
+> ##   Matrix           1.7-6   2026-07-25 [2] RSPM (R 4.6.1)
 > ##   memoise          2.0.1   2021-11-26 [2] RSPM (R 4.6.0)
-> ##   methods        * 4.6.1   2026-09-11 [3] local
+> ##   methods        * 4.6.1   2026-10-15 [3] local
 > ##   mgcv             1.9-4   2025-11-07 [3] CRAN (R 4.6.1)
 > ##   mime             0.13    2025-03-17 [2] RSPM (R 4.6.0)
 > ##   miniUI           0.1.2   2025-04-17 [2] RSPM (R 4.6.0)
-> ##   nlme             3.1-171 2026-09-01 [2] RSPM (R 4.6.0)
-> ##   nnet             7.3-21  2026-08-03 [2] RSPM (R 4.6.0)
+> ##   nlme             3.1-171 2026-09-01 [2] RSPM (R 4.6.1)
+> ##   nnet             7.3-21  2026-08-03 [2] RSPM (R 4.6.1)
 > ##   openssl          2.4.2   2026-06-09 [2] RSPM (R 4.6.0)
 > ##   otel             0.2.0   2025-08-29 [2] RSPM (R 4.6.0)
 > ##   pak              0.11.1  2026-07-22 [2] RSPM (R 4.6.0)
-> ##   parallel         4.6.1   2026-09-11 [3] local
+> ##   parallel         4.6.1   2026-10-15 [3] local
 > ##   pillar           1.11.1  2025-09-17 [2] RSPM (R 4.6.0)
 > ##   pkgbuild         1.4.8   2025-05-26 [2] RSPM (R 4.6.0)
 > ##   pkgconfig        2.0.3   2019-09-22 [2] RSPM (R 4.6.0)
@@ -245,11 +245,11 @@ This package was also inspired by the `*down` package series, including:
 > ##   RcppTOML         0.2.3   2025-03-08 [2] RSPM (R 4.6.0)
 > ##   rdtools          0.1.0   2026-07-16 [2] RSPM (R 4.6.0)
 > ##   remotes          2.5.0   2024-03-17 [2] RSPM (R 4.6.0)
-> ##   renv             1.3.0   2026-09-29 [2] RSPM (R 4.6.0)
+> ##   renv             1.3.1   2026-10-06 [2] RSPM (R 4.6.0)
 > ##   reticulate       1.47.0  2026-09-03 [2] RSPM (R 4.6.0)
 > ##   rlang            1.3.0   2026-07-05 [2] RSPM (R 4.6.0)
 > ##   rmarkdown        2.32    2026-09-01 [2] RSPM (R 4.6.0)
-> ##   roxygen2         8.1.0   2026-08-04 [2] RSPM (R 4.6.0)
+> ##   roxygen2         8.1.1   2026-10-08 [2] RSPM (R 4.6.0)
 > ##   rpart            4.1.27  2026-03-27 [3] CRAN (R 4.6.1)
 > ##   rprojroot        2.1.1   2025-08-26 [2] RSPM (R 4.6.0)
 > ##   rstudioapi       0.19.0  2026-06-11 [2] RSPM (R 4.6.0)
@@ -258,38 +258,38 @@ This package was also inspired by the `*down` package series, including:
 > ##   sessioninfo      1.2.4   2026-06-04 [2] RSPM (R 4.6.0)
 > ##   shiny            1.14.0  2026-06-21 [2] RSPM (R 4.6.0)
 > ##   sourcetools      0.1.7-2 2026-03-28 [2] RSPM (R 4.6.0)
-> ##   spatial          7.3-19  2026-08-03 [2] RSPM (R 4.6.0)
-> ##   splines          4.6.1   2026-09-11 [3] local
-> ##   stats          * 4.6.1   2026-09-11 [3] local
-> ##   stats4           4.6.1   2026-09-11 [3] local
+> ##   spatial          7.3-19  2026-08-03 [2] RSPM (R 4.6.1)
+> ##   splines          4.6.1   2026-10-15 [3] local
+> ##   stats          * 4.6.1   2026-10-15 [3] local
+> ##   stats4           4.6.1   2026-10-15 [3] local
 > ##   stringi          1.8.9   2026-08-04 [2] RSPM (R 4.6.0)
 > ##   stringr          1.6.0   2025-11-04 [2] RSPM (R 4.6.0)
-> ##   survival         3.8-12  2026-09-09 [2] RSPM (R 4.6.0)
+> ##   survival         3.8-12  2026-09-09 [2] RSPM (R 4.6.1)
 > ##   sys              3.4.3   2024-10-04 [2] RSPM (R 4.6.0)
 > ##   systemfonts      1.3.2   2026-03-05 [2] RSPM (R 4.6.0)
-> ##   tcltk            4.6.1   2026-09-11 [3] local
+> ##   tcltk            4.6.1   2026-10-15 [3] local
 > ##   testthat         3.3.2   2026-01-11 [2] RSPM (R 4.6.0)
 > ##   textshaping      1.0.5   2026-03-06 [2] RSPM (R 4.6.0)
 > ##   tibble           3.3.1   2026-01-11 [2] RSPM (R 4.6.0)
 > ##   tidyselect       1.2.1   2024-03-11 [2] RSPM (R 4.6.0)
 > ##   tinytex          0.61    2026-09-17 [2] RSPM (R 4.6.0)
-> ##   tools            4.6.1   2026-09-11 [3] local
+> ##   tools            4.6.1   2026-10-15 [3] local
 > ##   urlchecker       2.0.0   2026-07-08 [2] RSPM (R 4.6.0)
 > ##   usethis          3.2.2   2026-09-10 [2] RSPM (R 4.6.0)
 > ##   utf8             1.2.6   2025-06-08 [2] RSPM (R 4.6.0)
-> ##   utils          * 4.6.1   2026-09-11 [3] local
+> ##   utils          * 4.6.1   2026-10-15 [3] local
 > ##   vctrs            0.7.3   2026-04-11 [2] RSPM (R 4.6.0)
 > ##   waldo            0.6.2   2025-07-11 [2] RSPM (R 4.6.0)
 > ##   whisker          0.4.1   2022-12-05 [2] RSPM (R 4.6.0)
 > ##   withr            3.0.3   2026-06-19 [2] RSPM (R 4.6.0)
-> ##   xfun             0.61    2026-09-16 [2] RSPM (R 4.6.0)
+> ##   xfun             0.62    2026-10-16 [2] RSPM (R 4.6.0)
 > ##   xml2             1.6.0   2026-06-22 [2] RSPM (R 4.6.0)
 > ##   xopen            1.0.1   2024-04-25 [2] RSPM (R 4.6.0)
 > ##   xtable           1.8-8   2026-02-22 [2] RSPM (R 4.6.0)
 > ##   yaml             2.3.12  2025-12-10 [2] RSPM (R 4.6.0)
 > ##   zip              3.0.2   2026-08-04 [2] RSPM (R 4.6.0)
 > ##  
-> ##   [1] /tmp/RtmpcGMBFb/Rinstb771d3bef
+> ##   [1] /tmp/RtmpAfdFZk/Rinsta6519127b
 > ##   [2] /usr/local/lib/R/site-library
 > ##   [3] /usr/local/lib/R/library
 > ##   * ── Packages attached to the search path.

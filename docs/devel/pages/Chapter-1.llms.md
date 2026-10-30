@@ -107,7 +107,7 @@ The `BIOCONDUCTOR_DOCKER_VERSION` variable is set in all `Bioconductor` Docker i
 
 ``` r
 Sys.getenv("BIOCONDUCTOR_DOCKER_VERSION")
-##  [1] "3.24.18"
+##  [1] "3.24.21"
 ```
 
 > **TIP:**
@@ -123,7 +123,7 @@ Sys.getenv("BIOCONDUCTOR_DOCKER_VERSION")
 
 Any package that has been released in the Bioconductor version you are using (in this book version, this is 3.24.0).
 
-The `BiocBaseUtils` package is available in Bioconductor since `3.16`, while the `BiocHail` package was only made available in `3.17`. `CuratedAtlasQueryR` has recently been accepted in `3.18` (current `devel`, on Mon Oct 5 11:35:17 2026). Let’s check this!
+The `BiocBaseUtils` package is available in Bioconductor since `3.16`, while the `BiocHail` package was only made available in `3.17`. `CuratedAtlasQueryR` has recently been accepted in `3.18` (current `devel`, on Fri Oct 30 10:20:10 2026). Let’s check this!
 
 ``` r
 packageVersion("BiocVersion")
@@ -143,15 +143,15 @@ sessioninfo::session_info()
 ##  ─ Session info ────────────────────────────────────────────────────────────
 ##   setting  value
 ##   version  R version 4.6.1 (2026-06-24)
-##   os       Ubuntu 24.04.4 LTS
+##   os       Ubuntu 24.04.5 LTS
 ##   system   x86_64, linux-gnu
 ##   ui       X11
 ##   language (EN)
 ##   collate  C
 ##   ctype    en_US.UTF-8
 ##   tz       Etc/UTC
-##   date     2026-10-05
-##   pandoc   3.11 @ /usr/bin/ (via rmarkdown)
+##   date     2026-10-30
+##   pandoc   3.12.1 @ /usr/bin/ (via rmarkdown)
 ##   quarto   1.11.5 @ /usr/local/bin/quarto
 ##  
 ##  ─ Packages ────────────────────────────────────────────────────────────────
@@ -169,9 +169,9 @@ sessioninfo::session_info()
 ##   rlang         1.3.0   2026-07-05 [2] RSPM (R 4.6.0)
 ##   rmarkdown     2.32    2026-09-01 [2] RSPM (R 4.6.0)
 ##   sessioninfo   1.2.4   2026-06-04 [2] RSPM (R 4.6.0)
-##   xfun          0.61    2026-09-16 [2] RSPM (R 4.6.0)
+##   xfun          0.62    2026-10-16 [2] RSPM (R 4.6.0)
 ##  
-##   [1] /tmp/RtmpcGMBFb/Rinstb771d3bef
+##   [1] /tmp/RtmpAfdFZk/Rinsta6519127b
 ##   [2] /usr/local/lib/R/site-library
 ##   [3] /usr/local/lib/R/library
 ##  

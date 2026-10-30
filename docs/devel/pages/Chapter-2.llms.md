@@ -213,13 +213,13 @@ utils::packageVersion("BiocVersion")
 
 ``` sh
 find ../ -name "*.qmd"
-##  ../index.qmd
 ##  ../pages/biocbook-vs-rebook.qmd
+##  ../pages/Chapter-1.qmd
+##  ../pages/Chapter-3.qmd
+##  ../pages/preamble.qmd
 ##  ../pages/Chapter-4.qmd
 ##  ../pages/Chapter-2.qmd
-##  ../pages/Chapter-1.qmd
-##  ../pages/preamble.qmd
-##  ../pages/Chapter-3.qmd
+##  ../index.qmd
 ```
 
 #### 2.3.1.3 `python` code
@@ -255,15 +255,15 @@ sessioninfo::session_info()
 ##  ─ Session info ────────────────────────────────────────────────────────────
 ##   setting  value
 ##   version  R version 4.6.1 (2026-06-24)
-##   os       Ubuntu 24.04.4 LTS
+##   os       Ubuntu 24.04.5 LTS
 ##   system   x86_64, linux-gnu
 ##   ui       X11
 ##   language (EN)
 ##   collate  C
 ##   ctype    en_US.UTF-8
 ##   tz       Etc/UTC
-##   date     2026-10-05
-##   pandoc   3.11 @ /usr/bin/ (via rmarkdown)
+##   date     2026-10-30
+##   pandoc   3.12.1 @ /usr/bin/ (via rmarkdown)
 ##   quarto   1.11.5 @ /usr/local/bin/quarto
 ##  
 ##  ─ Packages ────────────────────────────────────────────────────────────────
@@ -276,8 +276,8 @@ sessioninfo::session_info()
 ##   htmlwidgets   1.6.4   2023-12-06 [2] RSPM (R 4.6.0)
 ##   jsonlite      2.0.0   2025-03-27 [2] RSPM (R 4.6.0)
 ##   knitr         1.52    2026-09-06 [2] RSPM (R 4.6.0)
-##   lattice       0.23-1  2026-08-12 [2] RSPM (R 4.6.0)
-##   Matrix        1.7-6   2026-07-25 [2] RSPM (R 4.6.0)
+##   lattice       0.23-1  2026-08-12 [2] RSPM (R 4.6.1)
+##   Matrix        1.7-6   2026-07-25 [2] RSPM (R 4.6.1)
 ##   otel          0.2.0   2025-08-29 [2] RSPM (R 4.6.0)
 ##   png           0.1-9   2026-03-15 [2] RSPM (R 4.6.0)
 ##   Rcpp          1.1.2   2026-07-05 [2] RSPM (R 4.6.0)
@@ -285,10 +285,10 @@ sessioninfo::session_info()
 ##   rlang         1.3.0   2026-07-05 [2] RSPM (R 4.6.0)
 ##   rmarkdown     2.32    2026-09-01 [2] RSPM (R 4.6.0)
 ##   sessioninfo   1.2.4   2026-06-04 [2] RSPM (R 4.6.0)
-##   xfun          0.61    2026-09-16 [2] RSPM (R 4.6.0)
+##   xfun          0.62    2026-10-16 [2] RSPM (R 4.6.0)
 ##   yaml          2.3.12  2025-12-10 [2] RSPM (R 4.6.0)
 ##  
-##   [1] /tmp/RtmpcGMBFb/Rinstb771d3bef
+##   [1] /tmp/RtmpAfdFZk/Rinsta6519127b
 ##   [2] /usr/local/lib/R/site-library
 ##   [3] /usr/local/lib/R/library
 ##  

@@ -78,7 +78,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-5f883865545033bfab6feb3d329ab180.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-f55a7b866f6476f4bfd126d49c39e786.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="../site_libs/bootstrap/bootstrap-ffa3cb8e805583c138d78e15c44b8f66.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -187,7 +187,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><a href="#declaring-and-installing-the-python-environment" id="toc-declaring-and-installing-the-python-environment" class="nav-link active" data-scroll-target="#declaring-and-installing-the-python-environment"><span class="header-section-number">4.1</span> Declaring and installing the python environment</a></li>
   <li><a href="#where-conda-itself-comes-from" id="toc-where-conda-itself-comes-from" class="nav-link" data-scroll-target="#where-conda-itself-comes-from"><span class="header-section-number">4.2</span> Where <code>conda</code> itself comes from</a></li>
   <li><a href="#a-worked-example" id="toc-a-worked-example" class="nav-link" data-scroll-target="#a-worked-example"><span class="header-section-number">4.3</span> A worked example</a></li>
-  <li><a href="#bioconda-packages" id="toc-bioconda-packages" class="nav-link" data-scroll-target="#bioconda-packages"><span class="header-section-number">4.4</span> Bioconda packages</a></li>
+  <li><a href="#command-line-tools-from-bioconda" id="toc-command-line-tools-from-bioconda" class="nav-link" data-scroll-target="#command-line-tools-from-bioconda"><span class="header-section-number">4.4</span> Command-line tools from <code>bioconda</code></a></li>
   <li><a href="#session-info" id="toc-session-info" class="nav-link" data-scroll-target="#session-info"><span class="header-section-number">4.5</span> Session info</a></li>
   </ul></nav>
     </div>
@@ -221,7 +221,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>
 <code>BiocBook</code>s can execute <strong><code>python</code> code</strong>, not just <code>R</code> code;</li>
 <li>The code runs on <strong>every render</strong>, including when the <em>Bioconductor Build System</em> builds the book;</li>
-<li>The <code>python</code> packages the book needs are therefore installed <strong>at build time</strong>, by the book itself, from the <code>conda</code> environment declared in <code>inst/requirements.yml</code>;</li>
+<li>The <code>python</code> packages the book needs are therefore installed <strong>at build time</strong>, by the book itself, in the environment declared in <code>inst/requirements.yml</code>: <code>python</code> and command-line tools from <code>conda</code>, the packages that <code>python</code> chunks import from PyPI;</li>
 <li>
 <strong>Keep at least one <code>R</code> chunk on a <code>python</code> page</strong>: it is what keeps <code>quarto</code> on the <code>knitr</code> engine.</li>
 </ul>
@@ -229,7 +229,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="declaring-and-installing-the-python-environment" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="declaring-and-installing-the-python-environment">
 <span class="header-section-number">4.1</span> Declaring and installing the python environment</h2>
-<p><code>python</code> packages are listed, pinned, in <code>inst/requirements.yml</code> – a plain <code>conda</code> environment file, e.g.</p>
+<p>The environment is declared, with pinned versions, in <code>inst/requirements.yml</code> – a plain <code>conda</code> environment file. This book’s is:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">    BiocBookDemo</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">channels</span><span class="kw">:</span></span>
@@ -238,16 +238,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> nodefaults</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dependencies</span><span class="kw">:</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> python=3.12</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> numpy=1.26</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> matplotlib</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> samtools=1.24</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> </span><span class="fu">pip</span><span class="kw">:</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="kw">-</span><span class="at"> numpy==2.5.4</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>conda</code> provides <code>python</code> itself and command-line tools, such as <code>samtools</code> from <code>bioconda</code>. The packages that <code>python</code> chunks import go under <code>pip:</code>, and come from PyPI. <code>python</code> chunks run inside the <code>R</code> session, and <code>conda</code> builds of these packages link libraries that <code>R</code> may already have loaded, in an older version: on the Bioconductor builders, <code>h5py</code> and <code>matplotlib</code> &gt;= 3.11 then fail to import. PyPI wheels carry their own (see <code>?BiocBook::BiocBook-python</code>).</p>
 <p>Note the presence of the <code>nodefaults</code> channel: the <code>defaults</code> channel is covered by the Anaconda Terms of Service, which require a paid licence for many organisations. <code>conda-forge</code> and <code>bioconda</code> are community channels that are free to use.</p>
 <p>Any page that needs <code>python</code> would need to have this chunk at the top:</p>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/reticulate/">reticulate</a></span><span class="op">)</span></span>
 <span><span class="fu">BiocBook</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook-python.html">setup_python</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">##  ✔ Using the `python` already configured for this session: '/opt/R-cache/R/BiocBook/envs/BiocBookDemo-0f9069b2be4b/bin/python'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span><span class="co">##  ✔ Using the `python` already configured for this session: '/opt/R-cache/R/BiocBook/envs/BiocBookDemo-faf828c9fe1d/bin/python'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><code>setup_python()</code> finds <code>inst/requirements.yml</code>, creates the <code>conda</code> environment if it is not already, and activates it, addressing it by full path rather than by name. If <code>RETICULATE_PYTHON</code> is already set (as it is inside the book’s <code>Docker</code> image) the whole step short-circuits.</p>
+<p><code>setup_python()</code> finds <code>inst/requirements.yml</code> and creates the environment if it does not exist yet: its <code>conda</code> packages, then its <code>pip:</code> section, with the environment’s own <code>pip</code>. It then activates the environment, addressing it by full path rather than by name, and puts its command-line tools on the <code>PATH</code>. If <code>RETICULATE_PYTHON</code> is already set (as it is inside the book’s <code>Docker</code> image), <code>setup_python()</code> only puts that interpreter’s folder on the <code>PATH</code>.</p>
 <p>Environments are cached, and keyed on the contents of <code>requirements.yml</code>: an environment is re-used rather than resolved again <strong>as long as <code>requirements.yml</code> is unchanged</strong>. Editing the file (adding, removing or re-pinning a package) gives a new environment on the next render, including on machines that build the book every day, and two books only share an environment when they declare exactly the same thing. <code><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook-python.html">BiocBook::python_envs()</a></code> lists the environments cached on a machine, and <code>python_envs(remove = ...)</code> deletes the ones that are no longer needed.</p>
 </section><section id="where-conda-itself-comes-from" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="where-conda-itself-comes-from">
 <span class="header-section-number">4.2</span> Where <code>conda</code> itself comes from</h2>
@@ -319,40 +321,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="co">##  [2,]      0.0  69306.93 131578.9</span></span>
 <span><span class="co">##  [3,] 789473.7 900990.10 868421.1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section><section id="bioconda-packages" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="bioconda-packages">
-<span class="header-section-number">4.4</span> Bioconda packages</h2>
-<p>Because the <code>BiocBook</code> environment is a <code>conda</code> environment, it can install any package from the <code>bioconda</code> channel, e.g.&nbsp;<code>deeptools</code>:</p>
+</section><section id="command-line-tools-from-bioconda" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="command-line-tools-from-bioconda">
+<span class="header-section-number">4.4</span> Command-line tools from <code>bioconda</code>
+</h2>
+<p>The <code>conda</code> part of the environment can hold any command-line tool from the <code>bioconda</code> channel, e.g.&nbsp;<code>samtools</code>. A tool runs in its own process, with its own libraries, so it cannot clash with the <code>R</code> session. <code>setup_python()</code> puts it on the <code>PATH</code>, for <code>bash</code> chunks…</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> importlib.metadata <span class="im">import</span> version</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> version(<span class="st">"deeptools"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>bash</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> <span class="at">--version</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-n</span> 1</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">##  samtools 1.24</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<p>… as well as for <code><a href="https://rdrr.io/r/base/system2.html">system2()</a></code> in <code>R</code>, and for <code>subprocess</code> in <code>python</code>:</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> subprocess</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> subprocess.run([<span class="st">"samtools"</span>, <span class="st">"--version"</span>], capture_output <span class="op">=</span> <span class="va">True</span>, text <span class="op">=</span> <span class="va">True</span>).stdout.splitlines()[<span class="dv">0</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Then read that in <code>R</code>:</p>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">reticulate</span><span class="fu">::</span><span class="va"><a href="https://rstudio.github.io/reticulate/reference/py.html">py</a></span><span class="op">$</span><span class="va">v</span></span>
-<span><span class="co">##  [1] "3.5.5"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">reticulate</span><span class="fu">::</span><span class="va"><a href="https://rstudio.github.io/reticulate/reference/py.html">py</a></span><span class="op">$</span><span class="va">v</span></span>
+<span><span class="co">##  [1] "samtools 1.24"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section><section id="session-info" class="level2" data-number="4.5"><h2 data-number="4.5" class="anchored" data-anchor-id="session-info">
 <span class="header-section-number">4.5</span> Session info</h2>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="https://sessioninfo.r-lib.org/reference/session_info.html">session_info</a></span><span class="op">(</span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="https://sessioninfo.r-lib.org/reference/session_info.html">session_info</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">##  ─ Session info ────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">##   setting  value</span></span>
 <span><span class="co">##   version  R version 4.6.1 (2026-06-24)</span></span>
-<span><span class="co">##   os       Ubuntu 24.04.4 LTS</span></span>
+<span><span class="co">##   os       Ubuntu 24.04.5 LTS</span></span>
 <span><span class="co">##   system   x86_64, linux-gnu</span></span>
 <span><span class="co">##   ui       X11</span></span>
 <span><span class="co">##   language (EN)</span></span>
 <span><span class="co">##   collate  C</span></span>
 <span><span class="co">##   ctype    en_US.UTF-8</span></span>
 <span><span class="co">##   tz       Etc/UTC</span></span>
-<span><span class="co">##   date     2026-10-05</span></span>
-<span><span class="co">##   pandoc   3.11 @ /usr/bin/ (via rmarkdown)</span></span>
+<span><span class="co">##   date     2026-10-30</span></span>
+<span><span class="co">##   pandoc   3.12.1 @ /usr/bin/ (via rmarkdown)</span></span>
 <span><span class="co">##   quarto   1.11.5 @ /usr/local/bin/quarto</span></span>
 <span><span class="co">##  </span></span>
 <span><span class="co">##  ─ Packages ────────────────────────────────────────────────────────────────</span></span>
 <span><span class="co">##   package      * version date (UTC) lib source</span></span>
 <span><span class="co">##   askpass        1.2.1   2024-10-04 [2] RSPM (R 4.6.0)</span></span>
-<span><span class="co">##   BiocBook       1.11.4  2026-10-05 [2] Github (js2264/BiocBook@15e8d15)</span></span>
+<span><span class="co">##   BiocBook       1.11.6  2026-10-30 [2] Github (js2264/BiocBook@3c3747d)</span></span>
 <span><span class="co">##   BiocGenerics   0.59.12 2026-08-11 [2] Bioconductor 3.24 (R 4.6.1)</span></span>
 <span><span class="co">##   cli            3.6.6   2026-04-09 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   credentials    2.0.3   2025-09-12 [2] RSPM (R 4.6.0)</span></span>
@@ -362,7 +375,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="co">##   fastmap        1.2.0   2024-05-15 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   fs             2.1.0   2026-04-18 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   generics       0.1.4   2025-05-09 [2] RSPM (R 4.6.0)</span></span>
-<span><span class="co">##   gert           2.4.1   2026-08-19 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   gert           2.5.0   2026-10-14 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   gh             1.6.1   2026-07-20 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   gitcreds       0.1.2   2022-09-08 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   glue           1.8.1   2026-04-17 [2] RSPM (R 4.6.0)</span></span>
@@ -371,10 +384,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="co">##   httr           1.4.9   2026-09-01 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   jsonlite       2.0.0   2025-03-27 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   knitr          1.52    2026-09-06 [2] RSPM (R 4.6.0)</span></span>
-<span><span class="co">##   lattice        0.23-1  2026-08-12 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   lattice        0.23-1  2026-08-12 [2] RSPM (R 4.6.1)</span></span>
 <span><span class="co">##   lifecycle      1.0.5   2026-01-08 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   magrittr       2.0.5   2026-04-04 [2] RSPM (R 4.6.0)</span></span>
-<span><span class="co">##   Matrix         1.7-6   2026-07-25 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   Matrix         1.7-6   2026-07-25 [2] RSPM (R 4.6.1)</span></span>
 <span><span class="co">##   openssl        2.4.2   2026-06-09 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   otel           0.2.0   2025-08-29 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   pak            0.11.1  2026-07-22 [2] RSPM (R 4.6.0)</span></span>
@@ -384,7 +397,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="co">##   purrr          1.2.2   2026-04-10 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   R6             2.6.1   2025-02-15 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   Rcpp           1.1.2   2026-07-05 [2] RSPM (R 4.6.0)</span></span>
-<span><span class="co">##   renv           1.3.0   2026-09-29 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   renv           1.3.1   2026-10-06 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   reticulate   * 1.47.0  2026-09-03 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   rlang          1.3.0   2026-07-05 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   rmarkdown      2.32    2026-09-01 [2] RSPM (R 4.6.0)</span></span>
@@ -398,21 +411,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span><span class="co">##   usethis        3.2.2   2026-09-10 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   vctrs          0.7.3   2026-04-11 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   withr          3.0.3   2026-06-19 [2] RSPM (R 4.6.0)</span></span>
-<span><span class="co">##   xfun           0.61    2026-09-16 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   xfun           0.62    2026-10-16 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   yaml           2.3.12  2025-12-10 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##  </span></span>
-<span><span class="co">##   [1] /tmp/RtmpcGMBFb/Rinstb771d3bef</span></span>
+<span><span class="co">##   [1] /tmp/RtmpAfdFZk/Rinsta6519127b</span></span>
 <span><span class="co">##   [2] /usr/local/lib/R/site-library</span></span>
 <span><span class="co">##   [3] /usr/local/lib/R/library</span></span>
 <span><span class="co">##   * ── Packages attached to the search path.</span></span>
 <span><span class="co">##  </span></span>
 <span><span class="co">##  ─ Python configuration ────────────────────────────────────────────────────</span></span>
-<span><span class="co">##   python:         /opt/R-cache/R/BiocBook/envs/BiocBookDemo-0f9069b2be4b/bin/python</span></span>
-<span><span class="co">##   libpython:      /opt/R-cache/R/BiocBook/envs/BiocBookDemo-0f9069b2be4b/lib/libpython3.12.so</span></span>
-<span><span class="co">##   pythonhome:     /opt/R-cache/R/BiocBook/envs/BiocBookDemo-0f9069b2be4b:/opt/R-cache/R/BiocBook/envs/BiocBookDemo-0f9069b2be4b</span></span>
-<span><span class="co">##   version:        3.12.14 (main, Sep  2 2026, 23:27:36) [GCC 15.3.0]</span></span>
-<span><span class="co">##   numpy:          /opt/R-cache/R/BiocBook/envs/BiocBookDemo-0f9069b2be4b/lib/python3.12/site-packages/numpy</span></span>
-<span><span class="co">##   numpy_version:  1.26.4</span></span>
+<span><span class="co">##   python:         /opt/R-cache/R/BiocBook/envs/BiocBookDemo-faf828c9fe1d/bin/python</span></span>
+<span><span class="co">##   libpython:      /opt/R-cache/R/BiocBook/envs/BiocBookDemo-faf828c9fe1d/lib/libpython3.12.so</span></span>
+<span><span class="co">##   pythonhome:     /opt/R-cache/R/BiocBook/envs/BiocBookDemo-faf828c9fe1d:/opt/R-cache/R/BiocBook/envs/BiocBookDemo-faf828c9fe1d</span></span>
+<span><span class="co">##   version:        3.12.16 (main, Oct 26 2026, 11:37:43) [GCC 15.3.0]</span></span>
+<span><span class="co">##   numpy:          /opt/R-cache/R/BiocBook/envs/BiocBookDemo-faf828c9fe1d/lib/python3.12/site-packages/numpy</span></span>
+<span><span class="co">##   numpy_version:  2.5.4</span></span>
 <span><span class="co">##   </span></span>
 <span><span class="co">##   NOTE: Python version was forced by RETICULATE_PYTHON</span></span>
 <span><span class="co">##  </span></span>
