@@ -5,7 +5,7 @@
 **Package:** BiocBookDemo\
 **Authors:** Jacques Serizay \[aut, cre\]\
 **Compiled:** 2026-10-30\
-**Package version:** 1.11.7\
+**Package version:** 1.11.8\
 **R version:** **R version 4.6.1 (2026-06-24)**\
 **BioC version:** **3.24**\
 **License:** MIT + file LICENSE\
@@ -145,8 +145,8 @@ This package was also inspired by the `*down` package series, including:
 > ##   askpass          1.2.1   2024-10-04 [2] RSPM (R 4.6.0)
 > ##   base           * 4.6.1   2026-10-15 [3] local
 > ##   base64enc        0.1-6   2026-02-02 [2] RSPM (R 4.6.0)
-> ##   BiocBook         1.11.6  2026-10-30 [2] Github (js2264/BiocBook@228e553)
-> ##   BiocBookDemo     1.11.7  2026-10-30 [1] local
+> ##   BiocBook         1.11.7  2026-10-30 [2] Github (js2264/BiocBook@504d3a6)
+> ##   BiocBookDemo     1.11.8  2026-10-30 [1] local
 > ##   BiocGenerics     0.59.12 2026-08-11 [2] Bioconductor 3.24 (R 4.6.1)
 > ##   BiocManager      1.30.27 2025-11-14 [2] CRAN (R 4.6.1)
 > ##   BiocStyle        2.41.0  2026-04-28 [2] Bioconductor 3.24 (R 4.6.1)
@@ -289,7 +289,7 @@ This package was also inspired by the `*down` package series, including:
 > ##   yaml             2.3.12  2025-12-10 [2] RSPM (R 4.6.0)
 > ##   zip              3.0.2   2026-08-04 [2] RSPM (R 4.6.0)
 > ##  
-> ##   [1] /tmp/Rtmpb36VSC/Rinstb226c129f
+> ##   [1] /tmp/RtmpPrVsIQ/Rinstc1b8904b9
 > ##   [2] /usr/local/lib/R/site-library
 > ##   [3] /usr/local/lib/R/library
 > ##   * ── Packages attached to the search path.

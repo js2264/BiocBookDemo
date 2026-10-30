@@ -157,7 +157,7 @@ sessioninfo::session_info()
 ##  ─ Packages ────────────────────────────────────────────────────────────────
 ##   package      * version date (UTC) lib source
 ##   askpass        1.2.1   2024-10-04 [2] RSPM (R 4.6.0)
-##   BiocBook       1.11.6  2026-10-30 [2] Github (js2264/BiocBook@228e553)
+##   BiocBook       1.11.7  2026-10-30 [2] Github (js2264/BiocBook@504d3a6)
 ##   BiocGenerics   0.59.12 2026-08-11 [2] Bioconductor 3.24 (R 4.6.1)
 ##   cli            3.6.6   2026-04-09 [2] RSPM (R 4.6.0)
 ##   credentials    2.0.3   2025-09-12 [2] RSPM (R 4.6.0)
@@ -206,7 +206,7 @@ sessioninfo::session_info()
 ##   xfun           0.62    2026-10-16 [2] RSPM (R 4.6.0)
 ##   yaml           2.3.12  2025-12-10 [2] RSPM (R 4.6.0)
 ##  
-##   [1] /tmp/Rtmpb36VSC/Rinstb226c129f
+##   [1] /tmp/RtmpPrVsIQ/Rinstc1b8904b9
 ##   [2] /usr/local/lib/R/site-library
 ##   [3] /usr/local/lib/R/library
 ##   * ── Packages attached to the search path.
