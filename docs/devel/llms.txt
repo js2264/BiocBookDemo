@@ -18,4 +18,5 @@
 - [2 Writing a {`BiocBook`} package](pages/Chapter-2.md)
 - [3 Containerizing and Publishing against specific Bioconductor release versions](pages/Chapter-3.md)
 - [4 Executing `python` code](pages/Chapter-4.md)
-- [5 {`BiocBook`}-based books vs. {`rebook`}-based books](pages/biocbook-vs-rebook.md)
+- [5 Serving the book to AI assistants](pages/Chapter-5.md)
+- [6 {`BiocBook`}-based books vs. {`rebook`}-based books](pages/biocbook-vs-rebook.md)

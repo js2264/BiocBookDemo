@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.11.5">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>5&nbsp; {BiocBook}-based books vs.&nbsp;{rebook}-based books – Write Quarto books with Bioconductor</title>
+<title>6&nbsp; {BiocBook}-based books vs.&nbsp;{rebook}-based books – Write Quarto books with Bioconductor</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -67,7 +67,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../pages/Chapter-4.html" rel="prev">
+<link href="../pages/Chapter-5.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -113,7 +113,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/biocbook-vs-rebook.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">{<code>BiocBook</code>}-based books vs.&nbsp;{<code>rebook</code>}-based books</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/biocbook-vs-rebook.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">{<code>BiocBook</code>}-based books vs.&nbsp;{<code>rebook</code>}-based books</span></a></li></ol></nav>
         <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -172,8 +172,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../pages/Chapter-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Serving the book to AI assistants</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../pages/biocbook-vs-rebook.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">{<code>BiocBook</code>}-based books vs.&nbsp;{<code>rebook</code>}-based books</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">{<code>BiocBook</code>}-based books vs.&nbsp;{<code>rebook</code>}-based books</span></span></a>
   </div>
 </li>
     </ul>
@@ -184,16 +190,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#differences-with-rebook-based-books" id="toc-differences-with-rebook-based-books" class="nav-link active" data-scroll-target="#differences-with-rebook-based-books"><span class="header-section-number">5.1</span> Differences with {<code>rebook</code>}-based books</a></li>
-  <li><a href="#biocbook-features-missing-from-rebook" id="toc-biocbook-features-missing-from-rebook" class="nav-link" data-scroll-target="#biocbook-features-missing-from-rebook"><span class="header-section-number">5.2</span> <code>BiocBook</code> features missing from <code>rebook</code></a></li>
-  <li><a href="#rebook-features-missing-from-biocbook" id="toc-rebook-features-missing-from-biocbook" class="nav-link" data-scroll-target="#rebook-features-missing-from-biocbook"><span class="header-section-number">5.3</span> <code>rebook</code> features missing from <code>BiocBook</code></a></li>
-  <li><a href="#session-info" id="toc-session-info" class="nav-link" data-scroll-target="#session-info"><span class="header-section-number">5.4</span> Session info</a></li>
+<li><a href="#differences-with-rebook-based-books" id="toc-differences-with-rebook-based-books" class="nav-link active" data-scroll-target="#differences-with-rebook-based-books"><span class="header-section-number">6.1</span> Differences with {<code>rebook</code>}-based books</a></li>
+  <li><a href="#biocbook-features-missing-from-rebook" id="toc-biocbook-features-missing-from-rebook" class="nav-link" data-scroll-target="#biocbook-features-missing-from-rebook"><span class="header-section-number">6.2</span> <code>BiocBook</code> features missing from <code>rebook</code></a></li>
+  <li><a href="#rebook-features-missing-from-biocbook" id="toc-rebook-features-missing-from-biocbook" class="nav-link" data-scroll-target="#rebook-features-missing-from-biocbook"><span class="header-section-number">6.3</span> <code>rebook</code> features missing from <code>BiocBook</code></a></li>
+  <li><a href="#session-info" id="toc-session-info" class="nav-link" data-scroll-target="#session-info"><span class="header-section-number">6.4</span> Session info</a></li>
   </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content" tabindex="-1"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title">
-<span class="chapter-number">5</span>&nbsp; <span class="chapter-title">{<code>BiocBook</code>}-based books vs.&nbsp;{<code>rebook</code>}-based books</span>
+<span class="chapter-number">6</span>&nbsp; <span class="chapter-title">{<code>BiocBook</code>}-based books vs.&nbsp;{<code>rebook</code>}-based books</span>
 </h1>
 </div>
 
@@ -209,8 +215,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 </header><p class="biocbook-md-link small"><a href="biocbook-vs-rebook.md" type="text/markdown"><i class="bi bi-markdown" aria-hidden="true"></i> View as Markdown</a></p><p>{<code>rebook</code>} is another book rendering package currently used by Bioconductor to build book packages such as <code>OSCA.*</code> and <code>SingleRBook</code>.</p>
-<section id="differences-with-rebook-based-books" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="differences-with-rebook-based-books">
-<span class="header-section-number">5.1</span> Differences with {<code>rebook</code>}-based books</h2>
+<section id="differences-with-rebook-based-books" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="differences-with-rebook-based-books">
+<span class="header-section-number">6.1</span> Differences with {<code>rebook</code>}-based books</h2>
 <p><code>OSCA</code> books provided by Bioconductor are rendered upon building by the <em>Bioconductor Build System</em> (BBS). They rely on {<code>rebook</code>} to orchestrate the rendering. Briefly, <code>OSCA</code> books have their book pages in <code>/inst/book/</code>, while the <code>vignettes/</code> folder contains (1) a <code>Makefile</code> and (2) a dummy <code>stub.Rmd</code> vignette (required to trigger vignette rendering and thus <code>make</code>).</p>
 <p>When the BBS triggers <code>OSCA.intro</code> package building, upon vignette rendering, the <code>Makefile</code> triggers the following commands:</p>
 <div class="cell" data-layout-align="center">
@@ -251,8 +257,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </div>
 </div>
-</section><section id="biocbook-features-missing-from-rebook" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="biocbook-features-missing-from-rebook">
-<span class="header-section-number">5.2</span> <code>BiocBook</code> features missing from <code>rebook</code>
+</section><section id="biocbook-features-missing-from-rebook" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="biocbook-features-missing-from-rebook">
+<span class="header-section-number">6.2</span> <code>BiocBook</code> features missing from <code>rebook</code>
 </h2>
 <ul>
 <li>A <code>BiocBook</code> can be readily initiated using <code><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook.html">BiocBook::init()</a></code>;</li>
@@ -262,8 +268,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>It distributes versioned Dockerfiles <strong>through the author Github account</strong>;</li>
 <li>
 <code>BiocBook</code>-based packages can actually provide fully-fledged functions in <code>R/</code>, manual pages and vignettes. They can be installed exactly the same way than other software packages.</li>
-</ul></section><section id="rebook-features-missing-from-biocbook" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="rebook-features-missing-from-biocbook">
-<span class="header-section-number">5.3</span> <code>rebook</code> features missing from <code>BiocBook</code>
+</ul></section><section id="rebook-features-missing-from-biocbook" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="rebook-features-missing-from-biocbook">
+<span class="header-section-number">6.3</span> <code>rebook</code> features missing from <code>BiocBook</code>
 </h2>
 <ul>
 <li>Smart reuse of objects generated in one book in another book;</li>
@@ -288,8 +294,8 @@ Tip
 </div>
 <ul>
 <li>Native support of cross-references across books.</li>
-</ul></section><section id="session-info" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="session-info">
-<span class="header-section-number">5.4</span> Session info</h2>
+</ul></section><section id="session-info" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="session-info">
+<span class="header-section-number">6.4</span> Session info</h2>
 <div class="cell" data-layout-align="center">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="https://sessioninfo.r-lib.org/reference/session_info.html">session_info</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">##  ─ Session info ────────────────────────────────────────────────────────────</span></span>
@@ -323,7 +329,7 @@ Tip
 <span><span class="co">##   xfun          0.62    2026-10-16 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##   yaml          2.3.12  2025-12-10 [2] RSPM (R 4.6.0)</span></span>
 <span><span class="co">##  </span></span>
-<span><span class="co">##   [1] /tmp/RtmpPrVsIQ/Rinstc1b8904b9</span></span>
+<span><span class="co">##   [1] /tmp/RtmpR3aWso/Rinstc2ce366bf</span></span>
 <span><span class="co">##   [2] /usr/local/lib/R/site-library</span></span>
 <span><span class="co">##   [3] /usr/local/lib/R/library</span></span>
 <span><span class="co">##  </span></span>
@@ -731,8 +737,8 @@ Tip
     }
   });
   </script><nav class="page-navigation" aria-label="Page"><div class="nav-page nav-page-previous">
-      <a href="../pages/Chapter-4.html" class="pagination-link" aria-label="Executing `python` code">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Executing <code>python</code> code</span></span>
+      <a href="../pages/Chapter-5.html" class="pagination-link" aria-label="Serving the book to AI assistants">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Serving the book to AI assistants</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

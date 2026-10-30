@@ -87,6 +87,10 @@ For example, the online book version matching the `devel` version of the {`BiocB
 
 👉 <http://js2264.github.io/BiocBookDemo/devel/> 📘
 
+## Readable by AI assistants
+
+Each version of the online book also serves an `llms.txt` file and a Markdown copy of every page, which AI assistants can read instead of crawling its HTML pages. `llms.txt` names the book package, its version, its `Docker` image and its `python` environment, so that an assistant can help reproduce the book’s code with the right version of everything (see [sec-ai](#sec-ai)).
+
 ## RStudio Server
 
 An RStudio Server instance based on a specific Bioconductor `<version>` (`devel` or `RELEASE_X_Y`) can be initiated from the corresponding `Docker` image as follows:
@@ -289,7 +293,7 @@ This package was also inspired by the `*down` package series, including:
 > ##   yaml             2.3.12  2025-12-10 [2] RSPM (R 4.6.0)
 > ##   zip              3.0.2   2026-08-04 [2] RSPM (R 4.6.0)
 > ##  
-> ##   [1] /tmp/RtmpPrVsIQ/Rinstc1b8904b9
+> ##   [1] /tmp/RtmpR3aWso/Rinstc2ce366bf
 > ##   [2] /usr/local/lib/R/site-library
 > ##   [3] /usr/local/lib/R/library
 > ##   * ── Packages attached to the search path.

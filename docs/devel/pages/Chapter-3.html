@@ -173,8 +173,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../pages/Chapter-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Serving the book to AI assistants</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../pages/biocbook-vs-rebook.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">{<code>BiocBook</code>}-based books vs.&nbsp;{<code>rebook</code>}-based books</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">{<code>BiocBook</code>}-based books vs.&nbsp;{<code>rebook</code>}-based books</span></span></a>
   </div>
 </li>
     </ul>
@@ -260,26 +266,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section><section id="serving-the-book-to-ai-assistants" class="level2" data-number="3.3"><h2 data-number="3.3" class="anchored" data-anchor-id="serving-the-book-to-ai-assistants">
 <span class="header-section-number">3.3</span> Serving the book to AI assistants</h2>
-<p>Each version of a <code>BiocBook</code> also serves an <code>llms.txt</code> file (e.g.&nbsp; <a href="https://js2264.github.io/BiocBookDemo/devel/llms.txt"><code>devel/llms.txt</code></a>), following the <a href="https://llmstxt.org/">llms.txt proposal</a>: a Markdown index of the book that AI assistants can read instead of crawling its HTML pages. It links to a Markdown copy of every page, at the page’s URL with <code>.md</code> in place of <code>.html</code>, e.g.&nbsp;<code>pages/Chapter-4.md</code> for <code>pages/Chapter-4.html</code>. Every page links to its own copy, under its title (“View as Markdown”), and in its <code>&lt;head&gt;</code>, where AI assistants look for it.</p>
-<ul>
-<li>
-<code>quarto</code> &gt;= 1.11 writes these files when the book’s <code>llms-txt</code> option is on. Books created from template &gt;= 1.1.0 switch it on through the <code>llms</code> <code>quarto</code> profile (<code>inst/_quarto-llms.yml</code>), which <code>vignettes/Makefile</code> activates whenever the installed <code>quarto</code> supports it (older versions reject the option). The <code>biocbook</code> GitHub workflow pins such a <code>quarto</code> with its <code>QUARTO_VERSION</code> setting, and copies built by Bioconductor get these files once the Bioconductor builders run <code>quarto</code> &gt;= 1.11.</li>
-<li>After every render, <code>inst/assets/post-render.R</code> calls <code><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook-llms.html">BiocBook::enrich_llms_txt()</a></code>, which adds what an assistant needs to run the book’s code to <code>llms.txt</code>: the book package and its version, how to install it, its <code>Docker</code> image, its <code>python</code> environment and where the other versions of the book live. It also renames the Markdown copies, which <code>quarto</code> writes as <code>&lt;page&gt;.llms.md</code>, and links every page to its own. With an older <code>quarto</code>, it writes a minimal <code>llms.txt</code> listing the chapters.</li>
-<li>The <code>biocbook</code> GitHub workflow writes a <code>.nojekyll</code> file at the root of the book’s GitHub Pages site, so that GitHub Pages serves the Markdown copies as they are, rather than running <code>Jekyll</code>, which would turn each of them into an HTML page colliding with the book’s own.</li>
-</ul>
-<p>To render these files locally:</p>
-<div class="cell" data-layout-align="center">
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>bash</strong></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="va">QUARTO_PROFILE</span><span class="op">=</span>llms <span class="ex">quarto</span> render inst/</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
+<p>Each deployed version of the book also serves an <code>llms.txt</code> file and a Markdown copy of every page, which AI assistants can read instead of crawling its HTML pages: see <a href="Chapter-5.html" class="quarto-xref"><span>Chapter 5</span></a>.</p>
 </section><section id="session-info" class="level2" data-number="3.4"><h2 data-number="3.4" class="anchored" data-anchor-id="session-info">
 <span class="header-section-number">3.4</span> Session info</h2>
 <div class="cell" data-layout-align="center">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="https://sessioninfo.r-lib.org/reference/session_info.html">session_info</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="https://sessioninfo.r-lib.org/reference/session_info.html">session_info</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 

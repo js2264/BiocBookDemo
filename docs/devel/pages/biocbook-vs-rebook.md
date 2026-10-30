@@ -1,8 +1,8 @@
-# 5  {`BiocBook`}-based books vs. {`rebook`}-based books
+# 6  {`BiocBook`}-based books vs. {`rebook`}-based books
 
 {`rebook`} is another book rendering package currently used by Bioconductor to build book packages such as `OSCA.*` and `SingleRBook`.
 
-## 5.1 Differences with {`rebook`}-based books
+## 6.1 Differences with {`rebook`}-based books
 
 `OSCA` books provided by Bioconductor are rendered upon building by the *Bioconductor Build System* (BBS). They rely on {`rebook`} to orchestrate the rendering. Briefly, `OSCA` books have their book pages in `/inst/book/`, while the `vignettes/` folder contains (1) a `Makefile` and (2) a dummy `stub.Rmd` vignette (required to trigger vignette rendering and thus `make`).
 
@@ -30,7 +30,7 @@ The resulting book, fully compiled by native `quarto`, is also located in `/inst
 
 > **WARNING:**
 
-## 5.2 `BiocBook` features missing from `rebook`
+## 6.2 `BiocBook` features missing from `rebook`
 
 - A `BiocBook` can be readily initiated using [`BiocBook::init()`](https://rdrr.io/pkg/BiocBook/man/BiocBook.html);
 - It relies on modern `.qmd` files supported by `Quarto`;
@@ -39,7 +39,7 @@ The resulting book, fully compiled by native `quarto`, is also located in `/inst
 - It distributes versioned Dockerfiles **through the author Github account**;
 - `BiocBook`-based packages can actually provide fully-fledged functions in `R/`, manual pages and vignettes. They can be installed exactly the same way than other software packages.
 
-## 5.3 `rebook` features missing from `BiocBook`
+## 6.3 `rebook` features missing from `BiocBook`
 
 - Smart reuse of objects generated in one book in another book;
 
@@ -55,7 +55,7 @@ The resulting book, fully compiled by native `quarto`, is also located in `/inst
 
 - Native support of cross-references across books.
 
-## 5.4 Session info
+## 6.4 Session info
 
 ``` r
 sessioninfo::session_info()
@@ -90,7 +90,7 @@ sessioninfo::session_info()
 ##   xfun          0.62    2026-10-16 [2] RSPM (R 4.6.0)
 ##   yaml          2.3.12  2025-12-10 [2] RSPM (R 4.6.0)
 ##  
-##   [1] /tmp/RtmpPrVsIQ/Rinstc1b8904b9
+##   [1] /tmp/RtmpR3aWso/Rinstc2ce366bf
 ##   [2] /usr/local/lib/R/site-library
 ##   [3] /usr/local/lib/R/library
 ##  

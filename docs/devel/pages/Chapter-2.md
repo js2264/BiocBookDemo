@@ -213,6 +213,7 @@ utils::packageVersion("BiocVersion")
 
 ``` sh
 find ../ -name "*.qmd"
+##  ../pages/Chapter-5.qmd
 ##  ../pages/biocbook-vs-rebook.qmd
 ##  ../pages/Chapter-1.qmd
 ##  ../pages/Chapter-3.qmd
@@ -288,7 +289,7 @@ sessioninfo::session_info()
 ##   xfun          0.62    2026-10-16 [2] RSPM (R 4.6.0)
 ##   yaml          2.3.12  2025-12-10 [2] RSPM (R 4.6.0)
 ##  
-##   [1] /tmp/RtmpPrVsIQ/Rinstc1b8904b9
+##   [1] /tmp/RtmpR3aWso/Rinstc2ce366bf
 ##   [2] /usr/local/lib/R/site-library
 ##   [3] /usr/local/lib/R/library
 ##  

@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.5">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>5&nbsp; Serving the book to AI assistants – Write Quarto books with Bioconductor</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../pages/biocbook-vs-rebook.html" rel="next">
+<link href="../pages/Chapter-4.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-5f883865545033bfab6feb3d329ab180.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-ffa3cb8e805583c138d78e15c44b8f66.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link rel="alternate" type="text/markdown" href="Chapter-5.md">
+</head>
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" aria-label="Toolbar"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/Chapter-5.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Serving the book to AI assistants</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Write Quarto books with Bioconductor</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">What are <code>BiocBook</code>s?</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/preamble.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preamble</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/Chapter-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><code>BiocBook</code> versioning system</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/Chapter-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Writing a {<code>BiocBook</code>} package</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/Chapter-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Containerizing and Publishing against specific Bioconductor release versions</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/Chapter-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Executing <code>python</code> code</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/Chapter-5.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Serving the book to AI assistants</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/biocbook-vs-rebook.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">{<code>BiocBook</code>}-based books vs.&nbsp;{<code>rebook</code>}-based books</span></span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#llms.txt-an-index-of-the-book-for-ai-assistants" id="toc-llms.txt-an-index-of-the-book-for-ai-assistants" class="nav-link active" data-scroll-target="#llms.txt-an-index-of-the-book-for-ai-assistants"><span class="header-section-number">5.1</span> <code>llms.txt</code>: an index of the book for AI assistants</a></li>
+  <li>
+<a href="#a-markdown-copy-of-every-page" id="toc-a-markdown-copy-of-every-page" class="nav-link" data-scroll-target="#a-markdown-copy-of-every-page"><span class="header-section-number">5.2</span> A Markdown copy of every page</a>
+  <ul class="collapse">
+<li><a href="#content-for-readers-or-for-assistants-only" id="toc-content-for-readers-or-for-assistants-only" class="nav-link" data-scroll-target="#content-for-readers-or-for-assistants-only"><span class="header-section-number">5.2.1</span> Content for readers or for assistants only</a></li>
+  </ul>
+</li>
+  <li><a href="#one-llms.txt-per-bioconductor-release" id="toc-one-llms.txt-per-bioconductor-release" class="nav-link" data-scroll-target="#one-llms.txt-per-bioconductor-release"><span class="header-section-number">5.3</span> One <code>llms.txt</code> per Bioconductor release</a></li>
+  <li><a href="#how-a-biocbook-builds-these-files" id="toc-how-a-biocbook-builds-these-files" class="nav-link" data-scroll-target="#how-a-biocbook-builds-these-files"><span class="header-section-number">5.4</span> How a <code>BiocBook</code> builds these files</a></li>
+  <li><a href="#asking-an-assistant-about-the-book" id="toc-asking-an-assistant-about-the-book" class="nav-link" data-scroll-target="#asking-an-assistant-about-the-book"><span class="header-section-number">5.5</span> Asking an assistant about the book</a></li>
+  <li><a href="#session-info" id="toc-session-info" class="nav-link" data-scroll-target="#session-info"><span class="header-section-number">5.6</span> Session info</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title"><span id="sec-ai" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Serving the book to AI assistants</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Important points
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Every version of a <code>BiocBook</code> serves an <strong><code>llms.txt</code></strong> file: a Markdown index of the book that AI assistants can read instead of crawling its HTML pages;</li>
+<li>Every page has a <strong>Markdown copy</strong>, at the page’s URL with <code>.md</code> in place of <code>.html</code>, and <strong>links to it</strong>;</li>
+<li>
+<code>llms.txt</code> tells an assistant <strong>what it needs to run the book’s code</strong>: the book package and its version, how to install it, its <code>Docker</code> image and its <code>python</code> environment;</li>
+<li>There is <strong>one <code>llms.txt</code> per Bioconductor release</strong>, so that an assistant can point a reader to the version of the book that matches theirs.</li>
+</ul>
+</div>
+</div>
+<section id="llms.txt-an-index-of-the-book-for-ai-assistants" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="llms.txt-an-index-of-the-book-for-ai-assistants">
+<span class="header-section-number">5.1</span> <code>llms.txt</code>: an index of the book for AI assistants</h2>
+<p>Readers increasingly ask AI assistants about what they read. An assistant that crawls the HTML pages of a book finds menus, scripts and styling, but no hint of the package, version or environment that its code was run with. The <a href="https://llmstxt.org/">llms.txt proposal</a> gives assistants a simpler entry point: a Markdown file at a fixed URL, with the title of the site, a short summary and links to Markdown versions of its pages.</p>
+<p>Each version of this book serves one, e.g. <a href="https://js2264.github.io/BiocBookDemo/devel/llms.txt"><code>devel/llms.txt</code></a>. It starts with the book’s title and description. Right after them, <code>BiocBook</code> adds a block of its own, between two markers. For this build of the book, it reads:</p>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- biocbook:start --&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Book package: <span class="in">`BiocBookDemo`</span> 1.11.8 (Bioconductor 3.24), source: <span class="ot">&lt;https://github.com/js2264/BiocBookDemo&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Install: <span class="in">`BiocManager::install("BiocBookDemo")`</span> (Bioconductor) or <span class="in">`BiocManager::install("js2264/BiocBookDemo")`</span> (GitHub)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Docker image with every dependency: <span class="in">`docker run -it ghcr.io/js2264/biocbookdemo:1.11.8 R`</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Python environment (conda): <span class="in">`python=3.12`</span>, <span class="in">`samtools=1.24`</span>, <span class="in">`pip`</span>; from PyPI: <span class="in">`numpy==2.5.4`</span>, provisioned by <span class="in">`BiocBook::setup_python()`</span> from <span class="in">`inst/requirements.yml`</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Other versions of this book: one per Bioconductor release, at <span class="in">`https://js2264.github.io/BiocBookDemo/&lt;version&gt;/`</span> (e.g. <span class="ot">&lt;https://js2264.github.io/BiocBookDemo/devel/&gt;</span>), indexed in <span class="ot">&lt;https://js2264.github.io/BiocBookDemo/llms.txt&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- biocbook:end --&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>An assistant that reads it knows which Bioconductor release the reader is looking at, how to install that version of the book package, which <code>Docker</code> image runs every chunk of the book, and which <code>python</code> environment its <code>python</code> chunks need (<a href="Chapter-4.html" class="quarto-xref"><span>Chapter 4</span></a>).</p>
+<p>The list of pages comes next, each linked to its Markdown copy:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Pages</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Write Quarto books with Bioconductor</span><span class="co">](index.md)</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">Preamble</span><span class="co">](pages/preamble.md)</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">1 `BiocBook` versioning system</span><span class="co">](pages/Chapter-1.md)</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>...</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section><section id="a-markdown-copy-of-every-page" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="a-markdown-copy-of-every-page">
+<span class="header-section-number">5.2</span> A Markdown copy of every page</h2>
+<p>Next to <code>pages/Chapter-4.html</code>, the book serves <code>pages/Chapter-4.md</code>: the same chapter as Markdown, with its code and its results, but without the navigation, scripts and styling of the HTML page. Every page links to its copy twice:</p>
+<ul>
+<li>under its title, with a <strong>“View as Markdown”</strong> link, for readers who would rather paste a chapter into an assistant themselves;</li>
+<li>in its <code>&lt;head&gt;</code>, for AI assistants and crawlers, which look there for other versions of a page:</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> rel</span><span class="op">=</span><span class="st">"alternate"</span><span class="ot"> type</span><span class="op">=</span><span class="st">"text/markdown"</span><span class="ot"> href</span><span class="op">=</span><span class="st">"Chapter-5.md"</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>quarto</code> writes these copies as <code>&lt;page&gt;.llms.md</code>: <code>BiocBook</code> renames them after their page, and rewrites the links of <code>llms.txt</code>, and those between the copies, to match. To hide the “View as Markdown” link, add this rule to the book’s <code>inst/assets/book.scss</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.biocbook-md-link</span> { <span class="kw">display</span><span class="ch">:</span> <span class="dv">none</span><span class="op">;</span> }</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="content-for-readers-or-for-assistants-only" class="level3" data-number="5.2.1"><h3 data-number="5.2.1" class="anchored" data-anchor-id="content-for-readers-or-for-assistants-only">
+<span class="header-section-number">5.2.1</span> Content for readers or for assistants only</h3>
+<p><code>quarto</code>’s conditional content can tell the HTML pages and their Markdown copies apart. Content that only makes sense in the browser, such as an interactive widget, can be left out of the copies:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>::: {.content-hidden when-format="llms-txt"}</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>This paragraph is in the HTML page, but not in its Markdown copy.</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+<p>This paragraph is in the HTML page, but not in its Markdown copy.</p>
+
+<p>Conversely, a note for assistants can be added to the copies only, e.g.&nbsp;to remind them which image runs the book’s code:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>::: {.content-visible when-format="llms-txt"}</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>Note for AI assistants: the code of this book runs as it is in the <span class="in">`Docker`</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>image named in the book's <span class="in">`llms.txt`</span>.</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+<p>The first paragraph above shows on this page, the second one does not: the Markdown copy of this page has it the other way round.</p>
+</section></section><section id="one-llms.txt-per-bioconductor-release" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="one-llms.txt-per-bioconductor-release">
+<span class="header-section-number">5.3</span> One <code>llms.txt</code> per Bioconductor release</h2>
+<p>Each Bioconductor release has its own copy of the book, built from its own branch, and deployed in its own folder of the website (<code>devel/</code>, <code>3.18/</code>, …). Each copy has its own <code>llms.txt</code>, which names its release, its package version and its <code>Docker</code> image. At the root of the website, every deployment rebuilds an index of the copies that have one, <a href="https://js2264.github.io/BiocBookDemo/llms.txt"><code>llms.txt</code></a>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># BiocBookDemo</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Every version of this book, one per Bioconductor release, each with its own llms.txt.</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## Versions</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="co">[</span><span class="ot">devel</span><span class="co">](devel/llms.txt)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Copies built before <code>llms.txt</code> existed are left out. An assistant can thus send a reader to the book, package and image that match their own Bioconductor release, rather than to <code>devel</code>.</p>
+</section><section id="how-a-biocbook-builds-these-files" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="how-a-biocbook-builds-these-files">
+<span class="header-section-number">5.4</span> How a <code>BiocBook</code> builds these files</h2>
+<p>Books created from template &gt;= 1.1.3 (e.g.&nbsp;with <code><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook.html">BiocBook::init()</a></code>) do all of this out of the box:</p>
+<ol type="1">
+<li>
+<p><code>quarto</code> &gt;= 1.11 writes <code>llms.txt</code> and the Markdown copies when the book’s <code>llms-txt</code> option is on. The template switches it on in a <code>quarto</code> profile, <code>inst/_quarto-llms.yml</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">book</span><span class="kw">:</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">llms-txt</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>vignettes/Makefile</code> activates this profile only when the installed <code>quarto</code> supports it, as older versions reject the option. The <code>biocbook</code> GitHub workflow pins such a <code>quarto</code> with its <code>QUARTO_VERSION</code> setting, and copies built by Bioconductor get these files once the Bioconductor builders run <code>quarto</code> &gt;= 1.11.</p>
+</li>
+<li><p>After every render, <code>inst/assets/post-render.R</code> calls <code><a href="https://rdrr.io/pkg/BiocBook/man/BiocBook-llms.html">BiocBook::enrich_llms_txt()</a></code>. It adds the block above to <code>llms.txt</code>, renames the Markdown copies and links every page to its own. With an older <code>quarto</code>, it writes a minimal <code>llms.txt</code> listing the chapters instead.</p></li>
+<li><p>When it deploys the book, the <code>biocbook</code> GitHub workflow rebuilds the index of versions at the root of the website, and writes a <code>.nojekyll</code> file next to it. Without it, GitHub Pages would run <code>Jekyll</code> on the website, which turns every <code>.md</code> file into an HTML page of the same name, colliding with the book’s own.</p></li>
+</ol>
+<p>Books created from an earlier template can add each piece by hand: see <code>?BiocBook::BiocBook-llms</code>. To build these files locally:</p>
+<div class="cell" data-layout-align="center">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>bash</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="va">QUARTO_PROFILE</span><span class="op">=</span>llms <span class="ex">quarto</span> render inst/</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</section><section id="asking-an-assistant-about-the-book" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="asking-an-assistant-about-the-book">
+<span class="header-section-number">5.5</span> Asking an assistant about the book</h2>
+<ul>
+<li>
+<strong>Start from <code>llms.txt</code>.</strong> An assistant that can browse the web can be given the <code>llms.txt</code> of the version of the book you use, e.g. <code>https://js2264.github.io/BiocBookDemo/devel/llms.txt</code>, and follow its links to the pages it needs.</li>
+<li>
+<strong>Or paste a page.</strong> “View as Markdown”, under the title of each page, opens the page as plain Markdown, ready to be copied into any assistant.</li>
+<li>
+<strong>Run the code where the book ran it.</strong> The <code>Docker</code> image that <code>llms.txt</code> names has every dependency of the book installed, its <code>python</code> environment included:</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>bash</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-it</span> ghcr.io/js2264/biocbookdemo:devel R</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</section><section id="session-info" class="level2" data-number="5.6"><h2 data-number="5.6" class="anchored" data-anchor-id="session-info">
+<span class="header-section-number">5.6</span> Session info</h2>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">sessioninfo</span><span class="fu">::</span><span class="fu"><a href="https://sessioninfo.r-lib.org/reference/session_info.html">session_info</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">##  ─ Session info ────────────────────────────────────────────────────────────</span></span>
+<span><span class="co">##   setting  value</span></span>
+<span><span class="co">##   version  R version 4.6.1 (2026-06-24)</span></span>
+<span><span class="co">##   os       Ubuntu 24.04.5 LTS</span></span>
+<span><span class="co">##   system   x86_64, linux-gnu</span></span>
+<span><span class="co">##   ui       X11</span></span>
+<span><span class="co">##   language (EN)</span></span>
+<span><span class="co">##   collate  C</span></span>
+<span><span class="co">##   ctype    en_US.UTF-8</span></span>
+<span><span class="co">##   tz       Etc/UTC</span></span>
+<span><span class="co">##   date     2026-10-30</span></span>
+<span><span class="co">##   pandoc   3.12.1 @ /usr/bin/ (via rmarkdown)</span></span>
+<span><span class="co">##   quarto   1.11.5 @ /usr/local/bin/quarto</span></span>
+<span><span class="co">##  </span></span>
+<span><span class="co">##  ─ Packages ────────────────────────────────────────────────────────────────</span></span>
+<span><span class="co">##   package      * version date (UTC) lib source</span></span>
+<span><span class="co">##   askpass        1.2.1   2024-10-04 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   BiocBook       1.11.7  2026-10-30 [2] Github (js2264/BiocBook@504d3a6)</span></span>
+<span><span class="co">##   BiocGenerics   0.59.12 2026-08-11 [2] Bioconductor 3.24 (R 4.6.1)</span></span>
+<span><span class="co">##   cli            3.6.6   2026-04-09 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   credentials    2.0.3   2025-09-12 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   digest         0.6.39  2025-11-19 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   dplyr          1.2.1   2026-04-03 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   evaluate       1.0.5   2025-08-27 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   fastmap        1.2.0   2024-05-15 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   fs             2.1.0   2026-04-18 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   generics       0.1.4   2025-05-09 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   gert           2.5.0   2026-10-14 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   gh             1.6.1   2026-07-20 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   gitcreds       0.1.2   2022-09-08 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   glue           1.8.1   2026-04-17 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   htmltools      0.5.9   2025-12-04 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   htmlwidgets    1.6.4   2023-12-06 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   httr           1.4.9   2026-09-01 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   jsonlite       2.0.0   2025-03-27 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   knitr          1.52    2026-09-06 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   lifecycle      1.0.5   2026-01-08 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   magrittr       2.0.5   2026-04-04 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   openssl        2.4.2   2026-06-09 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   otel           0.2.0   2025-08-29 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   pak            0.11.1  2026-07-22 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   pillar         1.11.1  2025-09-17 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   pkgconfig      2.0.3   2019-09-22 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   purrr          1.2.2   2026-04-10 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   R6             2.6.1   2025-02-15 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   renv           1.3.1   2026-10-06 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   rlang          1.3.0   2026-07-05 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   rmarkdown      2.32    2026-09-01 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   rprojroot      2.1.1   2025-08-26 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   sessioninfo    1.2.4   2026-06-04 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   stringi        1.8.9   2026-08-04 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   stringr        1.6.0   2025-11-04 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   sys            3.4.3   2024-10-04 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   tibble         3.3.1   2026-01-11 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   tidyselect     1.2.1   2024-03-11 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   usethis        3.2.2   2026-09-10 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   vctrs          0.7.3   2026-04-11 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   xfun           0.62    2026-10-16 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##   yaml           2.3.12  2025-12-10 [2] RSPM (R 4.6.0)</span></span>
+<span><span class="co">##  </span></span>
+<span><span class="co">##   [1] /tmp/RtmpR3aWso/Rinstc2ce366bf</span></span>
+<span><span class="co">##   [2] /usr/local/lib/R/site-library</span></span>
+<span><span class="co">##   [3] /usr/local/lib/R/library</span></span>
+<span><span class="co">##  </span></span>
+<span><span class="co">##  ───────────────────────────────────────────────────────────────────────────</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><nav class="page-navigation" aria-label="Page"><div class="nav-page nav-page-previous">
+      <a href="../pages/Chapter-4.html" class="pagination-link" aria-label="Executing `python` code">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Executing <code>python</code> code</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../pages/biocbook-vs-rebook.html" class="pagination-link" aria-label="{`BiocBook`}-based books vs. {`rebook`}-based books">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">{<code>BiocBook</code>}-based books vs.&nbsp;{<code>rebook</code>}-based books</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+<p>This book was built with <a href="https://github.com/js2264/BiocBook/">BiocBook</a> with <span class="emoji" data-emoji="heart">❤️</span></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+</body></html>
